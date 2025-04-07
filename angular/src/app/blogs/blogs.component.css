@@ -1,0 +1,44 @@
+.card-img {
+    max-width: 250px;
+    align-self: center;
+  }
+  .brand {
+    font-size: 14px;
+  }
+  .product-title {
+    font-size: 11px;
+  }
+  .title {
+    font-size: 12px;
+  }
+  .category-text {
+    font-size: 10px;
+  }
+  .size-label {
+    font-size: 10px !important;
+  }
+  
+  mat-option {
+    background: aliceblue !important;
+  }
+  
+  #brands-panel {
+    padding: 0 !important;
+  }
+  
+  .bg-info {
+    background: #3498db !important;
+  }
+  
+  .loading-gif {
+    width: 50px;
+  }
+  
+  .footer-title {
+      font-size:9px;
+      padding:5px;
+  }
+  
+  .no-found-text {
+      font-size:15px;
+  }
