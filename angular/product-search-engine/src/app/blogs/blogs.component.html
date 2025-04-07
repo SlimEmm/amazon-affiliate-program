@@ -1,0 +1,58 @@
+<div class="text-center">
+    <div class="d-flex align-items-center justify-content-center gap-5">
+        <div>
+            <a [href]="baseUrlEnv">
+                <img src="logo.png" style="width:80px; height: 40px;" />
+            </a>
+        </div>
+        <div class="mt-1">
+            <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off"
+                class="d-flex justify-content-center">
+                <mat-form-field class="bg-white" style="min-width: 600px">
+                    <input formControlName="title" id="title" name="title" matInput (keyup)="searching($event)">
+                </mat-form-field>
+            </form>
+        </div>
+        <div>
+            <a href="/products">Products</a>
+        </div>
+    </div>
+    <div class="row mx-0 mb-3 justify-content-center">
+        <ng-container *ngIf="isLoading">
+            <img class="loading-gif mt-5" src="loading.gif">
+        </ng-container>
+        <ng-container *ngIf="!isLoading && blogs.length > 0">
+            <ng-container *ngFor="let item of blogs">
+                <a [href]="baseUrlEnv+'/blog/'+item.url"
+                    class="col-12 py-3 border border-2 text-decoration-none text-dark">
+                    <div class="d-flex gap-3 align-items-center">
+                        <div>
+                            <img src="logo.png" style="width:100px; height: 50px;" />
+                        </div>
+                        <div class="mt-1">
+                            <span>{{ _utilService.textTruncate(item.title, 180)}}</span>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!isLoading && blogs.length <= 0">
+            <span class="no-found-text">No Blogs Found Currenly for your Search!</span>
+        </ng-container>
+    </div>
+    <div class="position-fixed bottom-0 bg-dark w-100 footer-title">
+        <span class="text-warning">As an Amazon Associate I earn from qualifying purchases, Product prices and
+            availability
+            are accurate as of the date/time indicated and are subject to change. Any price and available information
+            displayed on <a href="https://www.amazon.in/">https://www.amazon.in/</a> at the time of purchase will apply
+            to the
+            purchase of this product</span>
+        <br />
+        <span class="text-danger">DISCLAIMER: CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON SELLER
+            SERVICES
+            PRIVATE LIMITED. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME, Amazon
+            and the
+            Amazon logo are tradenarks of <a href="https://www.amazon.in/">Amazon.com, Inc.</a> or its affiliates</span>
+    </div>
+</div>
+<div *ngIf="structuredData" [innerHTML]="structuredData"></div>
