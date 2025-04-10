@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:5000',
-  baseUrl: 'https://thegreatproducts.com'
+  baseUrl: 'http://89.116.34.51'
 };
 
 /*
