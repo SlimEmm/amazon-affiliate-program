@@ -4,7 +4,10 @@ var Schema = mongoose.Schema;
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://89.116.34.51:4000', // or '*'
+  credentials: true
+}));
 const ObjectId = require("mongodb").ObjectId;
 // Connect to MongoDB
 mongoose
