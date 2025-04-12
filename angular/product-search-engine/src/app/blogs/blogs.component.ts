@@ -15,7 +15,6 @@ import { finalize } from 'rxjs';
 import { Blog } from '../../models';
 import { BlogService } from '../../services/brand.service';
 import { UtilService } from '../../services/util.service';
-import { FooterLinksComponent } from '../footer-links/footer-links.component';
 
 @Component({
   selector: 'app-blogs',
@@ -25,7 +24,6 @@ import { FooterLinksComponent } from '../footer-links/footer-links.component';
     FormsModule,
     ReactiveFormsModule,
     MatInput,
-    FooterLinksComponent,
   ],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.css',

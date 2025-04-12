@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const compression = require('compression');
+const expressStaticGzip = require('express-static-gzip');
 var Schema = mongoose.Schema;
 const cors = require("cors");
 const app = express();
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use(cors({
@@ -10,6 +13,13 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
+}));
+app.use('/', expressStaticGzip('public', {
+  enableBrotli: true,
+  orderPreference: ['br', 'gz'],
+  setHeaders: (res, path) => {
+    res.setHeader("Cache-Control", "public, max-age=31536000");
+  }
 }));
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`, req.body);

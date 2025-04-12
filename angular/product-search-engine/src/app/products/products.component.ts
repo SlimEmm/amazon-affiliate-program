@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -23,8 +23,6 @@ import {
 } from '../../models';
 import { ProductService } from '../../services/product.service';
 import { UtilService } from '../../services/util.service';
-import { FooterLinksComponent } from '../footer-links/footer-links.component';
-
 @Component({
   selector: 'app-products',
   imports: [
@@ -35,7 +33,6 @@ import { FooterLinksComponent } from '../footer-links/footer-links.component';
     MatInputModule,
     MatSelectModule,
     NgbTooltip,
-    FooterLinksComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -53,6 +50,8 @@ export class ProductsComponent {
   url: string = '';
   isLoading: boolean = false;
   baseUrlEnv: string = '';
+  private isBrowser: boolean;
+  screenWidth:number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,7 +61,8 @@ export class ProductsComponent {
     public _utilService: UtilService,
     private meta: Meta,
     private title: Title,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isProd = true; //environment.production || false;
     this.baseUrlEnv = environment.baseUrl || '';
@@ -75,6 +75,12 @@ export class ProductsComponent {
     this.getBrands();
     this.getCategories();
     this.getSubCategories();
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (this.isBrowser) {
+      // Safe to use window here
+      this.screenWidth = window.innerWidth || 0;
+    }
   }
   debounceTimer: any;
 

@@ -135,3 +135,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 angular/product-search-engine/.angular/*
+node/package-lock.json
+angular/product-search-engine/package-lock.json

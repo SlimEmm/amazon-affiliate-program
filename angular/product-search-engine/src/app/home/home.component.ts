@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from '@environment';
-import { FooterLinksComponent } from '../footer-links/footer-links.component';
 
 @Component({
   selector: 'app-home',
-  imports: [FooterLinksComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

@@ -1,58 +1,63 @@
 <div class="text-center">
   <h1>Products</h1>
-  <div class="d-flex align-items-center justify-content-center gap-5">
-    <div>
-      <a [href]="baseUrlEnv">
-        <img src="logo.png" style="width:80px; height: 40px;" />
-      </a>
-    </div>
-    <div class="mt-1">
-      <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
-        <mat-form-field class="bg-white w-100">
-          <mat-label>Brands</mat-label>
-          <mat-select id="brands" name="brands" multiple
-            (selectionChange)="_utilService.updateFormControlValue($event, searchForm); getProducts();"
-            [value]="searchForm.value.brands">
-            <mat-option *ngFor="let item of brands" [value]="item._id">{{item.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="bg-white w-100">
-          <mat-label>Categories</mat-label>
-          <mat-select id="categories" name="categories" multiple
-            (selectionChange)="_utilService.updateFormControlValue($event, searchForm); getProducts();"
-            [value]="searchForm.value.categories">
-            <mat-option *ngFor="let item of categories" [value]="item._id">{{item.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="bg-white w-100">
-          <mat-label>Subcategories</mat-label>
-          <mat-select id="subCategories" name="subCategories" multiple
-            (selectionChange)="_utilService.updateFormControlValue($event, searchForm); getProducts();"
-            [value]="searchForm.value.subCategories">
-            <mat-option *ngFor="let item of subcategories" [value]="item._id">{{item.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="bg-white" style="min-width: 600px">
-          <input placeholder="Search Products ..." formControlName="name" id="name" name="name" matInput (keyup)="searching($event)">
-        </mat-form-field>
-      </form>
-    </div>
-    <div>
-      <a href="/blogs">Blogs</a>
-    </div>
-  </div>
+      <div class="row m-0 p-0">
+        <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
+          <div class="col-xl-1 col-lg-2">
+            <a [href]="baseUrlEnv">
+              <img src="logo.png" style="width:100px; height: 50px;" />
+            </a>
+          </div>
+          <div class="col-xl-2 col-lg-3">
+            <mat-form-field class="bg-white w-100">
+              <mat-label>Brands</mat-label>
+              <mat-select id="brands" name="brands" multiple
+                (selectionChange)="_utilService.updateFormControlValue($event, searchForm); getProducts();"
+                [value]="searchForm.value.brands">
+                <mat-option *ngFor="let item of brands" [value]="item._id">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-3 col-lg-4">
+            <mat-form-field class="bg-white w-100">
+              <mat-label>Categories</mat-label>
+              <mat-select id="categories" name="categories" multiple
+                (selectionChange)="_utilService.updateFormControlValue($event, searchForm); getProducts();"
+                [value]="searchForm.value.categories">
+                <mat-option *ngFor="let item of categories" [value]="item._id">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-3 col-lg-4">
+            <mat-form-field class="bg-white w-100">
+              <mat-label>Subcategories</mat-label>
+              <mat-select id="subCategories" name="subCategories" multiple
+                (selectionChange)="_utilService.updateFormControlValue($event, searchForm); getProducts();"
+                [value]="searchForm.value.subCategories">
+                <mat-option *ngFor="let item of subcategories" [value]="item._id">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-3 col-lg-5">
+            <mat-form-field class="bg-white w-100">
+              <input placeholder="Search Products ..." formControlName="name" id="name" name="name" matInput
+                (keyup)="searching($event)">
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
   <div class="row mx-0 mb-5 justify-content-center">
     <ng-container *ngIf="isLoading">
-      <div class="col-12">
-        <img class="loading-gif mt-5" src="loading.gif">
+      <div class="col-11 my-5">
+        <img class="loading-gif" src="loading.gif">
       </div>
     </ng-container>
     <ng-container *ngIf="!isLoading && products.length > 0">
       <ng-container *ngFor="let item of products">
         <a [href]="isProd === true ? item.affiliateLink : '#'"
-          class="col-2 px-3 py-3 border rounded m-2 text-decoration-none text-dark bg-light">
+          class="px-3 py-3 m-2 border rounded text-decoration-none text-dark bg-light"
+          [ngClass]="screenWidth > 1300 ? 'col-2' : 'col-3'">
           <div
-            class="d-flex align-items-center justify-content-center gap-3 category-text fw-bold border border-1 py-1 rounded text-dark">
+            class="d-flex align-items-center justify-content-center gap-3 category-text fw-bold border border-1 py-2 px-4 rounded text-dark">
             <span class="text-start title"
               [ngbTooltip]="item.category.name && item.category.name.length > 10 ? item.category.name : ''"
               position="top" container="body">
@@ -66,32 +71,32 @@
               position="top" container="body">
               {{_utilService.textTruncate(item.subCategory.name,10)}} </span>
           </div>
-          <div class="d-flex align-items-center" style="min-height:300px">
+          <div class="d-flex align-items-center" style="min-height:275px">
             <img class="card-img border border-1 rounded-3" [src]="item.imgUrl" />
           </div>
           <div class="mx-2 d-flex flex-column">
             <span class="text-start fw-bolder brand fs-6 text-dark"
-              [ngbTooltip]="item.brand.name && item.brand.name.length > 15 ? item.brand.name : ''" position="top"
-              container="body">{{_utilService.textTruncate(item.brand.name,15)}}</span>
-            <span class="text-start product-title fw-bolder text-dark" style="min-height:50px"
-              [ngbTooltip]="item.name && item.name.length > 90 ? item.name : ''" position="top"
-              container="body">{{_utilService.textTruncate(item.name,90)}}</span>
-              <ng-container *ngIf="item.colors && item.colors?.length">
-                <div class="d-flex mt-1">
-                  <ng-container *ngFor="let color of item.colors; let i = index;">
-                    <ng-container *ngIf="i < 5">
-                      <span [ngbTooltip]="color" class="border rounded-3 me-1" position="top" container="body">
-                        <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-                          <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
-                        </svg>
-                      </span>
-                    </ng-container>
-                    <ng-container *ngIf="i === 5">
-                      <span class="fw-bolder fs-5 text-dark">...</span>
-                    </ng-container>
+              [ngbTooltip]="item.brand.name && item.brand.name.length > 20 ? item.brand.name : ''" position="top"
+              container="body">{{_utilService.textTruncate(item.brand.name,20)}}</span>
+            <span class="text-start product-title fw-bolder text-dark" style="min-height:60px"
+              [ngbTooltip]="item.name && item.name.length > 125 ? item.name : ''" position="top"
+              container="body">{{_utilService.textTruncate(item.name,125)}}</span>
+            <ng-container *ngIf="item.colors && item.colors?.length">
+              <div class="d-flex mt-1">
+                <ng-container *ngFor="let color of item.colors; let i = index;">
+                  <ng-container *ngIf="i < 5">
+                    <span [ngbTooltip]="color" class="border rounded-3 me-1" position="top" container="body">
+                      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
+                      </svg>
+                    </span>
                   </ng-container>
-                </div>
-              </ng-container>
+                  <ng-container *ngIf="i === 5">
+                    <span class="fw-bolder fs-5 text-dark">...</span>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </ng-container>
             <ng-container *ngIf="item.sizes && item.sizes.length > 0">
               <div class="d-flex gap-1 align-items-center">
                 <ng-container *ngFor="let size of item.sizes; let i = index;">
@@ -110,12 +115,10 @@
       </ng-container>
     </ng-container>
     <ng-container *ngIf="!isLoading && products.length === 0">
-      <div class="col-12">
+      <div class="col-12 my-5">
         <span class="no-found-text">No Products Found Currenly for your Search!</span>
       </div>
     </ng-container>
   </div>
-  <app-footer-links></app-footer-links>
-  
 </div>
 <div *ngIf="structuredData" [innerHTML]="structuredData"></div>

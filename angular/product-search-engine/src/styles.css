@@ -1,6 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.cdnfonts.com/css/amazon-ember");
-
 body {
   font-family: "Amazon Ember", sans-serif;
 }
@@ -8,4 +6,8 @@ body {
 a {
   color: black;
   text-decoration: none;
+}
+
+.loading-gif {
+  width: 25px;
 }

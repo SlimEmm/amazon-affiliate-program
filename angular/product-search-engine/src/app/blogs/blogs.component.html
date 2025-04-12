@@ -1,27 +1,26 @@
-<div class="text-center">
+<div class="text-center" style="min-height: calc(100vh - 75px)">
     <h1>Blogs</h1>
-    <div class="d-flex align-items-center justify-content-center gap-5">
-        <div>
+    <div class="row m-0 p-0">
+        <div class="col-1">
             <a [href]="baseUrlEnv">
-                <img src="logo.png" style="width:80px; height: 40px;" />
+                <img src="logo.png" style="width:100px; height: 50px;" />
             </a>
         </div>
-        <div class="mt-1">
+        <div class="col-11">
             <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off"
                 class="d-flex justify-content-center">
-                <mat-form-field class="bg-white" style="min-width: 600px">
+                <mat-form-field class="bg-white w-100">
                     <input placeholder="Search Blogs ..." formControlName="title" id="title" name="title" matInput
                         (keyup)="searching($event)">
                 </mat-form-field>
             </form>
         </div>
-        <div>
-            <a href="/products">Products</a>
-        </div>
     </div>
-    <div class="row mx-0 mb-3 justify-content-center">
+    <div class="row mx-0 mb-5 justify-content-center">
         <ng-container *ngIf="isLoading">
-            <img class="loading-gif mt-5" src="loading.gif">
+            <div class="col-12 my-5">
+                <img class="loading-gif" src="loading.gif">
+            </div>
         </ng-container>
         <ng-container *ngIf="!isLoading && blogs.length > 0">
             <ng-container *ngFor="let item of blogs">
@@ -38,10 +37,11 @@
                 </a>
             </ng-container>
         </ng-container>
-        <ng-container *ngIf="!isLoading && blogs.length <= 0">
-            <span class="no-found-text">No Blogs Found Currenly for your Search!</span>
+        <ng-container *ngIf="!isLoading && blogs.length === 0">
+            <div class="col-12 my-5">
+                <span class="no-found-text">No Blogs Found Currenly for your Search!</span>
+            </div>
         </ng-container>
     </div>
-    <app-footer-links></app-footer-links>
 </div>
 <div *ngIf="structuredData" [innerHTML]="structuredData"></div>
