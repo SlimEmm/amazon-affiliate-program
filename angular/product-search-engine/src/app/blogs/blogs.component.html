@@ -1,4 +1,5 @@
 <div class="text-center">
+    <h1>Blogs</h1>
     <div class="d-flex align-items-center justify-content-center gap-5">
         <div>
             <a [href]="baseUrlEnv">
@@ -9,7 +10,8 @@
             <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off"
                 class="d-flex justify-content-center">
                 <mat-form-field class="bg-white" style="min-width: 600px">
-                    <input formControlName="title" id="title" name="title" matInput (keyup)="searching($event)">
+                    <input placeholder="Search Blogs ..." formControlName="title" id="title" name="title" matInput
+                        (keyup)="searching($event)">
                 </mat-form-field>
             </form>
         </div>
@@ -40,19 +42,6 @@
             <span class="no-found-text">No Blogs Found Currenly for your Search!</span>
         </ng-container>
     </div>
-    <div class="position-fixed bottom-0 bg-dark w-100 footer-title">
-        <span class="text-warning">As an Amazon Associate I earn from qualifying purchases, Product prices and
-            availability
-            are accurate as of the date/time indicated and are subject to change. Any price and available information
-            displayed on <a href="https://www.amazon.in/">https://www.amazon.in/</a> at the time of purchase will apply
-            to the
-            purchase of this product</span>
-        <br />
-        <span class="text-danger">DISCLAIMER: CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON SELLER
-            SERVICES
-            PRIVATE LIMITED. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME, Amazon
-            and the
-            Amazon logo are tradenarks of <a href="https://www.amazon.in/">Amazon.com, Inc.</a> or its affiliates</span>
-    </div>
+    <app-footer-links></app-footer-links>
 </div>
 <div *ngIf="structuredData" [innerHTML]="structuredData"></div>

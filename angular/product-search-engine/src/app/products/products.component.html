@@ -1,4 +1,5 @@
 <div class="text-center">
+  <h1>Products</h1>
   <div class="d-flex align-items-center justify-content-center gap-5">
     <div>
       <a [href]="baseUrlEnv">
@@ -32,7 +33,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="bg-white" style="min-width: 600px">
-          <input formControlName="name" id="name" name="name" matInput (keyup)="searching($event)">
+          <input placeholder="Search Products ..." formControlName="name" id="name" name="name" matInput (keyup)="searching($event)">
         </mat-form-field>
       </form>
     </div>
@@ -49,9 +50,9 @@
     <ng-container *ngIf="!isLoading && products.length > 0">
       <ng-container *ngFor="let item of products">
         <a [href]="isProd === true ? item.affiliateLink : '#'"
-          class="col-2 px-3 py-3 border rounded m-2 text-decoration-none text-dark bg-info">
+          class="col-2 px-3 py-3 border rounded m-2 text-decoration-none text-dark bg-light">
           <div
-            class="d-flex align-items-center gap-2 category-text fw-bold border border-2 border-warning px-2 py-1 rounded">
+            class="d-flex align-items-center justify-content-center gap-3 category-text fw-bold border border-1 py-1 rounded text-dark">
             <span class="text-start title"
               [ngbTooltip]="item.category.name && item.category.name.length > 10 ? item.category.name : ''"
               position="top" container="body">
@@ -65,38 +66,41 @@
               position="top" container="body">
               {{_utilService.textTruncate(item.subCategory.name,10)}} </span>
           </div>
-          <img class="card-img mt-2 border border-3 border-warning rounded-4" [src]="item.imgUrl" />
-          <ng-container *ngIf="item.colors && item.colors?.length">
-            <div class="d-flex mt-1">
-              <ng-container *ngFor="let color of item.colors; let i = index;">
-                <ng-container *ngIf="i < 7">
-                  <span [ngbTooltip]="color" position="top" container="body">
-                    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
-                    </svg>
-                  </span>
-                </ng-container>
-                <ng-container *ngIf="i === 7">
-                  <span class="fw-bolder fs-5 text-dark">...</span>
-                </ng-container>
-              </ng-container>
-            </div>
-          </ng-container>
+          <div class="d-flex align-items-center" style="min-height:300px">
+            <img class="card-img border border-1 rounded-3" [src]="item.imgUrl" />
+          </div>
           <div class="mx-2 d-flex flex-column">
-            <span class="text-start fw-bolder brand fs-6 text-white"
+            <span class="text-start fw-bolder brand fs-6 text-dark"
               [ngbTooltip]="item.brand.name && item.brand.name.length > 15 ? item.brand.name : ''" position="top"
               container="body">{{_utilService.textTruncate(item.brand.name,15)}}</span>
-            <span class="text-start product-title" [ngbTooltip]="item.name && item.name.length > 45 ? item.name : ''"
-              position="top" container="body">{{_utilService.textTruncate(item.name,70)}}</span>
+            <span class="text-start product-title fw-bolder text-dark" style="min-height:50px"
+              [ngbTooltip]="item.name && item.name.length > 90 ? item.name : ''" position="top"
+              container="body">{{_utilService.textTruncate(item.name,90)}}</span>
+              <ng-container *ngIf="item.colors && item.colors?.length">
+                <div class="d-flex mt-1">
+                  <ng-container *ngFor="let color of item.colors; let i = index;">
+                    <ng-container *ngIf="i < 5">
+                      <span [ngbTooltip]="color" class="border rounded-3 me-1" position="top" container="body">
+                        <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
+                        </svg>
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="i === 5">
+                      <span class="fw-bolder fs-5 text-dark">...</span>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </ng-container>
             <ng-container *ngIf="item.sizes && item.sizes.length > 0">
               <div class="d-flex gap-1 align-items-center">
                 <ng-container *ngFor="let size of item.sizes; let i = index;">
                   <ng-container *ngIf="i < 5">
                     <span
-                      class="border rounded px-2 py-1 mb-2 mt-1 fs-5 fw-bolder text-white border-warning border-2 size-label">{{size}}</span>
+                      class="border rounded px-2 py-1 mb-2 mt-1 fs-5 fw-bolder text-dark border-1 size-label">{{size}}</span>
                   </ng-container>
                   <ng-container *ngIf="i === 5">
-                    <span class="fw-bolder fs-5 text-white">...</span>
+                    <span class="fw-bolder fs-5 text-dark">...</span>
                   </ng-container>
                 </ng-container>
               </div>
@@ -111,15 +115,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="position-fixed bottom-0 bg-dark w-100 footer-title">
-    <span class="text-warning">As an Amazon Associate I earn from qualifying purchases, Product prices and availability
-      are accurate as of the date/time indicated and are subject to change. Any price and available information
-      displayed on <a href="https://www.amazon.in/">https://www.amazon.in/</a> at the time of purchase will apply to the
-      purchase of this product</span>
-    <br />
-    <span class="text-danger">DISCLAIMER: CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON SELLER SERVICES
-      PRIVATE LIMITED. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME, Amazon and the
-      Amazon logo are tradenarks of <a href="https://www.amazon.in/">Amazon.com, Inc.</a> or its affiliates</span>
-  </div>
+  <app-footer-links></app-footer-links>
+  
 </div>
 <div *ngIf="structuredData" [innerHTML]="structuredData"></div>

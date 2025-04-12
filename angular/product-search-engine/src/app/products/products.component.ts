@@ -23,6 +23,7 @@ import {
 } from '../../models';
 import { ProductService } from '../../services/product.service';
 import { UtilService } from '../../services/util.service';
+import { FooterLinksComponent } from '../footer-links/footer-links.component';
 
 @Component({
   selector: 'app-products',
@@ -34,12 +35,13 @@ import { UtilService } from '../../services/util.service';
     MatInputModule,
     MatSelectModule,
     NgbTooltip,
+    FooterLinksComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent {
-  isProd: boolean = false;
+  isProd: boolean = true;
   searchForm: FormGroup;
   products: Product[] = [];
   filters: ProductsRequestCommand = new ProductsRequestCommand();
@@ -62,7 +64,7 @@ export class ProductsComponent {
     private title: Title,
     private sanitizer: DomSanitizer
   ) {
-    this.isProd = environment.production || false;
+    this.isProd = true; //environment.production || false;
     this.baseUrlEnv = environment.baseUrl || '';
     this.searchForm = this.fb.group({
       name: [''],
