@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -62,7 +62,8 @@ export class ProductsComponent {
     private meta: Meta,
     private title: Title,
     private sanitizer: DomSanitizer,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdr: ChangeDetectorRef
   ) {
     this.isProd = true; //environment.production || false;
     this.baseUrlEnv = environment.baseUrl || '';
@@ -173,6 +174,7 @@ export class ProductsComponent {
       .pipe(
         finalize(() => {
           this.isLoading = false;
+          this.cdr
         })
       )
       .subscribe((response) => {
@@ -181,25 +183,26 @@ export class ProductsComponent {
           const structuredDataJSON = {
             '@context': 'https://schema.org/',
             '@type': 'ItemList',
-            itemListElement: this.products.map((product, index) => ({
+            itemListElement: this.products?.map((product, index) => ({
               '@type': 'ListItem',
               position: index + 1,
-              url: environment.baseUrl + this.url,
-              name: product.name,
-              image: environment.baseUrl + '/logo.png',
+              url: environment?.baseUrl + this.url,
+              name: product?.name || '',
+              image: environment?.baseUrl + '/logo.png',
               brand: product.brand?.name || '',
-              category: product.category?.name || '',
-              subCategory: product.subCategory?.name || '',
-              colors: product.colors,
-              sizes: product.sizes,
+              category: product?.category?.name || '',
+              subCategory: product?.subCategory?.name || '',
+              colors: product?.colors || [],
+              sizes: product?.sizes || [],
             })),
           };
 
-          this.structuredData = this.sanitizer.bypassSecurityTrustHtml(
+          this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
             `<script type="application/ld+json">${JSON.stringify(
               structuredDataJSON
             )}</script>`
           );
+          this.cdr.detectChanges()
         }
       });
   }
