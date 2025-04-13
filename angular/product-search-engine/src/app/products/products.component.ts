@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -51,7 +51,7 @@ export class ProductsComponent {
   isLoading: boolean = false;
   baseUrlEnv: string = '';
   private isBrowser: boolean;
-  screenWidth:number = 0;
+  screenWidth: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -127,11 +127,13 @@ export class ProductsComponent {
 
   searching(event: Event) {
     const input = event.target as HTMLInputElement;
-    const value = input.value;
-    clearTimeout(this.debounceTimer);
-    this.debounceTimer = setTimeout(() => {
-      this.getProducts(value);
-    }, 500);
+    const value = input.value || '';
+    if (value.length > 3) {
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = setTimeout(() => {
+        this.getProducts(value);
+      }, 500);
+    }
   }
 
   getBrands() {

@@ -114,7 +114,7 @@
         </a>
       </ng-container>
     </ng-container>
-    <ng-container *ngIf="!isLoading && products.length === 0">
+    <ng-container *ngIf="!isLoading && products.length <= 0">
       <div class="col-12 my-5">
         <span class="no-found-text">No Products Found Currenly for your Search!</span>
       </div>

@@ -11,12 +11,16 @@ import { environment } from '@environment';
 })
 export class HomeComponent {
   url: string = '';
+  baseUrlEnv: string = '';
+
 
   constructor(
     private meta: Meta,
     private title: Title,
     private router: Router
-  ) {}
+  ) {
+    this.baseUrlEnv = environment.baseUrl || '';
+  }
 
   ngOnInit() {
     this.url = this.router.url;
