@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://89.116.34.51:5000',
-  baseUrl: 'http://89.116.34.51'
+  apiUrl: 'https://api.thegreatproducts.com',
+  baseUrl: 'https://thegreatproducts.com'
 };
 
 /*

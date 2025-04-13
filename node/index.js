@@ -9,7 +9,7 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use(cors({
-  origin: 'http://89.116.34.51:4000',
+  origin: 'https://thegreatproducts.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

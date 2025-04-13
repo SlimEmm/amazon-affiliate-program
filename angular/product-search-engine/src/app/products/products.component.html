@@ -78,7 +78,7 @@
             <span class="text-start fw-bolder brand fs-6 text-dark"
               [ngbTooltip]="item.brand.name && item.brand.name.length > 20 ? item.brand.name : ''" position="top"
               container="body">{{_utilService.textTruncate(item.brand.name,20)}}</span>
-            <span class="text-start product-title fw-bolder text-dark" style="min-height:60px"
+            <span class="text-start product-title fw-bolder text-dark" style="min-height:75px"
               [ngbTooltip]="item.name && item.name.length > 125 ? item.name : ''" position="top"
               container="body">{{_utilService.textTruncate(item.name,125)}}</span>
             <ng-container *ngIf="item.colors && item.colors?.length">
