@@ -1,10 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -57,7 +52,7 @@ export class ProductsComponent {
   url: string = '';
   isLoading: boolean = true;
   baseUrlEnv: string = '';
-  private isBrowser: boolean;
+  isBrowser: boolean;
   screenWidth: number = 0;
   debounceTimer: any;
 
@@ -70,8 +65,7 @@ export class ProductsComponent {
     private meta: Meta,
     private title: Title,
     private sanitizer: DomSanitizer,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private cdr: ChangeDetectorRef
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isProd = true; //environment.production || false;
     this.baseUrlEnv = environment.baseUrl || '';
@@ -184,7 +178,11 @@ export class ProductsComponent {
       .subscribe((response) => {
         if (response.isSuccess) {
           this.products = response.data;
-          if (!this.structuredDataSet && this.products?.length > 0) {
+          if (
+            !this.isBrowser &&
+            !this.structuredDataSet &&
+            this.products?.length > 0
+          ) {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',

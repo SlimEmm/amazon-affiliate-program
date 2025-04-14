@@ -116,6 +116,6 @@
     </ng-container>
   </div>
 </div>
-<ng-container *ngIf="structuredData">
+<ng-container *ngIf="!this.isBrowser && structuredData">
   <script type="application/ld+json" [innerHTML]="structuredData"></script>
 </ng-container>
