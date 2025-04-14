@@ -78,6 +78,7 @@ export class ProductsComponent {
     this.getBrands();
     this.getCategories();
     this.getSubCategories();
+    this.getProducts();
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
@@ -124,7 +125,7 @@ export class ProductsComponent {
       property: 'og:url',
       content: environment.baseUrl + this.url,
     });
-    this.getProducts(this.searchTerm || '');
+    //this.getProducts(this.searchTerm || '');
   }
 
   searching(event: Event) {
