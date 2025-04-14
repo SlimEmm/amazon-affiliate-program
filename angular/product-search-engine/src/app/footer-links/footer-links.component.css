@@ -1,0 +1,21 @@
+.links {
+    font-size: 18px !important;
+  }
+
+@media (max-width: 1280.98px) {
+    .links {
+      font-size: 14px !important;
+    }
+  }
+
+@media (max-width: 858.98px) {
+  .links {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 540.98px) {
+    .links {
+      font-size: 10px !important;
+    }
+  }

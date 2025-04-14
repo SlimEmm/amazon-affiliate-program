@@ -1,21 +1,11 @@
-<div class="text-center" style="min-height: calc(100vh - 75px)">
-    <h1>Blogs</h1>
-    <div class="row m-0 p-0">
-        <div class="col-1">
-            <a [href]="baseUrlEnv">
-                <img src="logo.png" style="width:100px; height: 50px;" />
-            </a>
-        </div>
-        <div class="col-11">
-            <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off"
-                class="d-flex justify-content-center">
-                <mat-form-field class="bg-white w-100">
-                    <input placeholder="Search Blogs ..." formControlName="title" id="title" name="title" matInput
-                        (keyup)="searching($event)">
-                </mat-form-field>
-            </form>
-        </div>
-    </div>
+<div class="text-center" style="height:648px">
+    <h1 class="py-3">Blogs</h1>
+    <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
+        <mat-form-field class="bg-white w-50">
+            <input placeholder="Search Blogs ..." formControlName="title" id="title" name="title" matInput
+                (keyup)="searching($event)">
+        </mat-form-field>
+    </form>
     <div class="row mx-0 mb-5 justify-content-center">
         <ng-container *ngIf="isLoading">
             <div class="col-12 my-5">

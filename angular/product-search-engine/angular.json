@@ -19,6 +19,8 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/robots.txt",
+              "src/sitemap.xml",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -62,10 +64,10 @@
               "sourceMap": true
             },
             "analyze": {
-  "sourceMap": true,
-  "extractLicenses": false,
-  "outputHashing": "none"
-}
+              "sourceMap": true,
+              "extractLicenses": false,
+              "outputHashing": "none"
+            }
           },
           "defaultConfiguration": "production"
         },
