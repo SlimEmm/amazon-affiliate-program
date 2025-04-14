@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -37,7 +37,7 @@ import { UtilService } from '../../services/util.service';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent {
+export class ProductsComponent implements AfterViewInit {
   isProd: boolean = true;
   searchForm: FormGroup;
   products: Product[] = [];
@@ -48,7 +48,7 @@ export class ProductsComponent {
   searchTerm: string = '';
   structuredData: SafeHtml | undefined;
   url: string = '';
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   baseUrlEnv: string = '';
   private isBrowser: boolean;
   screenWidth: number = 0;
@@ -84,7 +84,7 @@ export class ProductsComponent {
     }
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.searchTerm = this.route.snapshot?.params?.['id'] || '';
     this.searchForm.get('name')?.setValue(this.searchTerm);
     this.url = this.router.url;
@@ -170,7 +170,7 @@ export class ProductsComponent {
       .pipe(
         finalize(() => {
           this.isLoading = false;
-          this.cdr
+          this.cdr.detectChanges();
         })
       )
       .subscribe((response) => {
