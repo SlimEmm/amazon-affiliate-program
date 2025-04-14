@@ -81,7 +81,6 @@ export class ProductsComponent {
     if (this.isBrowser) {
       // Safe to use window here
       this.screenWidth = window.innerWidth || 0;
-      console.log(this.screenWidth);
     }
   }
   debounceTimer: any;
@@ -135,12 +134,6 @@ export class ProductsComponent {
       this.debounceTimer = setTimeout(() => {
         this.getProducts(value);
       }, 500);
-    }
-    else {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = setTimeout(() => {
-        this.getProducts('');
-      }, 3000);
     }
   }
 
