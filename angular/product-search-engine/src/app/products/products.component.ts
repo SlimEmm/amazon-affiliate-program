@@ -83,7 +83,6 @@ export class ProductsComponent {
       this.screenWidth = window.innerWidth || 0;
     }
   }
-  debounceTimer: any;
 
   ngOnInit() {
     this.searchTerm = this.route.snapshot?.params?.['id'] || '';
@@ -130,10 +129,7 @@ export class ProductsComponent {
     const input = event.target as HTMLInputElement;
     const value = input.value || '';
     if (value.length >= 3) {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = setTimeout(() => {
         this.getProducts(value);
-      }, 500);
     }
   }
 

@@ -14,6 +14,13 @@
   }
 }
 
+@media (max-width: 786.98px) {
+  .links {
+    font-size: 14px !important;
+  }
+}
+
+
 @media (max-width: 540.98px) {
     .links {
       font-size: 10px !important;
