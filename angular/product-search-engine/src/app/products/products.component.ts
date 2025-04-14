@@ -125,7 +125,10 @@ export class ProductsComponent {
       property: 'og:url',
       content: environment.baseUrl + this.url,
     });
-    this.getProducts(this.searchTerm || '');
+    if(this.searchTerm)
+    {
+      this.getProducts(this.searchTerm || '');
+    }
   }
 
   searching(event: Event) {
