@@ -125,7 +125,7 @@ export class ProductsComponent {
       property: 'og:url',
       content: environment.baseUrl + this.url,
     });
-    //this.getProducts(this.searchTerm || '');
+    this.getProducts(this.searchTerm || '');
   }
 
   searching(event: Event) {
@@ -163,6 +163,7 @@ export class ProductsComponent {
 
   getProducts(value?: string) {
     this.isLoading = true;
+    this.products = [];
     let filters = {
       name: value || this.searchForm.value.name,
       brands: this.searchForm.value.brands,
@@ -179,35 +180,35 @@ export class ProductsComponent {
       .subscribe((response) => {
         if (response.isSuccess) {
           this.products = response.data;
-          // if (
-          //   !this.isBrowser &&
-          //   !this.structuredDataSet &&
-          //   this.products?.length > 0
-          // ) {
-          //   const structuredDataJSON = {
-          //     '@context': 'https://schema.org/',
-          //     '@type': 'ItemList',
-          //     itemListElement: this.products?.map((product, index) => ({
-          //       '@type': 'ListItem',
-          //       position: index + 1,
-          //       url: environment?.baseUrl + this.url,
-          //       name: product?.name || '',
-          //       image: environment?.baseUrl + '/logo.png',
-          //       brand: product.brand?.name || '',
-          //       category: product?.category?.name || '',
-          //       subCategory: product?.subCategory?.name || '',
-          //       colors: product?.colors || [],
-          //       sizes: product?.sizes || [],
-          //     })),
-          //   };
+          if (
+            !this.isBrowser &&
+            !this.structuredDataSet &&
+            this.products?.length > 0
+          ) {
+            const structuredDataJSON = {
+              '@context': 'https://schema.org/',
+              '@type': 'ItemList',
+              itemListElement: this.products?.map((product, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                url: environment?.baseUrl + this.url,
+                name: product?.name || '',
+                image: environment?.baseUrl + '/logo.png',
+                brand: product.brand?.name || '',
+                category: product?.category?.name || '',
+                subCategory: product?.subCategory?.name || '',
+                colors: product?.colors || [],
+                sizes: product?.sizes || [],
+              })),
+            };
 
-          //   this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
-          //     `<script type="application/ld+json">${JSON.stringify(
-          //       structuredDataJSON
-          //     )}</script>`
-          //   );
-          //   this.structuredDataSet = true;
-          // }
+            this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
+              `<script type="application/ld+json">${JSON.stringify(
+                structuredDataJSON
+              )}</script>`
+            );
+            this.structuredDataSet = true;
+          }
         }
       });
   }
