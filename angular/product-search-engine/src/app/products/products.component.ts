@@ -1,5 +1,10 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -37,7 +42,9 @@ import { UtilService } from '../../services/util.service';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent implements AfterViewInit {
+export class ProductsComponent {
+  structuredDataSet: boolean = false; // Add this property
+
   isProd: boolean = true;
   searchForm: FormGroup;
   products: Product[] = [];
@@ -52,6 +59,7 @@ export class ProductsComponent implements AfterViewInit {
   baseUrlEnv: string = '';
   private isBrowser: boolean;
   screenWidth: number = 0;
+  debounceTimer: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +92,7 @@ export class ProductsComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.searchTerm = this.route.snapshot?.params?.['id'] || '';
     this.searchForm.get('name')?.setValue(this.searchTerm);
     this.url = this.router.url;
@@ -128,9 +136,10 @@ export class ProductsComponent implements AfterViewInit {
   searching(event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.value || '';
-    if (value.length >= 3) {
-        this.getProducts(value);
-    }
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      this.getProducts(value);
+    }, 500);
   }
 
   getBrands() {
@@ -170,35 +179,36 @@ export class ProductsComponent implements AfterViewInit {
       .pipe(
         finalize(() => {
           this.isLoading = false;
-          this.cdr.detectChanges();
         })
       )
       .subscribe((response) => {
         if (response.isSuccess) {
           this.products = response.data;
-          const structuredDataJSON = {
-            '@context': 'https://schema.org/',
-            '@type': 'ItemList',
-            itemListElement: this.products?.map((product, index) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              url: environment?.baseUrl + this.url,
-              name: product?.name || '',
-              image: environment?.baseUrl + '/logo.png',
-              brand: product.brand?.name || '',
-              category: product?.category?.name || '',
-              subCategory: product?.subCategory?.name || '',
-              colors: product?.colors || [],
-              sizes: product?.sizes || [],
-            })),
-          };
+          if (!this.structuredDataSet && this.products?.length > 0) {
+            const structuredDataJSON = {
+              '@context': 'https://schema.org/',
+              '@type': 'ItemList',
+              itemListElement: this.products?.map((product, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                url: environment?.baseUrl + this.url,
+                name: product?.name || '',
+                image: environment?.baseUrl + '/logo.png',
+                brand: product.brand?.name || '',
+                category: product?.category?.name || '',
+                subCategory: product?.subCategory?.name || '',
+                colors: product?.colors || [],
+                sizes: product?.sizes || [],
+              })),
+            };
 
-          this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
-            `<script type="application/ld+json">${JSON.stringify(
-              structuredDataJSON
-            )}</script>`
-          );
-          this.cdr.detectChanges()
+            this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
+              `<script type="application/ld+json">${JSON.stringify(
+                structuredDataJSON
+              )}</script>`
+            );
+            this.structuredDataSet = true;
+          }
         }
       });
   }

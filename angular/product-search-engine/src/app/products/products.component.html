@@ -116,4 +116,6 @@
     </ng-container>
   </div>
 </div>
-<div *ngIf="structuredData" [innerHTML]="structuredData"></div>
+<ng-container *ngIf="structuredData">
+  <script type="application/ld+json" [innerHTML]="structuredData"></script>
+</ng-container>
