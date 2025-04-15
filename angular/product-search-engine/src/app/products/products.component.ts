@@ -78,10 +78,9 @@ export class ProductsComponent {
     this.getBrands();
     this.getCategories();
     this.getSubCategories();
-    this.getProducts();
     this.isBrowser = isPlatformBrowser(this.platformId);
 
-    if (this.isBrowser) {
+    if (window) {
       // Safe to use window here
       this.screenWidth = window.innerWidth || 0;
     }
@@ -125,10 +124,7 @@ export class ProductsComponent {
       property: 'og:url',
       content: environment.baseUrl + this.url,
     });
-    if(this.searchTerm)
-    {
-      this.getProducts(this.searchTerm || '');
-    }
+    this.getProducts(this.searchTerm || '');
   }
 
   searching(event: Event) {
@@ -191,7 +187,7 @@ export class ProductsComponent {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',
-              itemListElement: this.products?.map((product, index) => ({
+              itemListElement: this.products?.forEach((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
                 url: environment?.baseUrl + this.url,
