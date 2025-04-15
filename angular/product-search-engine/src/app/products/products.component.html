@@ -41,12 +41,12 @@
     </div>
   </form>
   <div class="row mx-0 mb-5 justify-content-center">
-    <ng-container *ngIf="isLoading">
+    <!-- <ng-container *ngIf="isLoading">
       <div class="col-11 my-5">
-        <img class="loading-gif" src="loading.gif">
+        <img class="loading-gif" src="loading.gif" alt="loading-gif">
       </div>
-    </ng-container>
-    <ng-container *ngIf="!isLoading && products.length">
+    </ng-container> -->
+    <ng-container *ngIf="products.length">
       <ng-container *ngFor="let item of products">
         <a [href]="isProd === true ? item.affiliateLink : '#'"
           class="px-3 py-3 m-2 border rounded text-decoration-none text-dark bg-light col-xl-2 col-lg-3 col-md-5">
@@ -109,10 +109,10 @@
         </a>
       </ng-container>
     </ng-container>
-    <ng-container *ngIf="!isLoading && products.length === 0">
+    <!-- <ng-container *ngIf="!isLoading && products.length === 0">
       <div class="col-12 my-5">
         <span class="no-found-text">No Products Found Currenly for your Search!</span>
       </div>
-    </ng-container>
+    </ng-container> -->
   </div>
 </div>
