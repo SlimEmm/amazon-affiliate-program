@@ -80,7 +80,7 @@ export class ProductsComponent {
     this.getSubCategories();
     this.isBrowser = isPlatformBrowser(this.platformId);
 
-    if (window) {
+    if (this.isBrowser && window) {
       // Safe to use window here
       this.screenWidth = window.innerWidth || 0;
     }
@@ -180,19 +180,19 @@ export class ProductsComponent {
         if (response.isSuccess) {
           this.products = response.data;
           if (
-            !this.isBrowser &&
+            this.isBrowser &&
             !this.structuredDataSet &&
             this.products?.length > 0
           ) {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',
-              itemListElement: this.products?.forEach((product, index) => ({
+              itemListElement: this.products?.map((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
                 url: environment?.baseUrl + this.url,
                 name: product?.name || '',
-                image: environment?.baseUrl + '/logo.png',
+                image: product.imgUrl || environment?.baseUrl + '/logo.png',
                 brand: product.brand?.name || '',
                 category: product?.category?.name || '',
                 subCategory: product?.subCategory?.name || '',
@@ -201,11 +201,11 @@ export class ProductsComponent {
               })),
             };
 
-            this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
-              `<script type="application/ld+json">${JSON.stringify(
-                structuredDataJSON
-              )}</script>`
-            );
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(structuredDataJSON);
+            document.head.appendChild(script);
+
             this.structuredDataSet = true;
           }
         }
