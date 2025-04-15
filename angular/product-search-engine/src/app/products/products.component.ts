@@ -23,6 +23,9 @@ import {
 } from '../../models';
 import { ProductService } from '../../services/product.service';
 import { UtilService } from '../../services/util.service';
+declare const window:any;
+declare const document:any;
+
 @Component({
   selector: 'app-products',
   imports: [
@@ -64,7 +67,7 @@ export class ProductsComponent {
     public _utilService: UtilService,
     private meta: Meta,
     private title: Title,
-    private sanitizer: DomSanitizer,
+    public sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isProd = true; //environment.production || false;
@@ -181,7 +184,6 @@ export class ProductsComponent {
         if (response.isSuccess) {
           this.products = response.data;
           if (
-            this.isBrowser &&
             !this.structuredDataSet &&
             this.products?.length > 0
           ) {
@@ -201,12 +203,22 @@ export class ProductsComponent {
                 sizes: product?.sizes || [],
               })),
             };
-
-            const script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.text = JSON.stringify(structuredDataJSON);
-            document.head.appendChild(script);
-
+            // if(this.isBrowser && document) {
+            //   console.log(document);
+            // var script = document.createElement('script');
+            // script.type = 'application/ld+json';
+            // script.text = JSON.stringify(structuredDataJSON);
+            // script = this.sanitizer.bypassSecurityTrustScript(script);
+            // document.head.appendChild(script);
+            // }
+            if(this.isBrowser)
+            {
+              this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
+                `<script type="application/ld+json">${JSON.stringify(
+                  structuredDataJSON
+                )}</script>`
+              );
+            }
             this.structuredDataSet = true;
           }
         }

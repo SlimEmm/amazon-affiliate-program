@@ -9,7 +9,7 @@
     <div class="row mx-0 mb-5 justify-content-center">
         <ng-container *ngIf="isLoading">
             <div class="col-12 my-5">
-                <img class="loading-gif" src="loading.gif">
+                <img class="loading-gif" src="loading.gif" alt="loading...">
             </div>
         </ng-container>
         <ng-container *ngIf="!isLoading && blogs.length > 0">
@@ -18,20 +18,28 @@
                     class="col-12 py-3 border border-2 text-decoration-none text-dark">
                     <div class="d-flex gap-3 align-items-center">
                         <div>
-                            <img src="logo.png" style="width:100px; height: 50px;" />
+                            <div>
+                                <img [src]="item.thumbnail" [alt]="item.thumbnailDetail"
+                                    style="width:150px; height: 150px;" />
+                            </div>
+                            <span style="font-size:10px">
+                                {{item.thumbnailDetail}}
+                            </span>
                         </div>
-                        <div class="mt-1">
-                            <span>{{ _utilService.textTruncate(item.title, 180)}}</span>
+                        <div class="my-1">
+                            <span>{{ _utilService.textTruncate(item.title || '', 512)}}</span>
                         </div>
                     </div>
                 </a>
             </ng-container>
         </ng-container>
-        <ng-container *ngIf="!isLoading && blogs.length === 0">
+        <ng-container *ngIf="!isLoading && blogs.length <= 0">
             <div class="col-12 my-5">
                 <span class="no-found-text">No Blogs Found Currenly for your Search!</span>
             </div>
         </ng-container>
     </div>
 </div>
-<div *ngIf="structuredData" [innerHTML]="structuredData"></div>
+<ng-container *ngIf="isBrowser && structuredDataSet">
+    <div [innerHTML]="structuredData"></div>
+  </ng-container>
