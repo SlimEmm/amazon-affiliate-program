@@ -166,7 +166,6 @@ export class ProductsComponent {
 
   getProducts(value?: string) {
     this.isLoading = true;
-    this.products = [];
     let filters = {
       name: value || this.searchForm.value.name,
       brands: this.searchForm.value.brands,
