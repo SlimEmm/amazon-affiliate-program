@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://thegreatproducts.com/sitemap.xml
