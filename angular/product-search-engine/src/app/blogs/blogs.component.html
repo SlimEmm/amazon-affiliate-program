@@ -15,7 +15,7 @@
         <ng-container *ngIf="!isLoading && blogs.length > 0">
             <ng-container *ngFor="let item of blogs">
                 <a [href]="baseUrlEnv+'/blog/'+item.url"
-                    class="col-12 py-3 border border-2 text-decoration-none text-dark">
+                    class="col-12 py-3 border border-2 text-decoration-none text-white" style="background: linear-gradient(0.25turn, #003366, #0066cc)">
                     <div class="d-flex gap-3 align-items-center">
                         <div>
                             <div>
