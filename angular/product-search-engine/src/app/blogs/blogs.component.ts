@@ -40,6 +40,7 @@ export class BlogsComponent {
   searchTerm: string = '';
   url: string = '';
   isBrowser: boolean;
+  oldSearchValue: string = '';
 
   //paraphrase, and import image in paint first and image export only from paint
 
@@ -58,7 +59,6 @@ export class BlogsComponent {
     this.searchForm = this.fb.group({
       title: [''],
     });
-    this.getBlogs();
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
@@ -92,12 +92,9 @@ export class BlogsComponent {
     });
     this.meta.updateTag({
       property: 'og:url',
-      content: environment.baseUrl + this.url,
+      content: `${environment.baseUrl}/blogs/${this.url}`,
     });
-    // if(this.searchTerm)
-    // {
-    // this.getBlogs(this.searchTerm || '');
-    // }
+    this.getBlogs(this.searchTerm || '');
   }
 
   searching(event: Event) {
@@ -105,7 +102,10 @@ export class BlogsComponent {
     const value = input.value;
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
-      this.getBlogs(value);
+      if (this.oldSearchValue != value) {
+        this.getBlogs(value);
+        this.oldSearchValue = value;
+      }
     }, 500);
   }
 
@@ -175,12 +175,14 @@ export class BlogsComponent {
                 blogs: blog.blogs,
               })),
             };
-            this.structuredData = this.sanitizer.bypassSecurityTrustHtml(
-              `<script type="application/ld+json">${JSON.stringify(
-                structuredDataJSON
-              )}</script>`
-            );
-            this.structuredDataSet = true;
+            if (this.isBrowser) {
+              this.structuredData = this.sanitizer.bypassSecurityTrustHtml(
+                `<script type="application/ld+json">${JSON.stringify(
+                  structuredDataJSON
+                )}</script>`
+              );
+              this.structuredDataSet = true;
+            }
           }
         }
       });

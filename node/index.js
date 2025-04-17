@@ -1,31 +1,36 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const compression = require('compression');
-const expressStaticGzip = require('express-static-gzip');
+const compression = require("compression");
+const expressStaticGzip = require("express-static-gzip");
 var Schema = mongoose.Schema;
 const cors = require("cors");
 const app = express();
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
-app.use(cors({
-  origin: 'https://thegreatproducts.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-}));
-app.use('/', expressStaticGzip('public', {
-  enableBrotli: true,
-  orderPreference: ['br', 'gz'],
-  setHeaders: (res, path) => {
-    res.setHeader("Cache-Control", "public, max-age=31536000");
-  }
-}));
+app.use(
+  cors({
+    origin: "https://thegreatproducts.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+app.use(
+  "/",
+  expressStaticGzip("public", {
+    enableBrotli: true,
+    orderPreference: ["br", "gz"],
+    setHeaders: (res, path) => {
+      res.setHeader("Cache-Control", "public, max-age=31536000");
+    },
+  })
+);
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`, req.body);
   next();
 });
-app.options('*', cors());
+app.options("*", cors());
 const ObjectId = require("mongodb").ObjectId;
 // Connect to MongoDB
 mongoose
@@ -82,6 +87,7 @@ const blogSchema = new mongoose.Schema({
   updatedOn: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false },
   products: { type: [Schema.Types.ObjectId], ref: "Product", default: [] },
+  blogs: { type: [Schema.Types.ObjectId], ref: "Blog", default: [] },
   views: { type: Number, default: 0 },
 });
 const productSchema = new mongoose.Schema({
@@ -206,25 +212,14 @@ app.post("/user/products", async (req, res) => {
     delete req.body.updatedOn;
     delete req.body.isDeleted;
     const filters = {};
-    if (req.body.name)
-      filters.name = { $regex: ".*" + req.body.name + ".*", $options: "i" };
-    if (req.body.brands?.length > 0)
-      filters.brand = { $in: req.body.brands.map((x) => new ObjectId(x)) };
-    if (req.body.categories?.length > 0)
-      filters.category = {
-        $in: req.body.categories.map((x) => new ObjectId(x)),
-      };
-    if (req.body.subCategories?.length > 0)
-      filters.subCategory = {
-        $in: req.body.subCategories.map((x) => new ObjectId(x)),
-      };
-    filters.isDeleted = false;
 
-    const products = await Product.aggregate([
-      {
-        $match: filters,
-      },
-      { $unset: ["isDeleted", "createdOn", "updatedOn", "__v"] },
+    filters.isDeleted = false;
+    let block1 = [];
+    block1.push({
+      $match: filters,
+    });
+
+    block1.push(
       {
         $lookup: {
           from: "brands",
@@ -257,17 +252,122 @@ app.post("/user/products", async (req, res) => {
       },
       {
         $unwind: "$brand",
-      },
-      {
-        $sort: {
-          updatedOn: -1,
-          createdOn: -1,
+      }
+    );
+    if (
+      req.body.name.toLowerCase() &&
+      !req.body.brands.length &&
+      !req.body.categories.length &&
+      !req.body.subCategories.length
+    ) {
+      block1.push({
+        $match: {
+          $or: [
+            { name: { $regex: req.body.name.toLowerCase(), $options: "i" } },
+            {
+              "brand.name": {
+                $regex: req.body.name.toLowerCase(),
+                $options: "i",
+              },
+            },
+            {
+              "category.name": {
+                $regex: req.body.name.toLowerCase(),
+                $options: "i",
+              },
+            },
+            {
+              "subCategory.name": {
+                $regex: req.body.name.toLowerCase(),
+                $options: "i",
+              },
+            },
+          ],
         },
+      });
+    } else if (
+      !req.body.name.toLowerCase() &&
+      (req.body.brands.length ||
+        req.body.categories.length ||
+        req.body.subCategories.length)
+    ) {
+      block1.push({
+        $match: {
+          $or: [
+            {
+              "brand._id": { $in: req.body.brands.map((x) => new ObjectId(x)) },
+            },
+            {
+              "category._id": {
+                $in: req.body.categories.map((x) => new ObjectId(x)),
+              },
+            },
+            {
+              "subCategory._id": {
+                $in: req.body.subCategories.map((x) => new ObjectId(x)),
+              },
+            },
+          ],
+        },
+      });
+    } else if (
+      req.body.name.toLowerCase() &&
+      (req.body.brands.length ||
+        req.body.categories.length ||
+        req.body.subCategories.length)
+    ) {
+      block1.push({
+        $match: {
+          $or: [
+            {
+              "brand._id": { $in: req.body.brands.map((x) => new ObjectId(x)) },
+            },
+            {
+              "category._id": {
+                $in: req.body.categories.map((x) => new ObjectId(x)),
+              },
+            },
+            {
+              "subCategory._id": {
+                $in: req.body.subCategories.map((x) => new ObjectId(x)),
+              },
+            },
+            { name: { $regex: req.body.name.toLowerCase(), $options: "i" } },
+            {
+              "brand.name": {
+                $regex: req.body.name.toLowerCase(),
+                $options: "i",
+              },
+            },
+            {
+              "category.name": {
+                $regex: req.body.name.toLowerCase(),
+                $options: "i",
+              },
+            },
+            {
+              "subCategory.name": {
+                $regex: req.body.name.toLowerCase(),
+                $options: "i",
+              },
+            },
+          ],
+        },
+      });
+    }
+
+    block1.push({ $unset: ["isDeleted", "createdOn", "updatedOn", "__v"] });
+    block1.push({
+      $sort: {
+        updatedOn: -1,
+        createdOn: -1,
       },
-      {
-        $limit: 1000,
-      },
-    ]);
+    });
+    block1.push({
+      $limit: 1000,
+    });
+
+    const products = await Product.aggregate(block1);
 
     res.status(200).json({
       isSuccess: true,
@@ -284,10 +384,23 @@ app.post("/user/blogs", async (req, res) => {
   try {
     const filters = {};
     if (req.body.title)
-      filters.title = { $regex: ".*" + req.body.title + ".*", $options: "i" };
+      filters["$or"] = [
+        {
+          title: {
+            $regex: ".*" + req.body.title.toString() + ".*",
+            $options: "i",
+          },
+        },
+        {
+          content: {
+            $regex: ".*" + req.body.title.toString() + ".*",
+            $options: "i",
+          },
+        },
+      ];
     filters.isDeleted = false;
     const blogs = await Blog.find(filters)
-      .sort({ updatedOn: -1, createdOn: -1 })
+      .sort({ views: -1, updatedOn: -1, createdOn: -1 })
       .limit(100);
     res.status(200).json({
       isSuccess: true,
@@ -300,38 +413,43 @@ app.post("/user/blogs", async (req, res) => {
   }
 });
 
-app.get("/user/blog/:id", async (req, res) => {
+app.post("/user/blog", async (req, res) => {
   try {
-    const blogId = req.params.id;
-    const blog = await Blog.findOne({
-      _id: new ObjectId(blogId),
+    const blogUrl = req.body.url;
+    const blog = await Blog.findOneAndUpdate(
+      { url: blogUrl, isDeleted: false },
+      { $inc: { views: 1 } },
+      { new: true, runValidators: true }
+    );
+
+    if (!blog) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
+    const productIds = blog.products.map((y) => y.toString());
+    const dbProducts = await Product.find({
       isDeleted: false,
+      _id: { $in: JSON.parse(JSON.stringify([productIds.toString()] || '[]')) || [] },
     });
-    const products = await Product.find({
+    console.log(
+      dbProducts
+    );
+    const products = dbProducts.map((y) => {
+      return products.find((z) => z._id === new ObjectId(y.toString()));
+    });
+    const dbBlogs = await Blog.find({
       isDeleted: false,
-      _id: { $in: blog.products.map((y) => new ObjectId(y)) },
+    }).sort({
+      views: -1,
+      updatedOn: -1,
+      createdOn: -1,
     });
-    const productsDetails = x.products.map((y) => {
-      return products.find((z) => z._id === new ObjectId(y));
+    blog.products = products;
+    blog.blogs = dbBlogs;
+    res.status(200).json({
+      isSuccess: true,
+      data: blog,
+      message: "Blog Fetched Successfully",
     });
-    const trendingBlogsDetails = await Blog.find({
-      isDeleted: false,
-    })
-      .sort({
-        views: -1,
-        updatedOn: -1,
-        createdOn: -1,
-      })
-      .limit(5);
-    blog.products = productsDetails;
-    blog.blogs = {
-      trendingBlogs: trendingBlogsDetails,
-      newBlogs: res.status(200).json({
-        isSuccess: true,
-        data: blog,
-        message: "Blog Fetched Successfully",
-      }),
-    };
   } catch (error) {
     console.error(error);
     res.status(500).send(error);

@@ -23,8 +23,7 @@ import {
 } from '../../models';
 import { ProductService } from '../../services/product.service';
 import { UtilService } from '../../services/util.service';
-declare const window:any;
-declare const document:any;
+declare const window: any;
 
 @Component({
   selector: 'app-products',
@@ -58,6 +57,7 @@ export class ProductsComponent {
   isBrowser: boolean;
   screenWidth: number = 0;
   debounceTimer: any;
+  oldSearchValue: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -81,7 +81,6 @@ export class ProductsComponent {
     this.getBrands();
     this.getCategories();
     this.getSubCategories();
-    this.getProducts();
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser && window) {
@@ -126,9 +125,9 @@ export class ProductsComponent {
     });
     this.meta.updateTag({
       property: 'og:url',
-      content: environment.baseUrl + this.url,
+      content: `${environment.baseUrl}/products/${this.url}`,
     });
-    //this.getProducts(this.searchTerm || '');
+    this.getProducts(this.searchTerm || '');
   }
 
   searching(event: Event) {
@@ -136,7 +135,10 @@ export class ProductsComponent {
     const value = input.value || '';
     clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => {
-      this.getProducts(value);
+      if (this.oldSearchValue != value) {
+        this.getProducts(value);
+        this.oldSearchValue = value;
+      }
     }, 500);
   }
 
@@ -182,10 +184,7 @@ export class ProductsComponent {
       .subscribe((response) => {
         if (response.isSuccess) {
           this.products = response.data;
-          if (
-            !this.structuredDataSet &&
-            this.products?.length > 0
-          ) {
+          if (!this.structuredDataSet && this.products?.length > 0) {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',
@@ -210,15 +209,14 @@ export class ProductsComponent {
             // script = this.sanitizer.bypassSecurityTrustScript(script);
             // document.head.appendChild(script);
             // }
-            if(this.isBrowser)
-            {
+            if (this.isBrowser) {
               this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
                 `<script type="application/ld+json">${JSON.stringify(
                   structuredDataJSON
                 )}</script>`
               );
+              this.structuredDataSet = true;
             }
-            this.structuredDataSet = true;
           }
         }
       });

@@ -20,7 +20,7 @@ export class BlogService {
 
   getBlogByUrl(
     blogRequestCommand: BlogRequestCommand
-  ): Observable<Response<Blog[]>> {
+  ): Observable<Response<Blog>> {
     return this.apiService.post(
       `user/blog`,
       blogRequestCommand
