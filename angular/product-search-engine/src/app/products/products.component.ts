@@ -191,7 +191,7 @@ export class ProductsComponent {
               itemListElement: this.products?.map((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
-                url: environment?.baseUrl + this.url,
+                url: environment?.baseUrl + '/' + this.url,
                 name: product?.name || '',
                 image: product.imgUrl || environment?.baseUrl + '/logo.png',
                 brand: product.brand?.name || '',
@@ -201,14 +201,6 @@ export class ProductsComponent {
                 sizes: product?.sizes || [],
               })),
             };
-            // if(this.isBrowser && document) {
-            //   console.log(document);
-            // var script = document.createElement('script');
-            // script.type = 'application/ld+json';
-            // script.text = JSON.stringify(structuredDataJSON);
-            // script = this.sanitizer.bypassSecurityTrustScript(script);
-            // document.head.appendChild(script);
-            // }
             if (this.isBrowser) {
               this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
                 `<script type="application/ld+json">${JSON.stringify(

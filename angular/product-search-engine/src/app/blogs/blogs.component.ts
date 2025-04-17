@@ -114,42 +114,6 @@ export class BlogsComponent {
     let filters = {
       title: value || this.searchForm.value.title,
     };
-    // this.blogs = [
-    //   {
-    //     title:
-    //       "China's BYD to Build First EV Plant in India Amid Rising Global Trade Barriers, China's BYD to Build First EV Plant in India Amid Rising Global Trade Barriers, China's BYD to Build First EV Plant in India Amid Rising Global Trade Barriers",
-    //     url: 'china-byd',
-    //     createdOn: new Date().toString(),
-    //     updatedOn: new Date().toString(),
-    //     content:
-    //       "BYD, the world's largest electric vehicle (EV) maker, is set to build its first manufacturing plant in India, marking a pivotal move in its global expansion. The facility will be located in Rangareddy district, Telangana, approximately 60 kilometres from Hyderabad, as per a Business Standard report. This decision aligns with BYD’s strategy to navigate rising tariffs in Western markets, particularly in the United States and European Union (EU), where the company faces steep levies on Chinese EV imports. To comply with Indian regulations, BYD is expected to partner with Hyderabad-based Megha Engineering and Infrastructures Ltd (MEIL), with MEIL holding a majority stake in the venture.",
-    //     thumbnail:
-    //       'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1BT8nT.img?w=534&h=300&m=6',
-    //     thumbnailDetail:
-    //       "china's byd to build first ev plant in india amid rising global trade barriers",
-    //     products: [],
-    //     blogs: [],
-    //   },
-    // ];
-    // const structuredDataJSON = {
-    //   '@context': 'https://schema.org/',
-    //   '@type': 'ItemList',
-    //   itemListElement: this.blogs.map((blog, index) => ({
-    //     '@type': 'ListItem',
-    //     position: index + 1,
-    //     url: environment.baseUrl + '/blog/' + blog.url,
-    //     title: blog.title,
-    //     thumbnail: blog.thumbnail || environment.baseUrl + '/logo.png',
-    //     thumbnailDetail: blog.thumbnailDetail || '',
-    //     content: blog.content || '',
-    //   })),
-    // };
-
-    // this.structuredData = this.sanitizer.bypassSecurityTrustHtml(
-    //   `<script type="application/ld+json">${JSON.stringify(
-    //     structuredDataJSON
-    //   )}</script>`
-    // );
     this._blogService
       .getBlogs(filters)
       .pipe(
@@ -171,8 +135,7 @@ export class BlogsComponent {
                 title: blog.title,
                 thumbnail: blog.thumbnail || environment.baseUrl + '/logo.png',
                 thumbnailDetail: blog.thumbnailDetail,
-                products: blog.products,
-                blogs: blog.blogs,
+                searchTerm: blog.searchTerm
               })),
             };
             if (this.isBrowser) {

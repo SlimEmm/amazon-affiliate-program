@@ -57,6 +57,5 @@ export class Blog {
   content?: string = '';
   createdOn?: string = '';
   updatedOn?: string = '';
-  products: Product[] = [];
-  blogs: Blog[] = [];
+  searchTerm: string = '';
 }

@@ -86,8 +86,7 @@ const blogSchema = new mongoose.Schema({
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false },
-  products: { type: [Schema.Types.ObjectId], ref: "Product", default: [] },
-  blogs: { type: [Schema.Types.ObjectId], ref: "Blog", default: [] },
+  searchTerm: { type: String, required: true},
   views: { type: Number, default: 0 },
 });
 const productSchema = new mongoose.Schema({
@@ -425,26 +424,6 @@ app.post("/user/blog", async (req, res) => {
     if (!blog) {
       return res.status(404).json({ error: "Blog not found" });
     }
-    const productIds = blog.products.map((y) => y.toString());
-    const dbProducts = await Product.find({
-      isDeleted: false,
-      _id: { $in: JSON.parse(JSON.stringify([productIds.toString()] || '[]')) || [] },
-    });
-    console.log(
-      dbProducts
-    );
-    const products = dbProducts.map((y) => {
-      return products.find((z) => z._id === new ObjectId(y.toString()));
-    });
-    const dbBlogs = await Blog.find({
-      isDeleted: false,
-    }).sort({
-      views: -1,
-      updatedOn: -1,
-      createdOn: -1,
-    });
-    blog.products = products;
-    blog.blogs = dbBlogs;
     res.status(200).json({
       isSuccess: true,
       data: blog,
