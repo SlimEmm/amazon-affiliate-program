@@ -6,7 +6,7 @@
                 (keyup)="searching($event)">
         </mat-form-field>
     </form>
-    <div class="row mx-0 mb-5 justify-content-center">
+    <div class="row mx-0 justify-content-center">
         <ng-container *ngIf="isLoading">
             <div class="col-12 my-5">
                 <img class="loading-gif" src="loading.gif" alt="loading...">
@@ -15,18 +15,19 @@
         <ng-container *ngIf="!isLoading && blogs.length > 0">
             <ng-container *ngFor="let item of blogs">
                 <a [href]="baseUrlEnv+'/blog/'+item.url"
-                    class="col-12 py-3 border border-2 text-decoration-none text-white" style="background: linear-gradient(1.35turn, #003366, #7dbcde)">
+                    class="col-12 py-3 border border-2 text-decoration-none text-white"
+                    style="background: linear-gradient(1.35turn, #003366, #7dbcde)">
                     <div class="d-flex gap-3 align-items-center">
                         <div>
-                            <div>
+                            <div class="mx-2 my-0">
                                 <img [src]="item.thumbnail" [alt]="item.thumbnailDetail"
-                                    style="width:150px; height: 150px;" />
+                                    style="width:125px; height: 110px;" />
                             </div>
                             <span style="font-size:10px">
                                 {{item.thumbnailDetail}}
                             </span>
                         </div>
-                        <div class="my-1">
+                        <div class="my-0 mx-3 d-flex text-start justify-content-center">
                             <span>{{ _utilService.textTruncate(item.title || '', 512)}}</span>
                         </div>
                     </div>
@@ -39,7 +40,10 @@
             </div>
         </ng-container>
     </div>
+    <div class="text-dark my-5">
+        <h2>Welcome! Thank you! Visit Again!</h2>
+    </div>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">
     <div [innerHTML]="structuredData"></div>
-  </ng-container>
+</ng-container>

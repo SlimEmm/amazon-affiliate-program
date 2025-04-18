@@ -69,7 +69,7 @@ export class BlogsComponent {
     this.title.setTitle(`${this.searchTerm || ''}`);
     this.meta.updateTag({
       name: 'description',
-      content: `Latest details about ${this.searchTerm || ''}.`,
+      content: `Latest highlight about ${this.searchTerm || ''}.`,
     });
     this.meta.updateTag({
       name: 'keywords',
@@ -84,7 +84,7 @@ export class BlogsComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Latest details about ${this.searchTerm || ''}.`,
+      content: `Latest highlight about ${this.searchTerm || ''}.`,
     });
     this.meta.updateTag({
       property: 'og:image',

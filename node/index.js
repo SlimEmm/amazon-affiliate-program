@@ -5,6 +5,9 @@ const expressStaticGzip = require("express-static-gzip");
 var Schema = mongoose.Schema;
 const cors = require("cors");
 const app = express();
+const path = require("path");
+const root = path.join(__dirname, "/");
+// app.use(express.static(root));
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
@@ -18,7 +21,7 @@ app.use(
 );
 app.use(
   "/",
-  expressStaticGzip("public", {
+  expressStaticGzip(root, {
     enableBrotli: true,
     orderPreference: ["br", "gz"],
     setHeaders: (res, path) => {
@@ -86,7 +89,7 @@ const blogSchema = new mongoose.Schema({
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false },
-  searchTerm: { type: String, required: true},
+  searchTerm: { type: String, required: true },
   views: { type: Number, default: 0 },
 });
 const productSchema = new mongoose.Schema({
@@ -205,6 +208,7 @@ const Blog = mongoose.model("Blog", blogSchema);
 //   }
 // });
 // Route to search products with filters
+
 app.post("/user/products", async (req, res) => {
   try {
     delete req.body.createdOn;

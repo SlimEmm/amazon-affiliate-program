@@ -120,7 +120,9 @@ export class BlogComponent {
                 sizes: product?.sizes || [],
               })),
             };
-            this.getBlogs(value, structuredDataJSON);
+            this.getBlogs(
+              '',//value, 
+              structuredDataJSON);
           }
         }
       });

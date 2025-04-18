@@ -1,187 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+>
+  <sitemap>
+    <loc>https://thegreatproducts.com/sitemap-blog.xml</loc>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </sitemap>
+  <sitemap>
+    <loc>https://thegreatproducts.com/sitemap-blogs.xml</loc>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </sitemap>
+  <sitemap>
+    <loc>https://thegreatproducts.com/sitemap-brands.xml</loc>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </sitemap>
+  <sitemap>
+    <loc>https://thegreatproducts.com/sitemap-categories.xml</loc>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </sitemap>
+  <sitemap>
+    <loc>https://thegreatproducts.com/sitemap-subcategories.xml</loc>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.75</priority>
+  </sitemap>
   <!-- Start of Main Links -->
   <url>
     <loc>https://thegreatproducts.com</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/home</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/products</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/blogs</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/about</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/contact</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/disclaimer</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://thegreatproducts.com/privacy-policy</loc>
-    <lastmod>2025-04-17</lastmod>
+    <lastmod>2025-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <!-- End of Main Links -->
-  <!-- Start of Brand Links -->
-  <url>
-    <loc>https://thegreatproducts.com/products/amazon</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/samsung</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/redmi</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/oneplus</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/sony</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/jbl</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/bose</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/elgato</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/rayneo</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/roku</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/noise</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/soundcore</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/sennheiser</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/marshall</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/skullcandy</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/razor</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/hyperx</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/shure</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/lewitt</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/obsbot</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/akg</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <!-- End of Brand Links -->
-  <!-- Start of Category Links -->
-  <url>
-    <loc>https://thegreatproducts.com/products/electronics</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/device</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/accessory</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/accessories</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <!-- End of Category Links -->
-  <!-- Start of Subcategory Links -->
-  <url>
-    <loc>https://thegreatproducts.com/products/fire%20tv</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/earbud</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/headphone</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/microphone</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/webcam</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/speaker</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/display</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <url>
-    <loc>https://thegreatproducts.com/products/mobile</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <!-- End of Brand Links -->
-  <!-- Start of Blogs Links -->
-  <url>
-    <loc>https://thegreatproducts.com/blogs/wireless%20earbuds</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <!-- End of Blogs Links -->
-  <!-- Start of Blog Links -->
-  <url>
-    <loc>https://thegreatproducts.com/blog/wire-less-earbuds</loc>
-    <lastmod>2025-04-17</lastmod>
-  </url>
-  <!-- End of Blog Links -->
 </urlset>

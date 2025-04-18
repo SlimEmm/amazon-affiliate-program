@@ -21,6 +21,11 @@
             "assets": [
               "src/robots.txt",
               "src/sitemap.xml",
+              "src/sitemap-blog.xml",
+              "src/sitemap-blogs.xml",
+              "src/sitemap-brands.xml",
+              "src/sitemap-categories.xml",
+              "src/sitemap-subcategories.xml",
               {
                 "glob": "**/*",
                 "input": "public"
