@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!-- <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://thegreatproducts.com/sitemap-blog.xml</loc>
     <lastmod>2025-04-18</lastmod>
@@ -22,7 +22,7 @@
     <loc>https://thegreatproducts.com/sitemap-subcategories.xml</loc>
     <lastmod>2025-04-18</lastmod>
   </sitemap>
-</sitemapindex>
+</sitemapindex> -->
   <!-- Start of Main Links -->
   <url>
     <loc>https://thegreatproducts.com</loc>
