@@ -50,7 +50,7 @@
               <div class="d-flex mt-1">
                 <ng-container *ngFor="let color of item.colors; let i = index;">
                   <ng-container *ngIf="i < 5">
-                    <span [ngbTooltip]="color" class="border rounded-3 me-1" position="top" container="body">
+                    <span [ngbTooltip]="color" class="border rounded-3 me-1 bg-white" position="top" container="body">
                       <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
                         <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
                       </svg>
