@@ -66,7 +66,9 @@ export class BlogsComponent {
     this.searchTerm = this.route.snapshot?.params?.['id'] || '';
     this.searchForm.get('title')?.setValue(this.searchTerm);
     this.url = this.router.url;
-    this.title.setTitle(`${this.searchTerm || ''}`);
+    this.title.setTitle(`${this.searchTerm || ''}${
+        (this.searchTerm || '') && ','
+      } The Great Blogs`);
     this.meta.updateTag({
       name: 'description',
       content: `Latest highlight about ${this.searchTerm || ''}.`,
@@ -92,7 +94,7 @@ export class BlogsComponent {
     });
     this.meta.updateTag({
       property: 'og:url',
-      content: `${environment.baseUrl}/blogs/${this.url}`,
+      content: `${environment.baseUrl}${this.url}`,
     });
     this.getBlogs(this.searchTerm || '');
   }

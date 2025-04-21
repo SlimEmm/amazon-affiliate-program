@@ -112,7 +112,7 @@ export class ProductsComponent {
     this.meta.updateTag({
       property: 'og:title',
       content: `${this.searchTerm || ''} ${
-        (this.searchTerm || '') && '|'
+        (this.searchTerm || '') && ','
       } The Great Products`,
     });
     this.meta.updateTag({
@@ -125,7 +125,7 @@ export class ProductsComponent {
     });
     this.meta.updateTag({
       property: 'og:url',
-      content: `${environment.baseUrl}/products/${this.url}`,
+      content: `${environment.baseUrl}${this.url}`,
     });
     this.getProducts(this.searchTerm || '');
   }
