@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
   <url>
-    <loc>https://thegreatproducts.com</loc>
+    <loc>https://thegreatproducts.com/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/home</loc>
+    <loc>https://thegreatproducts.com/home/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/products</loc>
+    <loc>https://thegreatproducts.com/products/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/blogs</loc>
+    <loc>https://thegreatproducts.com/blogs/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/about</loc>
+    <loc>https://thegreatproducts.com/about/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/contact</loc>
+    <loc>https://thegreatproducts.com/contact/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/disclaimer</loc>
+    <loc>https://thegreatproducts.com/disclaimer/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://thegreatproducts.com/privacy-policy</loc>
+    <loc>https://thegreatproducts.com/privacy-policy/</loc>
     <lastmod>2025-04-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
