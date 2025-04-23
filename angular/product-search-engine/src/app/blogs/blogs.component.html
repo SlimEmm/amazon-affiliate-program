@@ -1,4 +1,4 @@
-<div class="text-center" style="min-height: 705px;">
+<div class="text-center" style="min-height: 640px">
     <h1 class="py-3">Blogs</h1>
     <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
         <mat-form-field class="bg-white w-50">
@@ -14,7 +14,7 @@
         </ng-container>
         <ng-container *ngIf="!isLoading && blogs.length > 0">
             <ng-container *ngFor="let item of blogs">
-                <a [href]="baseUrlEnv+'/blog/'+item.url"
+                <a [href]="baseUrlEnv+'/blog/'+item.url" target="_blank"
                     class="col-12 py-3 border border-2 text-decoration-none text-white"
                     style="background: linear-gradient(1.35turn, #003366, #7dbcde)">
                     <div class="d-flex gap-3 align-items-center">
@@ -39,9 +39,6 @@
                 <span class="no-found-text">No Blogs Found Currenly for your Search!</span>
             </div>
         </ng-container>
-    </div>
-    <div class="text-dark my-5">
-        <h2>Welcome! Thank you! Visit Again!</h2>
     </div>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">

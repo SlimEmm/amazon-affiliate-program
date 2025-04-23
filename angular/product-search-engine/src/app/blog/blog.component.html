@@ -1,4 +1,4 @@
-<div class="text-center" style="min-height: 705px">
+<div class="text-center" style="min-height: 640px">
   <h1 class="py-1">Blog</h1>
   <div class="col-12 py-5 border border-2 text-decoration-none text-white"
     style="background: linear-gradient(1.35turn, #003366, #7dbcde)">
@@ -17,7 +17,7 @@
     </div>
     <div class="row mx-0 mb-5 justify-content-center">
       <ng-container *ngFor="let item of products">
-        <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')"
+        <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
           class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5" style="background: #000">
           <div
             class="d-flex align-items-center justify-content-center gap-xl-3 gap-md-2 gap-sm-2 gap-1 category-text fw-bold border border-1 py-2 px-5 rounded text-white"
@@ -84,7 +84,7 @@
     </div>
     <ng-container *ngFor="let item of blogs">
       <div class="px-5 py-5 border-bottom" style="background: #000;">
-        <a [href]="baseUrlEnv+'/blog/'+item.url" class="col-12 py-3 text-decoration-none text-white ">
+        <a [href]="baseUrlEnv+'/blog/'+item.url" class="col-12 py-3 text-decoration-none text-white " target="_blank">
           <div class="d-flex gap-3 align-items-center">
             <div>
               <div>
@@ -101,9 +101,6 @@
         </a>
       </div>
     </ng-container>
-    <div class="text-dark mt-5">
-      <h2>Welcome! Thank you! Visit Again!</h2>
-    </div>
   </div>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">
