@@ -24,14 +24,14 @@ export class HomeComponent {
 
   ngOnInit() {
     this.url = this.router.url;
-    this.title.setTitle(`The Great Products`);
+    this.title.setTitle(`Home - The Great Products`);
     this.meta.updateTag({
       name: 'description',
-      content: `Find the best products at The Great Products.`,
+      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Buy Online At The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `best products, quality items, buy online`,
+      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy Online`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
@@ -40,7 +40,7 @@ export class HomeComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Discover and shop the best products here.`,
+      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Buy Online At The Great Products.`,
     });
     this.meta.updateTag({
       property: 'og:image',

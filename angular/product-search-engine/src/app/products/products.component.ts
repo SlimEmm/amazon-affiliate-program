@@ -96,28 +96,28 @@ export class ProductsComponent {
     this.title.setTitle(
       `${this.searchTerm || ''} ${
         (this.searchTerm || '') && '|'
-      } The Great Products`
+      } The Great Products - Latest & Best Products`
     );
     this.meta.updateTag({
       name: 'description',
-      content: `Find the best ${this.searchTerm || ''} at The Great Products.`,
+      content: `Discover, Find & Shop ${this.searchTerm || ''} At The Great Products, Latest Products, Best Products, Quality Items, Buy Online.`,
     });
     this.meta.updateTag({
       name: 'keywords',
       content: `${this.searchTerm || ''}${
         (this.searchTerm || '') && ', '
-      }best products, quality items, buy online`,
+      }Discover, Find, Shop, Great, Viral, Trending Latest, Best, Quality, Products, Items, Buy, Online`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
       property: 'og:title',
       content: `${this.searchTerm || ''} ${
-        (this.searchTerm || '') && ','
+        (this.searchTerm || '') ? ' - ' : 'Products - '
       } The Great Products`,
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Discover and shop the best ${this.searchTerm || ''} here.`,
+      content: `Discover, Find & Shop The Best ${this.searchTerm || ''} At The Great Products, Trending, Viral, Latest, Best, Products, Quality, Items, Buy Online.`,
     });
     this.meta.updateTag({
       property: 'og:image',

@@ -19,7 +19,7 @@ export class DisclaimerComponent {
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `The Great Products - Disclaimer, latest news, latest blogs, today new, today blogs`,
+      content: `Disclaimer, Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Best, Quality, Products, Buy, Online`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({

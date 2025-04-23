@@ -8,7 +8,7 @@
       <loc>https://thegreatproducts.com/blog/future-of-television</loc>
       <news:news>
         <news:publication>
-          <news:name>The Great Products - Blogs</news:name>
+          <news:name>The Great Products - Today Blog</news:name>
           <news:language>en</news:language>
         </news:publication>
         <news:publication_date>2025-04-22</news:publication_date>
@@ -27,7 +27,7 @@
       <loc>https://thegreatproducts.com/blog/red-flag-air-conditioner</loc>
       <news:news>
         <news:publication>
-          <news:name>The Great Products - Blogs</news:name>
+          <news:name>The Great Products - Today Blog</news:name>
           <news:language>en</news:language>
         </news:publication>
         <news:publication_date>2025-04-22</news:publication_date>
@@ -46,7 +46,7 @@
         <loc>https://thegreatproducts.com/blog//wire-less-earbuds-music</loc>
         <news:news>
             <news:publication>
-                <news:name>The Great Products - Blogs</news:name>
+                <news:name>The Great Products - Today Blog</news:name>
                 <news:language>en</news:language>
             </news:publication>
             <news:publication_date>2025-04-22</news:publication_date>
@@ -67,7 +67,7 @@
         <loc>https://thegreatproducts.com/blog/amazon-brand-review</loc>
         <news:news>
             <news:publication>
-                <news:name>The Great Products - Blogs</news:name>
+                <news:name>The Great Products - Today Blog</news:name>
                 <news:language>en</news:language>
             </news:publication>
             <news:publication_date>2025-04-22</news:publication_date>
@@ -86,7 +86,7 @@
         <loc>https://thegreatproducts.com/blog/officially-6g-connectivity</loc>
         <news:news>
             <news:publication>
-                <news:name>The Great Products - Blogs</news:name>
+                <news:name>The Great Products - Today Blog</news:name>
                 <news:language>en</news:language>
             </news:publication>
             <news:publication_date>2025-04-22</news:publication_date>
@@ -106,7 +106,7 @@
         <loc>https://thegreatproducts.com/blog/headphone-factors</loc>
         <news:news>
           <news:publication>
-            <news:name>The Great Products - Blogs</news:name>
+            <news:name>The Great Products - Today Blog</news:name>
             <news:language>en</news:language>
           </news:publication>
           <news:publication_date>2025-04-22</news:publication_date>
@@ -125,7 +125,7 @@
         <loc>https://thegreatproducts.com/blog/nasa-camera</loc>
         <news:news>
           <news:publication>
-            <news:name>The Great Products - Blogs</news:name>
+            <news:name>The Great Products - Today Blog</news:name>
             <news:language>en</news:language>
           </news:publication>
           <news:publication_date>2025-04-22</news:publication_date>
@@ -135,6 +135,26 @@
         <image:image>
           <image:loc>
             https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl26HchZMwcbSjQkTZR0WGsU0okxXTVfSSPw%26s
+          </image:loc>
+        </image:image>
+        <lastmod>2025-04-22</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.95</priority>
+      </url>
+      <url>
+        <loc>https://thegreatproducts.com/blog/samsung</loc>
+        <news:news>
+          <news:publication>
+            <news:name>The Great Products - Today Blog</news:name>
+            <news:language>en</news:language>
+          </news:publication>
+          <news:publication_date>2025-04-22</news:publication_date>
+          <news:title>The global competition for the next generation of wireless technology, 6G
+            connectivity, has officially begun.</news:title>
+        </news:news>
+        <image:image>
+          <image:loc>
+            https://media.gettyimages.com/id/458266683/photo/samsung-store-bangkok.jpg?s=612x612%26w=0%26k=20%26c=noATJ4udwZcjH1812TNfK0MwNOX0r1GRl6CHXGo7pd8=
           </image:loc>
         </image:image>
         <lastmod>2025-04-22</lastmod>

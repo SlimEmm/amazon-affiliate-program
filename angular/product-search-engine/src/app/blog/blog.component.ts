@@ -42,29 +42,37 @@ export class BlogComponent {
   ) {}
   ngOnInit() {
     this.url = this.route.snapshot?.params?.['id'] || '';
-    this.title.setTitle(`${this.url.replaceAll('-', ' ') || ''}`);
+    this.title.setTitle(
+      `${this.url.replaceAll('-', ' ') || ''}${
+        (this.url.replaceAll('-', ' ') || '') && ','
+      } The Great Article - Trending, Viral, Latest, Today, New, Blog, Article`
+    );
     this.meta.updateTag({
       name: 'description',
-      content: `Latest details about ${this.url.replaceAll('-', ' ') || ''}.`,
+      content: `Latest Highlight About ${this.url.replaceAll(
+        '-',
+        ' '
+      )} Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     this.meta.updateTag({
       name: 'keywords',
       content: `${this.url.replaceAll('-', ' ') || ''}${
-        (this.url || '') && ', '
-      } latest news, latest blogs, today new, today blogs`,
+        (this.url.replaceAll('-', ' ') || '') && ', '
+      }Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
       property: 'og:title',
-      content: `${this.url.replaceAll('-', ' ') || ''}`,
+      content: `${this.url.replaceAll('-', ' ') || ''}${
+        (this.url.replaceAll('-', ' ') || '') && ','
+      } The Great Article - Trending, Viral, Latest, Today, New, Blog, Article.`,
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Latest details about ${this.url.replaceAll('-', ' ') || ''}.`,
-    });
-    this.meta.updateTag({
-      property: 'og:image',
-      content: environment.baseUrl + '/logo.png',
+      content: `Latest Highlight About ${this.url.replaceAll(
+        '-',
+        ' '
+      )} Trending, Viral, Latest, Today, News, Blog, Article.`,
     });
     this.meta.updateTag({
       property: 'og:url',
@@ -81,6 +89,10 @@ export class BlogComponent {
   getBlogByUrl() {
     this._blogService.getBlogByUrl({ url: this.url }).subscribe((response) => {
       this.blog = response.data;
+      this.meta.updateTag({
+        property: 'og:image',
+        content: this.blog.thumbnail || environment.baseUrl + '/logo.png',
+      });
       this.getProducts(this.blog.searchTerm);
     });
   }
@@ -121,8 +133,9 @@ export class BlogComponent {
               })),
             };
             this.getBlogs(
-              '',//value, 
-              structuredDataJSON);
+              '', //value,
+              structuredDataJSON
+            );
           }
         }
       });

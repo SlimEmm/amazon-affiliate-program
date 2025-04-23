@@ -15,11 +15,11 @@ export class ContactComponent {
     this.title.setTitle('Contact Us - The Great Products');
     this.meta.updateTag({
       name: 'description',
-      content: `Contact Us - contact@thegreatproducts.com - The Great Products.`,
+      content: `Contact Us - contact.thegreatproducts@gmail.com - The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `The Great Products - Contact Us, latest news, latest blogs, today new, today blogs`,
+      content: `Contact, Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Best, Quality, Products, Buy, Online`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
@@ -28,7 +28,7 @@ export class ContactComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Contact Us - contact@thegreatproducts.com - The Great Products.`,
+      content: `Contact Us - contact.thegreatproducts@gmail.com - The Great Products.`,
     });
     this.meta.updateTag({
       property: 'og:image',

@@ -19,7 +19,7 @@ export class PrivacyPolicyComponent {
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `The Great Products - Privacy Policy, latest news, latest blogs, today new, today blogs`,
+      content: `Privacy Policy, Discover, Find, Shop, Great, Viral, Trending Latest, Best, Quality, Products, Items, Buy, Online`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({

@@ -68,25 +68,27 @@ export class BlogsComponent {
     this.url = this.router.url;
     this.title.setTitle(`${this.searchTerm || ''}${
         (this.searchTerm || '') && ','
-      } The Great Blogs`);
+      } The Great Blogs - Trending, Viral & Latest Blogs`);
     this.meta.updateTag({
       name: 'description',
-      content: `Latest highlight about ${this.searchTerm || ''}.`,
+      content: `Latest Highlight About ${this.searchTerm || ''} Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     this.meta.updateTag({
       name: 'keywords',
       content: `${this.searchTerm || ''}${
         (this.searchTerm || '') && ', '
-      } latest news, latest blogs, today new, today blogs`,
+      }Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
       property: 'og:title',
-      content: `${this.searchTerm || ''}`,
+      content: `${this.searchTerm || ''}${
+        (this.searchTerm || '') && ','
+      } The Great Blogs - Trending, Viral & Latest Blogs`,
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Latest highlight about ${this.searchTerm || ''}.`,
+      content: `Latest Highlight About ${this.searchTerm || ''} Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     this.meta.updateTag({
       property: 'og:image',

@@ -19,7 +19,7 @@ export class AboutComponent {
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `The Great Products - About Us, latest news, latest blogs, today new, today blogs`,
+      content: `The Great Products - About Us, Latest News, Latest Blogs, Latest Articles, Today News, Today blog, Today Article`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
