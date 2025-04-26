@@ -49,7 +49,9 @@
       <ng-container *ngFor="let item of products">
         <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
           class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
-          style="background: linear-gradient(1.35turn, #003366, #7dbcdc)">
+          style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;"
+          >
+          <!-- style="background: linear-gradient(1.35turn, #003366, #7dbcdc)" -->
           <div
             class="d-flex align-items-center justify-content-center gap-xl-3 gap-md-2 gap-sm-2 gap-1 category-text fw-bold border border-1 py-2 px-5 rounded text-white"
             style="min-height:50px">
@@ -81,7 +83,7 @@
               <div class="d-flex mt-1">
                 <ng-container *ngFor="let color of item.colors; let i = index;">
                   <ng-container *ngIf="i < 5">
-                    <span [ngbTooltip]="color" class="border rounded-3 me-1" position="top" container="body">
+                    <span [ngbTooltip]="color" class="border rounded-3 me-1 bg-white" position="top" container="body">
                       <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
                         <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
                       </svg>
@@ -98,7 +100,7 @@
                 <ng-container *ngFor="let size of item.sizes; let i = index;">
                   <ng-container *ngIf="i < 4">
                     <span
-                      class="border rounded px-2 py-1 mb-2 mt-1 fs-5 fw-bolder text-white border-1 size-label">{{size}}</span>
+                      class="border rounded px-1 py-1 mb-2 mt-1 fs-5 fw-bolder text-white border-1 size-label">{{size}}</span>
                   </ng-container>
                   <ng-container *ngIf="i === 4">
                     <span class="fw-bolder fs-5 text-white">...</span>
