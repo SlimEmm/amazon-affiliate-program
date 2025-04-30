@@ -438,6 +438,39 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://thegreatproducts.com/products/kodak</loc>
+    <image:image>
+      <image:loc>
+        https://a.media-amazon.com/images/I/71qdY0OZbaL._SL1500_.jpg
+      </image:loc>
+    </image:image>
+    <lastmod>2025-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegreatproducts.com/products/nikon</loc>
+    <image:image>
+      <image:loc>
+        https://a.media-amazon.com/images/I/81elcNxkR4L._SL1500_.jpg
+      </image:loc>
+    </image:image>
+    <lastmod>2025-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegreatproducts.com/products/sigma</loc>
+    <image:image>
+      <image:loc>
+        https://a.media-amazon.com/images/I/61vtffHUqrL._SL1500_.jpg
+      </image:loc>
+    </image:image>
+    <lastmod>2025-04-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://thegreatproducts.com/products/skullcandy</loc>
     <image:image>
       <image:loc>
