@@ -3,21 +3,25 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'home',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./home/home.component').then((d) => d.HomeComponent),
   },
   {
     path: 'about',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./about/about.component').then((d) => d.AboutComponent),
   },
   {
     path: 'contact',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./contact/contact.component').then((d) => d.ContactComponent),
   },
   {
     path: 'disclaimer',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./disclaimer/disclaimer.component').then(
         (d) => d.DisclaimerComponent
@@ -25,15 +29,11 @@ export const routes: Routes = [
   },
   {
     path: 'privacy-policy',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./privacy-policy/privacy-policy.component').then(
         (d) => d.PrivacyPolicyComponent
       ),
-  },
-  {
-    path: 'blogs',
-    loadComponent: () =>
-      import('./blogs/blogs.component').then((d) => d.BlogsComponent),
   },
   {
     path: 'blogs/:id',
@@ -46,12 +46,19 @@ export const routes: Routes = [
       import('./blog/blog.component').then((d) => d.BlogComponent),
   },
   {
-    path: 'products',
+    path: 'blogs',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./blogs/blogs.component').then((d) => d.BlogsComponent),
+  },
+  {
+    path: 'products/:id',
     loadComponent: () =>
       import('./products/products.component').then((d) => d.ProductsComponent),
   },
   {
-    path: 'products/:id',
+    path: 'products',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./products/products.component').then((d) => d.ProductsComponent),
   },
