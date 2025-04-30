@@ -49,9 +49,8 @@ mongoose
   .catch((err) => console.error("MongoDB Connection Error:", err));
 
   const cacheMiddleware = async (req, res, next) => {
-    const key = `cache:${req.originalUrl}`;
   
-    const cached = await client.get(key);
+    const cached = await client.get(body);
     if (cached) {
       console.log(`Serving from cache: ${key}`);
       return res.send(JSON.parse(cached));
@@ -61,7 +60,7 @@ mongoose
     const originalSend = res.send.bind(res);
     res.send = async (body) => {
       if (res.statusCode === 200) {
-        await client.setEx(key, 360000, JSON.stringify(body)); // Cache for 100 hour
+        await client.setEx(body, 360000, JSON.stringify(body)); // Cache for 100 hour
       }
       return originalSend(body);
     };
