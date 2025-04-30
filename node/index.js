@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const compression = require("compression");
 const expressStaticGzip = require("express-static-gzip");
+const crypto = require('crypto');
 var Schema = mongoose.Schema;
 const cors = require("cors");
 const app = express();
@@ -47,29 +48,35 @@ mongoose
   )
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB Connection Error:", err));
+// Utility to generate a hash-based cache key
+function generateCacheKey(url, body) {
+  const keyData = url + JSON.stringify(body);
+  return 'cache:' + crypto.createHash('md5').update(keyData).digest('hex');
+}
 
-  const cacheMiddleware = async (req, res, next) => {
-  
-    const cached = await client.get(body);
-    if (cached) {
-      console.log(`Serving from cache: ${key}`);
-      return res.send(JSON.parse(cached));
+// Cache middleware for POST requests
+const cacheMiddleware = async (req, res, next) => {
+  const key = generateCacheKey(req.originalUrl, req.body);
+
+  const cached = await client.get(key);
+  if (cached) {
+    console.log(`Serving from cache: ${key}`);
+    return res.json(JSON.parse(cached));
+  }
+
+  // Intercept and cache the real response
+  const originalJson = res.json.bind(res);
+  res.json = async (body) => {
+    if (res.statusCode === 200 && body?.isSuccess) {
+      await client.setEx(key, 360000, JSON.stringify(body)); // cache for 100 hour
     }
-  
-    // Override res.send to cache response
-    const originalSend = res.send.bind(res);
-    res.send = async (body) => {
-      if (res.statusCode === 200) {
-        await client.setEx(body, 360000, JSON.stringify(body)); // Cache for 100 hour
-      }
-      return originalSend(body);
-    };
-  
-    next();
+    return originalJson(body);
   };
-  
-  // Apply cache middleware globally (or per route)
-  app.use(cacheMiddleware);
+
+  next();
+};
+
+app.use(cacheMiddleware);
 
   const redis = require('redis');
 
