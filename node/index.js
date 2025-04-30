@@ -48,6 +48,54 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB Connection Error:", err));
 
+  const cacheMiddleware = async (req, res, next) => {
+    const key = `cache:${req.originalUrl}`;
+  
+    const cached = await client.get(key);
+    if (cached) {
+      console.log(`Serving from cache: ${key}`);
+      return res.send(JSON.parse(cached));
+    }
+  
+    // Override res.send to cache response
+    const originalSend = res.send.bind(res);
+    res.send = async (body) => {
+      if (res.statusCode === 200) {
+        await client.setEx(key, 360000, JSON.stringify(body)); // Cache for 100 hour
+      }
+      return originalSend(body);
+    };
+  
+    next();
+  };
+  
+  // Apply cache middleware globally (or per route)
+  app.use(cacheMiddleware);
+
+  const redis = require('redis');
+
+  // Create a client
+  const client = redis.createClient({
+    socket: {
+      host: '127.0.0.1',
+      port: 6379
+    }
+  }); // defaults to localhost:6379
+  
+  // Connect to Redis
+  client.connect().then(() => {
+    console.log('Connected to Redis');
+  }).catch(console.error);
+
+  process.on('SIGINT', async () => {
+    await client.flushAll();
+    await client.quit();
+    console.log('Redis client disconnected');
+    process.exit(0);
+  });
+  
+  
+
 const brandSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, maxlength: 256, required: true },
@@ -372,11 +420,15 @@ app.post("/user/products", async (req, res) => {
 
     const products = await Product.aggregate(block1);
 
-    res.status(200).json({
+    const response = {
       isSuccess: true,
       data: products,
       message: "Products Fetched Successfully",
-    });
+    }
+
+    await client.set('/user/products', JSON.stringify(response));
+
+    res.status(200).json(response);
   } catch (error) {
     console.error(error);
     res.status(500).send(error);
