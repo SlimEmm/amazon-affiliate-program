@@ -12,7 +12,7 @@ export class DisclaimerComponent {
   constructor(private meta: Meta, private title: Title) {}
 
   ngOnInit() {
-    this.title.setTitle('Contact Us - The Great Products');
+    this.title.setTitle('Disclaimer - The Great Products');
     this.meta.updateTag({
       name: 'description',
       content: `Disclaimer - The Great Products.`,
