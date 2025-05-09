@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const compression = require("compression");
 const expressStaticGzip = require("express-static-gzip");
-const crypto = require('crypto');
+const crypto = require("crypto");
 var Schema = mongoose.Schema;
 const cors = require("cors");
 const app = express();
@@ -51,56 +51,58 @@ mongoose
 // Utility to generate a hash-based cache key
 function generateCacheKey(url, body) {
   const keyData = url + JSON.stringify(body);
-  return 'cache:' + crypto.createHash('md5').update(keyData).digest('hex');
+  return "cache:" + crypto.createHash("md5").update(keyData).digest("hex");
 }
 
 // Cache middleware for POST requests
 const cacheMiddleware = async (req, res, next) => {
-  const key = generateCacheKey(req.originalUrl, req.body);
+  if (!req.originalUrl?.includes("flush-cache")) {
+    const key = generateCacheKey(req.originalUrl, req.body);
 
-  const cached = await client.get(key);
-  if (cached) {
-    console.log(`Serving from cache: ${key}`);
-    return res.json(JSON.parse(cached));
-  }
-
-  // Intercept and cache the real response
-  const originalJson = res.json.bind(res);
-  res.json = async (body) => {
-    if (res.statusCode === 200 && body?.isSuccess) {
-      await client.setEx(key, 756000, JSON.stringify(body)); // cache for 240 hours = 10 days
+    const cached = await client.get(key);
+    if (cached) {
+      console.log(`Serving from cache: ${key}`);
+      return res.json(JSON.parse(cached));
     }
-    return originalJson(body);
-  };
 
+    // Intercept and cache the real response
+    const originalJson = res.json.bind(res);
+    res.json = async (body) => {
+      if (res.statusCode === 200 && body?.isSuccess) {
+        await client.setEx(key, 756000, JSON.stringify(body)); // cache for 240 hours = 10 days
+      }
+      return originalJson(body);
+    };
+  }
   next();
 };
 
 app.use(cacheMiddleware);
 
-  const redis = require('redis');
+const redis = require("redis");
 
-  // Create a client
-  const client = redis.createClient({
-    socket: {
-      host: '127.0.0.1',
-      port: 6379
-    }
-  }); // defaults to localhost:6379
-  
-  // Connect to Redis
-  client.connect().then(() => {
-    console.log('Connected to Redis');
-  }).catch(console.error);
+// Create a client
+const client = redis.createClient({
+  socket: {
+    host: "127.0.0.1",
+    port: 6379,
+  },
+}); // defaults to localhost:6379
 
-  process.on('SIGINT', async () => {
-    await client.flushAll();
-    await client.quit();
-    console.log('Redis client disconnected');
-    process.exit(0);
-  });
-  
-  
+// Connect to Redis
+client
+  .connect()
+  .then(() => {
+    console.log("Connected to Redis");
+  })
+  .catch(console.error);
+
+process.on("SIGINT", async () => {
+  await client.flushAll();
+  await client.quit();
+  console.log("Redis client disconnected");
+  process.exit(0);
+});
 
 const brandSchema = new mongoose.Schema({
   _id: { type: String, required: true },
@@ -175,93 +177,24 @@ const Category = mongoose.model("Category", categorySchema);
 const SubCategory = mongoose.model("SubCategory", subCategorySchema);
 const Product = mongoose.model("Product", productSchema);
 const Blog = mongoose.model("Blog", blogSchema);
-// // Route to add a product
-// app.post("/admin/products", async (req, res) => {
-//   try {
-//     const product = new Product(req.body);
-//     product._id = new ObjectId();
-//     await product.save();
-//     res.status(201).send(product);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(400).send(error);
-//   }
-// });
-// app.put("/admin/products/:id", async (req, res) => {
-//   try {
-//     const productId = req.params.id;
 
-//     // Validate ObjectId format
-//     if (!ObjectId.isValid(productId)) {
-//       return res.status(400).json({ error: "Invalid product ID format" });
-//     }
-
-//     req.body.updatedOn = new Date();
-//     delete req.body.createdOn;
-//     delete req.body.isDeleted;
-//     const updatedProduct = await Product.findByIdAndUpdate(
-//       productId,
-//       { $set: req.body },
-//       { new: true, runValidators: true } // Return updated doc & validate fields
-//     );
-
-//     if (!updatedProduct) {
-//       return res.status(404).json({ error: "Product not found" });
-//     }
-
-//     res.status(200).json(updatedProduct);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-// app.get("/admin/products/:id", async (req, res) => {
-//   try {
-//     const productId = req.params.id;
-
-//     // Validate ObjectId format
-//     if (!ObjectId.isValid(productId)) {
-//       return res.status(400).json({ error: "Invalid product ID format" });
-//     }
-
-//     const product = await Product.findById(productId);
-
-//     if (!product) {
-//       return res.status(404).json({ error: "Product not found" });
-//     }
-
-//     res.status(200).json(product);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-// app.delete("/admin/products/:id", async (req, res) => {
-//   try {
-//     const productId = req.params.id;
-
-//     // Validate ObjectId format
-//     if (!ObjectId.isValid(productId)) {
-//       return res.status(400).json({ error: "Invalid product ID format" });
-//     }
-
-//     const updatedProduct = await Product.findByIdAndUpdate(
-//       productId,
-//       { isDeleted: true }, // Mark as deleted
-//       { new: true }
-//     );
-
-//     if (!updatedProduct) {
-//       return res.status(404).json({ error: "Product not found" });
-//     }
-
-//     res.status(200).json({ message: "Product soft deleted", updatedProduct });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-// Route to search products with filters
+app.get("/flush-cache/:id", async (req, res) => {
+  try {
+    let cacheId = req.params.id;
+    if (cacheId === "all") {
+      await client.flushAll();
+    }
+    const response = {
+      isSuccess: true,
+      data: null,
+      message: "DB Flush Successfully",
+    };
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+});
 
 app.post("/user/products", async (req, res) => {
   try {
@@ -421,7 +354,7 @@ app.post("/user/products", async (req, res) => {
       },
     });
     block1.push({
-      $limit: 1000,
+      $limit: 200,
     });
 
     const products = await Product.aggregate(block1);
@@ -430,9 +363,9 @@ app.post("/user/products", async (req, res) => {
       isSuccess: true,
       data: products,
       message: "Products Fetched Successfully",
-    }
+    };
 
-    await client.set('/user/products', JSON.stringify(response));
+    await client.set("/user/products", JSON.stringify(response));
 
     res.status(200).json(response);
   } catch (error) {
@@ -461,8 +394,8 @@ app.post("/user/blogs", async (req, res) => {
       ];
     filters.isDeleted = false;
     const blogs = await Blog.find(filters)
-      .sort({ views: -1, updatedOn: -1, createdOn: -1 })
-      .limit(100);
+      .sort({ updatedOn: -1, createdOn: -1 })
+      .limit(50);
     res.status(200).json({
       isSuccess: true,
       data: blogs,
