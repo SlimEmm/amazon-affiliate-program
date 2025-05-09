@@ -15,7 +15,7 @@ export class ContactComponent {
     this.title.setTitle('Contact Us - The Great Products');
     this.meta.updateTag({
       name: 'description',
-      content: `Contact Us - contact@thegreatproducts.com - The Great Products.`,
+      content: `Contact Us - contact.thegreatproducts@gmail.com - The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
@@ -28,7 +28,7 @@ export class ContactComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Contact Us - contact@thegreatproducts.com - The Great Products.`,
+      content: `Contact Us - contact.thegreatproducts@gmail.com - The Great Products.`,
     });
     this.meta.updateTag({
       property: 'og:image',
