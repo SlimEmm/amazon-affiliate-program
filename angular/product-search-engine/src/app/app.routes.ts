@@ -57,6 +57,24 @@ export const routes: Routes = [
       import('./products/products.component').then((d) => d.ProductsComponent),
   },
   {
+    path: 'brands',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./brands/brands.component').then((d) => d.BrandsComponent),
+  },
+  {
+    path: 'categories',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./categories/categories.component').then((d) => d.CategoriesComponent),
+  },
+  {
+    path: 'subcategories',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./subcategories/subcategories.component').then((d) => d.SubCategoriesComponent),
+  },
+  {
     path: 'products',
     pathMatch: 'full',
     loadComponent: () =>

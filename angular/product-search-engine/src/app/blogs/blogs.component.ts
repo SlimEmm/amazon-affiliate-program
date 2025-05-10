@@ -64,9 +64,9 @@ export class BlogsComponent {
 
   ngOnInit() {
     this.searchTerm = this.route.snapshot?.params?.['id'] || '';
-    this.searchForm.get('title')?.setValue(this.searchTerm);
+    this.searchForm.get('title')?.setValue(this._utilService.toTitleCase(this.searchTerm));
     this.url = this.router.url;
-    this.title.setTitle(`${this.searchTerm || ''}${
+    this.title.setTitle(`${this._utilService.toTitleCase(this.searchTerm) || ''}${
         (this.searchTerm || '') && ','
       } The Great Blogs - Trending, Viral & Latest Blogs`);
     this.meta.updateTag({
@@ -75,14 +75,14 @@ export class BlogsComponent {
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `${this.searchTerm || ''}${
+      content: `${this._utilService.toTitleCase(this.searchTerm) || ''}${
         (this.searchTerm || '') && ', '
       }Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
       property: 'og:title',
-      content: `${this.searchTerm || ''}${
+      content: `${this._utilService.toTitleCase(this.searchTerm) || ''}${
         (this.searchTerm || '') && ','
       } The Great Blogs - Trending, Viral & Latest Blogs`,
     });

@@ -394,7 +394,7 @@ app.post("/user/blogs", async (req, res) => {
       ];
     filters.isDeleted = false;
     const blogs = await Blog.find(filters)
-      .sort({ title: 1 })
+      .sort({ _id: -1 })
       .limit(50);
     res.status(200).json({
       isSuccess: true,

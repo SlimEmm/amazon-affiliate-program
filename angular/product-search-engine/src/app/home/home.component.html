@@ -294,6 +294,7 @@
                         </ng-container>
                 </div>
         </ng-container>
-
-
 </div>
+<ng-container *ngIf="isBrowser && structuredDataSet">
+  <div [innerHTML]="structuredData"></div>
+</ng-container>

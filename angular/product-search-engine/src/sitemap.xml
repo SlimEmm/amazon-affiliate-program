@@ -1,53 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 >
   <url>
     <loc>https://thegreatproducts.com/</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/home</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
+    <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thegreatproducts.com/brands</loc>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thegreatproducts.com/categories</loc>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thegreatproducts.com/subcategories</loc>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/products</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/blogs</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/about</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/contact</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/disclaimer</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://thegreatproducts.com/privacy-policy</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>
+        https://thegreatproducts.com/logo.png
+      </image:loc>
+    </image:image>
   </url>
   <!-- End of Main Links -->
 </urlset>

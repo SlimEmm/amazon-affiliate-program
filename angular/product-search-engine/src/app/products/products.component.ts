@@ -94,7 +94,7 @@ export class ProductsComponent {
     this.searchForm.get('name')?.setValue(this.searchTerm);
     this.url = this.router.url;
     this.title.setTitle(
-      `${this.searchTerm || ''} ${
+      `${this._utilService.toTitleCase(this.searchTerm) || ''} ${
         (this.searchTerm || '') && '|'
       } The Great Products - Latest & Best Products`
     );
@@ -111,7 +111,7 @@ export class ProductsComponent {
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
       property: 'og:title',
-      content: `${this.searchTerm || ''} ${
+      content: `${this._utilService.toTitleCase(this.searchTerm) || ''} ${
         (this.searchTerm || '') ? ' - ' : 'Products - '
       } The Great Products`,
     });

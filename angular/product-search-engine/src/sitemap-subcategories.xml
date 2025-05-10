@@ -71,6 +71,17 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://thegreatproducts.com/products/cleaner</loc>
+    <image:image>
+      <image:loc>
+        https://m.media-amazon.com/images/I/81z6gO3OZwL._SL1500_.jpg
+      </image:loc>
+    </image:image>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://thegreatproducts.com/products/laptop</loc>
     <image:image>
       <image:loc>

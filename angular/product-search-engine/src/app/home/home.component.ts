@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
+import { DomSanitizer, Meta, SafeHtml, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from '@environment';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,6 +24,9 @@ export class HomeComponent {
   isBrowser: boolean;
   screenWidth: number = 0;
   subscribedList: any[] = [];
+  structuredDataSet: boolean = false; // Add this property
+  structuredData: SafeHtml | undefined;
+  structuredDataJSON: any;
 
   constructor(
     private meta: Meta,
@@ -64,6 +67,29 @@ export class HomeComponent {
             })
             .subscribe((response) => {
               if (response.isSuccess) {
+                this.structuredDataJSON.itemListElement = [
+                  ...this.structuredDataJSON?.itemListElement,
+                  ...response.data?.map((product, index) => ({
+                    '@type': 'ListItem',
+                    position: this.structuredDataJSON.itemListElement.length + index + 1,
+                    url: environment?.baseUrl + '/' + this.url,
+                    name: product?.name || '',
+                    image: product.imgUrl || environment?.baseUrl + '/logo.png',
+                    brand: product.brand?.name || '',
+                    category: product?.category?.name || '',
+                    subCategory: product?.subCategory?.name || '',
+                    colors: product?.colors || [],
+                    sizes: product?.sizes || [],
+                  })),
+                ];
+                if (this.isBrowser) {
+                  this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
+                    `<script type="application/ld+json">${JSON.stringify(
+                      this.structuredDataJSON
+                    )}</script>`
+                  );
+                  this.structuredDataSet = true;
+                }
                 let brandId = response.data?.[0]?.brand?._id?.toString();
                 if (
                   [true, false].includes(
@@ -110,6 +136,24 @@ export class HomeComponent {
             })
             .subscribe((response) => {
               if (response.isSuccess) {
+                if (response.data?.length) {
+                  this.structuredDataJSON.itemListElement = [
+                    ...this.structuredDataJSON?.itemListElement,
+                    ...response.data?.map((product, index) => ({
+                      '@type': 'ListItem',
+                      position: this.structuredDataJSON.itemListElement + index + 1,
+                      url: environment?.baseUrl + '/' + this.url,
+                      name: product?.name || '',
+                      image:
+                        product.imgUrl || environment?.baseUrl + '/logo.png',
+                      brand: product.brand?.name || '',
+                      category: product?.category?.name || '',
+                      subCategory: product?.subCategory?.name || '',
+                      colors: product?.colors || [],
+                      sizes: product?.sizes || [],
+                    })),
+                  ];
+                }
                 let categoryId = response.data?.[0]?.category?._id?.toString();
                 if (
                   [true, false].includes(
@@ -160,6 +204,25 @@ export class HomeComponent {
             })
             .subscribe((response) => {
               if (response.isSuccess) {
+                if (!this.structuredDataSet && response.data?.length > 0) {
+                  this.structuredDataJSON = {
+                    '@context': 'https://schema.org/',
+                    '@type': 'ItemList',
+                    itemListElement: response.data?.map((product, index) => ({
+                      '@type': 'ListItem',
+                      position: index + 1,
+                      url: environment?.baseUrl + '/' + this.url,
+                      name: product?.name || '',
+                      image:
+                        product.imgUrl || environment?.baseUrl + '/logo.png',
+                      brand: product.brand?.name || '',
+                      category: product?.category?.name || '',
+                      subCategory: product?.subCategory?.name || '',
+                      colors: product?.colors || [],
+                      sizes: product?.sizes || [],
+                    })),
+                  };
+                }
                 let subCategoryId =
                   response.data?.[0]?.subCategory?._id?.toString();
                 if (

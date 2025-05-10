@@ -38,6 +38,17 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://thegreatproducts.com/products/bosch</loc>
+    <image:image>
+      <image:loc>
+        https://m.media-amazon.com/images/I/71FS5XXc8DL._SL1500_.jpg
+      </image:loc>
+    </image:image>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://thegreatproducts.com/products/fastrack</loc>
     <image:image>
       <image:loc>

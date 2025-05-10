@@ -269,6 +269,13 @@ export class UtilService {
     return ['Alt', 'Control', 'AltGraph', 'Tab'].includes(key);
   }
 
+ toTitleCase(str:string) {
+  return str.replace(
+    /\w\S*/g,
+    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  );
+}
+
   textTruncate(text: string, length: number) {
     return text?.length > length
       ? text?.slice(0, length) + '...'
