@@ -64,8 +64,8 @@ export const routes: Routes = [
   },
   {
     path: '', // Default route (optional)
-    redirectTo: 'products',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
-  { path: '**', redirectTo: 'products' },
+  { path: '**', redirectTo: 'home' },
 ];

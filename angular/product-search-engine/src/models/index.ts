@@ -9,17 +9,20 @@ export class Response<Type> {
 export class Brand {
   _id: string = '';
   name: string = '';
+  products?: Product[] | any[] = [];
 }
 
 export class Category {
   _id: string = '';
   name: string = '';
+  products?: Product[] | any[] = [];
 }
 
 export class SubCategory {
   _id: string = '';
   name: string = '';
   category: Category = new Category();
+  products?: Product[] | any[] = [];
 }
 
 export class Product {
@@ -36,9 +39,9 @@ export class Product {
 
 export class ProductsRequestCommand {
   name: string = '';
-  brands: Brand[] = [];
-  categories: Category[] = [];
-  subCategories: SubCategory[] = [];
+  brands: Brand[] | any[] = [];
+  categories: Category[] | any[] = [];
+  subCategories: SubCategory[] | any[] = [];
 }
 
 export class BlogsRequestCommand {
