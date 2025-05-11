@@ -57,61 +57,61 @@ export class HomeComponent {
             value: true,
           };
         });
-        this.brands.forEach((x) => {
-          let subscribed = this._productService
-            .getProducts({
-              name: '',
-              brands: [x?._id || ''],
-              categories: [],
-              subCategories: [],
-            })
-            .subscribe((response) => {
-              if (response.isSuccess) {
-                this.structuredDataJSON.itemListElement = [
-                  ...this.structuredDataJSON?.itemListElement,
-                  ...response.data?.map((product, index) => ({
-                    '@type': 'ListItem',
-                    position: this.structuredDataJSON.itemListElement.length + index + 1,
-                    url: environment?.baseUrl + '/' + this.url,
-                    name: product?.name || '',
-                    image: product.imgUrl || environment?.baseUrl + '/logo.png',
-                    brand: product.brand?.name || '',
-                    category: product?.category?.name || '',
-                    subCategory: product?.subCategory?.name || '',
-                    colors: product?.colors || [],
-                    sizes: product?.sizes || [],
-                  })),
-                ];
-                if (this.isBrowser) {
-                  this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
-                    `<script type="application/ld+json">${JSON.stringify(
-                      this.structuredDataJSON
-                    )}</script>`
-                  );
-                  this.structuredDataSet = true;
-                }
-                let brandId = response.data?.[0]?.brand?._id?.toString();
-                if (
-                  [true, false].includes(
-                    this.isLoadingList?.find(
-                      (x: any) => x.key?.toString() === brandId?.toString()
-                    )?.value
-                  )
-                ) {
-                  this.isLoadingList.find(
-                    (x: any) => x.key?.toString() === brandId?.toString()
-                  ).value = false;
-                  this.brands = this.brands.map((x) => {
-                    if (response.data?.[0]?.brand?._id === x?._id) {
-                      x.products = response.data;
-                    }
-                    return x;
-                  });
-                }
-              }
-            });
-          this.subscribedList.push(subscribed);
-        });
+        // this.brands.forEach((x) => {
+        //   let subscribed = this._productService
+        //     .getProducts({
+        //       name: '',
+        //       brands: [x?._id || ''],
+        //       categories: [],
+        //       subCategories: [],
+        //     })
+        //     .subscribe((response) => {
+        //       if (response.isSuccess) {
+        //         this.structuredDataJSON.itemListElement = [
+        //           ...this.structuredDataJSON?.itemListElement,
+        //           ...response.data?.map((product, index) => ({
+        //             '@type': 'ListItem',
+        //             position: this.structuredDataJSON.itemListElement.length + index + 1,
+        //             url: environment?.baseUrl + '/' + this.url,
+        //             name: product?.name || '',
+        //             image: product.imgUrl || environment?.baseUrl + '/logo.png',
+        //             brand: product.brand?.name || '',
+        //             category: product?.category?.name || '',
+        //             subCategory: product?.subCategory?.name || '',
+        //             colors: product?.colors || [],
+        //             sizes: product?.sizes || [],
+        //           })),
+        //         ];
+        //         if (this.isBrowser) {
+        //           this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
+        //             `<script type="application/ld+json">${JSON.stringify(
+        //               this.structuredDataJSON
+        //             )}</script>`
+        //           );
+        //           this.structuredDataSet = true;
+        //         }
+        //         let brandId = response.data?.[0]?.brand?._id?.toString();
+        //         if (
+        //           [true, false].includes(
+        //             this.isLoadingList?.find(
+        //               (x: any) => x.key?.toString() === brandId?.toString()
+        //             )?.value
+        //           )
+        //         ) {
+        //           this.isLoadingList.find(
+        //             (x: any) => x.key?.toString() === brandId?.toString()
+        //           ).value = false;
+        //           this.brands = this.brands.map((x) => {
+        //             if (response.data?.[0]?.brand?._id === x?._id) {
+        //               x.products = response.data;
+        //             }
+        //             return x;
+        //           });
+        //         }
+        //       }
+        //     });
+        //   this.subscribedList.push(subscribed);
+        // });
       }
     });
   }
@@ -126,59 +126,59 @@ export class HomeComponent {
             value: true,
           };
         });
-        this.categories.forEach((x) => {
-          let subscribed = this._productService
-            .getProducts({
-              name: '',
-              brands: [],
-              categories: [x._id || ''],
-              subCategories: [],
-            })
-            .subscribe((response) => {
-              if (response.isSuccess) {
-                if (response.data?.length) {
-                  this.structuredDataJSON.itemListElement = [
-                    ...this.structuredDataJSON?.itemListElement,
-                    ...response.data?.map((product, index) => ({
-                      '@type': 'ListItem',
-                      position: this.structuredDataJSON.itemListElement + index + 1,
-                      url: environment?.baseUrl + '/' + this.url,
-                      name: product?.name || '',
-                      image:
-                        product.imgUrl || environment?.baseUrl + '/logo.png',
-                      brand: product.brand?.name || '',
-                      category: product?.category?.name || '',
-                      subCategory: product?.subCategory?.name || '',
-                      colors: product?.colors || [],
-                      sizes: product?.sizes || [],
-                    })),
-                  ];
-                }
-                let categoryId = response.data?.[0]?.category?._id?.toString();
-                if (
-                  [true, false].includes(
-                    this.isLoadingList?.find(
-                      (x: any) => x.key?.toString() === categoryId?.toString()
-                    )?.value
-                  )
-                ) {
-                  this.isLoadingList.find(
-                    (x: any) => x.key?.toString() === categoryId?.toString()
-                  ).value = false;
-                }
-                this.categories = this.categories.map((x) => {
-                  if (
-                    response.data?.[0]?.category?._id?.toString() ===
-                    x?._id?.toString()
-                  ) {
-                    x.products = response.data;
-                  }
-                  return x;
-                });
-              }
-            });
-          this.subscribedList.push(subscribed);
-        });
+        // this.categories.forEach((x) => {
+        //   let subscribed = this._productService
+        //     .getProducts({
+        //       name: '',
+        //       brands: [],
+        //       categories: [x._id || ''],
+        //       subCategories: [],
+        //     })
+        //     .subscribe((response) => {
+        //       if (response.isSuccess) {
+        //         if (response.data?.length) {
+        //           this.structuredDataJSON.itemListElement = [
+        //             ...this.structuredDataJSON?.itemListElement,
+        //             ...response.data?.map((product, index) => ({
+        //               '@type': 'ListItem',
+        //               position: this.structuredDataJSON.itemListElement + index + 1,
+        //               url: environment?.baseUrl + '/' + this.url,
+        //               name: product?.name || '',
+        //               image:
+        //                 product.imgUrl || environment?.baseUrl + '/logo.png',
+        //               brand: product.brand?.name || '',
+        //               category: product?.category?.name || '',
+        //               subCategory: product?.subCategory?.name || '',
+        //               colors: product?.colors || [],
+        //               sizes: product?.sizes || [],
+        //             })),
+        //           ];
+        //         }
+        //         let categoryId = response.data?.[0]?.category?._id?.toString();
+        //         if (
+        //           [true, false].includes(
+        //             this.isLoadingList?.find(
+        //               (x: any) => x.key?.toString() === categoryId?.toString()
+        //             )?.value
+        //           )
+        //         ) {
+        //           this.isLoadingList.find(
+        //             (x: any) => x.key?.toString() === categoryId?.toString()
+        //           ).value = false;
+        //         }
+        //         this.categories = this.categories.map((x) => {
+        //           if (
+        //             response.data?.[0]?.category?._id?.toString() ===
+        //             x?._id?.toString()
+        //           ) {
+        //             x.products = response.data;
+        //           }
+        //           return x;
+        //         });
+        //       }
+        //     });
+        //   this.subscribedList.push(subscribed);
+        // });
         this.getBrands();
       }
     });
@@ -194,62 +194,62 @@ export class HomeComponent {
             value: true,
           };
         });
-        this.subcategories.forEach((x) => {
-          let subscribed = this._productService
-            .getProducts({
-              name: '',
-              brands: [],
-              categories: [],
-              subCategories: [x?._id?.toString() || ''],
-            })
-            .subscribe((response) => {
-              if (response.isSuccess) {
-                if (!this.structuredDataSet && response.data?.length > 0) {
-                  this.structuredDataJSON = {
-                    '@context': 'https://schema.org/',
-                    '@type': 'ItemList',
-                    itemListElement: response.data?.map((product, index) => ({
-                      '@type': 'ListItem',
-                      position: index + 1,
-                      url: environment?.baseUrl + '/' + this.url,
-                      name: product?.name || '',
-                      image:
-                        product.imgUrl || environment?.baseUrl + '/logo.png',
-                      brand: product.brand?.name || '',
-                      category: product?.category?.name || '',
-                      subCategory: product?.subCategory?.name || '',
-                      colors: product?.colors || [],
-                      sizes: product?.sizes || [],
-                    })),
-                  };
-                }
-                let subCategoryId =
-                  response.data?.[0]?.subCategory?._id?.toString();
-                if (
-                  [true, false].includes(
-                    this.isLoadingList?.find(
-                      (x: any) =>
-                        x.key?.toString() === subCategoryId?.toString()
-                    )?.value
-                  )
-                ) {
-                  this.isLoadingList.find(
-                    (x: any) => x.key?.toString() === subCategoryId?.toString()
-                  ).value = false;
-                }
-                this.subcategories = this.subcategories.map((x) => {
-                  if (
-                    response.data?.[0]?.subCategory?._id?.toString() ===
-                    x?._id?.toString()
-                  ) {
-                    x.products = response.data;
-                  }
-                  return x;
-                });
-              }
-            });
-          this.subscribedList.push(subscribed);
-        });
+        // this.subcategories.forEach((x) => {
+        //   let subscribed = this._productService
+        //     .getProducts({
+        //       name: '',
+        //       brands: [],
+        //       categories: [],
+        //       subCategories: [x?._id?.toString() || ''],
+        //     })
+        //     .subscribe((response) => {
+        //       if (response.isSuccess) {
+        //         if (!this.structuredDataSet && response.data?.length > 0) {
+        //           this.structuredDataJSON = {
+        //             '@context': 'https://schema.org/',
+        //             '@type': 'ItemList',
+        //             itemListElement: response.data?.map((product, index) => ({
+        //               '@type': 'ListItem',
+        //               position: index + 1,
+        //               url: environment?.baseUrl + '/' + this.url,
+        //               name: product?.name || '',
+        //               image:
+        //                 product.imgUrl || environment?.baseUrl + '/logo.png',
+        //               brand: product.brand?.name || '',
+        //               category: product?.category?.name || '',
+        //               subCategory: product?.subCategory?.name || '',
+        //               colors: product?.colors || [],
+        //               sizes: product?.sizes || [],
+        //             })),
+        //           };
+        //         }
+        //         let subCategoryId =
+        //           response.data?.[0]?.subCategory?._id?.toString();
+        //         if (
+        //           [true, false].includes(
+        //             this.isLoadingList?.find(
+        //               (x: any) =>
+        //                 x.key?.toString() === subCategoryId?.toString()
+        //             )?.value
+        //           )
+        //         ) {
+        //           this.isLoadingList.find(
+        //             (x: any) => x.key?.toString() === subCategoryId?.toString()
+        //           ).value = false;
+        //         }
+        //         this.subcategories = this.subcategories.map((x) => {
+        //           if (
+        //             response.data?.[0]?.subCategory?._id?.toString() ===
+        //             x?._id?.toString()
+        //           ) {
+        //             x.products = response.data;
+        //           }
+        //           return x;
+        //         });
+        //       }
+        //     });
+        //   this.subscribedList.push(subscribed);
+        // });
         this.getCategories();
       }
     });

@@ -4,14 +4,16 @@
                 <img src="logo.png" />
         </a> -->
         <ng-container *ngFor="let subCategory of subcategories; let i= index">
+                <a target="_blank" href='/subcategories'>
                 <h4 class="w-100 bg-danger border rounded-5 py-2 text-white">{{subCategory.name}}</h4>
-                <div class="row mx-0 mb-5 justify-content-center">
-                        <ng-container *ngIf="getIsLoading(subCategory._id)">
+                </a>
+                <div class="row m-0 justify-content-center">
+                        <!-- <ng-container *ngIf="getIsLoading(subCategory._id)">
                                 <div class="col-11 my-5">
                                         <img class="loading-gif" src="loading.gif" alt="loading...">
                                 </div>
-                        </ng-container>
-                        <ng-container *ngFor="let item of subCategory.products">
+                        </ng-container> -->
+                        <!-- <ng-container *ngFor="let item of subCategory.products">
                                 <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
                                         class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
                                         style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
@@ -97,19 +99,21 @@
                                 <div class="col-12 my-5">
                                         <span class="no-found-text">No Products Found Currenly for your Search!</span>
                                 </div>
-                        </ng-container>
+                        </ng-container> -->
                 </div>
         </ng-container>
         <ng-container *ngFor="let category of categories; let i= index">
+                <a target="_blank" href='/categories'>
                 <h4 class="w-100 bg-danger border rounded-5 py-2 text-white">Products of {{category.name}} Category
                 </h4>
-                <div class="row mx-0 mb-5 justify-content-center">
-                        <ng-container *ngIf="getIsLoading(category._id)">
+                </a>
+                <div class="row m-0 justify-content-center">
+                        <!-- <ng-container *ngIf="getIsLoading(category._id)">
                                 <div class="col-11 my-5">
                                         <img class="loading-gif" src="loading.gif" alt="loading...">
                                 </div>
-                        </ng-container>
-                        <ng-container *ngFor="let item of category.products">
+                        </ng-container> -->
+                        <!-- <ng-container *ngFor="let item of category.products">
                                 <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
                                         class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
                                         style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
@@ -195,18 +199,20 @@
                                 <div class="col-12 my-5">
                                         <span class="no-found-text">No Products Found Currenly for your Search!</span>
                                 </div>
-                        </ng-container>
+                        </ng-container> -->
                 </div>
         </ng-container>
         <ng-container *ngFor="let brand of brands; let i= index">
+                <a target="_blank" href='/brands'>
                 <h4 class="w-100 bg-danger border rounded-5 py-2 text-white">Products of {{brand.name}} Brand</h4>
-                <div class="row mx-0 mb-5 justify-content-center">
-                        <ng-container *ngIf="getIsLoading(brand._id)">
+                </a>
+                <div class="row m-0 justify-content-center">
+                        <!-- <ng-container *ngIf="getIsLoading(brand._id)">
                                 <div class="col-11 my-5">
                                         <img class="loading-gif" src="loading.gif" alt="loading...">
                                 </div>
-                        </ng-container>
-                        <ng-container *ngFor="let item of brand.products">
+                        </ng-container> -->
+                        <!-- <ng-container *ngFor="let item of brand.products">
                                 <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
                                         class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
                                         style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
@@ -291,7 +297,7 @@
                                 <div class="col-12 my-5">
                                         <span class="no-found-text">No Products Found Currenly for your Search!</span>
                                 </div>
-                        </ng-container>
+                        </ng-container> -->
                 </div>
         </ng-container>
 </div>
