@@ -349,12 +349,8 @@ app.post("/user/products", async (req, res) => {
     block1.push({ $unset: ["isDeleted", "createdOn", "updatedOn", "__v"] });
     block1.push({
       $sort: {
-        updatedOn: -1,
-        createdOn: -1,
+        _id: -1,
       },
-    });
-    block1.push({
-      $limit: 200,
     });
 
     const products = await Product.aggregate(block1);
@@ -393,9 +389,7 @@ app.post("/user/blogs", async (req, res) => {
         },
       ];
     filters.isDeleted = false;
-    const blogs = await Blog.find(filters)
-      .sort({ _id: -1 })
-      .limit(50);
+    const blogs = await Blog.find(filters).sort({ _id: -1 });
     res.status(200).json({
       isSuccess: true,
       data: blogs,
