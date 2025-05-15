@@ -23,6 +23,7 @@
                         </a>
                 </div>
         </div>
+        <hr style="border:1px solid black !important; margin-bottom: 50px; margin-top:50px" />
         <a target="_blank" href="/categories" class="d-flex justify-content-center">
                 <h2 class="w-25 bg-dark py-2 border rounded-3 text-warning text-center">Category</h2>
         </a>
@@ -43,6 +44,8 @@
                         </a>
                 </div>
         </div>
+        <hr style="border:1px solid black !important; margin-bottom: 50px; margin-top:50px" />
+
         <a target="_blank" href="/brands" class="d-flex justify-content-center">
                 <h2 class="w-25 bg-dark py-2 border rounded-3 text-warning text-center">
                         Brands</h2>
@@ -51,7 +54,7 @@
                 <div *ngFor="let brand of brands; let i= index"
                         class="col-2 d-flex  justify-content-center border rounded-3 p-0 bg-dark m-1">
                         <a target="_blank" [href]="'/products/'+brand.name" class="d-flex align-items-center"
-                        style="min-height:150px">
+                                style="min-height:150px">
                                 <h4 class="w-100 py-2 text-white">
                                         <img class="logo-img border border-1 rounded-3"
                                                 [src]="sanitizer.bypassSecurityTrustUrl(brand.logoUrl)"
@@ -60,6 +63,7 @@
                         </a>
                 </div>
         </div>
+
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">
         <div [innerHTML]="structuredData"></div>
