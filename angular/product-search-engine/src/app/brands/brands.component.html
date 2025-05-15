@@ -4,7 +4,14 @@
                 <img src="logo.png" />
         </a> -->
         <ng-container *ngFor="let brand of brands; let i= index">
-                <h4 class="w-100 bg-warning border rounded-5 py-2 text-black">{{brand.name}}</h4>
+                <a [href]="'/products/'+brand.name" target="_blank">
+                <div class="d-flex justify-content-center">
+                        <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
+                                <img class="logo-img border border-1 rounded-3"
+                                        [src]="sanitizer.bypassSecurityTrustUrl(brand.logoUrl)" [alt]="brand.name" />
+                        </h4>
+                </div>
+                </a>
                 <div class="row mx-0 mb-5 justify-content-center">
                         <ng-container *ngIf="getIsLoading(brand._id)">
                                 <div class="col-11 my-5">
@@ -98,6 +105,7 @@
                                 </div>
                         </ng-container>
                 </div>
+                <hr style="border:1px solid black !important"/>
         </ng-container>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">

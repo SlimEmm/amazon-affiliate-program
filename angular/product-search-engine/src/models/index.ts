@@ -10,12 +10,14 @@ export class Brand {
   _id: string = '';
   name: string = '';
   products?: Product[] | any[] = [];
+  logoUrl: string = '';
 }
 
 export class Category {
   _id: string = '';
   name: string = '';
   products?: Product[] | any[] = [];
+  imgUrl: string = '';
 }
 
 export class SubCategory {
@@ -23,6 +25,7 @@ export class SubCategory {
   name: string = '';
   category: Category = new Category();
   products?: Product[] | any[] = [];
+  imgUrl: string = '';
 }
 
 export class Product {

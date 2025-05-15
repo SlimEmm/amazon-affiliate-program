@@ -75,8 +75,13 @@ export class SubCategoriesComponent {
                       image:
                         product.imgUrl || environment?.baseUrl + '/logo.png',
                       brand: product.brand?.name || '',
+                      brandLogo:
+                        product.brand?.logoUrl ||
+                        environment?.baseUrl + '/logo.png',
                       category: product?.category?.name || '',
+                      categoryImage: product?.category?.imgUrl || environment?.baseUrl + '/logo.png',
                       subCategory: product?.subCategory?.name || '',
+                      subCategoryImage: product?.subCategory?.imgUrl || environment?.baseUrl + '/logo.png',
                       colors: product?.colors || [],
                       sizes: product?.sizes || [],
                     })),
@@ -128,14 +133,14 @@ export class SubCategoriesComponent {
 
   ngOnInit() {
     this.url = this.router.url;
-    this.title.setTitle(`subcategories - The Great Products`);
+    this.title.setTitle(`Subcategories - The Great Products`);
     this.meta.updateTag({
       name: 'description',
-      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Buy Online At The Great Products.`,
+      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy Online`,
+      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy, Online, Electronics`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
@@ -144,7 +149,7 @@ export class SubCategoriesComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Buy Online At The Great Products.`,
+      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       property: 'og:image',

@@ -126,8 +126,16 @@ export class BlogComponent {
                 name: product?.name || '',
                 image: product.imgUrl || environment?.baseUrl + '/logo.png',
                 brand: product.brand?.name || '',
+                brandLogo:
+                  product.brand?.logoUrl || environment?.baseUrl + '/logo.png',
                 category: product?.category?.name || '',
+                categoryImage:
+                  product?.category?.imgUrl ||
+                  environment?.baseUrl + '/logo.png',
                 subCategory: product?.subCategory?.name || '',
+                subCategoryImage:
+                  product?.subCategory?.imgUrl ||
+                  environment?.baseUrl + '/logo.png',
                 colors: product?.colors || [],
                 sizes: product?.sizes || [],
               })),

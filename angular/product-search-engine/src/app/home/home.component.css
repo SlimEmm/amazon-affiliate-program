@@ -33,3 +33,8 @@ mat-option {
 .no-found-text {
     font-size:15px;
 }
+
+.logo-img {
+  max-width: 150px;
+  align-self: center;
+}

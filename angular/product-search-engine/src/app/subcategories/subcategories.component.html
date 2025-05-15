@@ -4,7 +4,18 @@
                 <img src="logo.png" />
         </a> -->
         <ng-container *ngFor="let subCategory of subcategories; let i= index">
-                <h4 class="w-100 bg-warning border rounded-5 py-2 text-black">{{subCategory.name}}</h4>
+                <a [href]="'/products/'+subCategory.name" target="_blank">
+                        <div class="d-flex justify-content-center">
+                                <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
+                                        <img class="logo-img border border-1 rounded-3"
+                                                [src]="sanitizer.bypassSecurityTrustUrl(subCategory.imgUrl)"
+                                                [alt]="subCategory.name" />
+                                                <br/>
+                                                <br/>
+                                        <span class="text-white">{{subCategory.name}}</span>
+                                </h4>
+                        </div>
+                </a>
                 <div class="row mx-0 mb-5 justify-content-center">
                         <ng-container *ngIf="getIsLoading(subCategory._id)">
                                 <div class="col-11 my-5">

@@ -107,6 +107,10 @@ process.on("SIGINT", async () => {
 const brandSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, maxlength: 256, required: true },
+  logoUrl: {
+    type: String,
+    default: "/logo.png",
+  },
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false },
@@ -114,6 +118,10 @@ const brandSchema = new mongoose.Schema({
 const categorySchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, maxlength: 256, required: true },
+  imgUrl: {
+    type: String,
+    default: "/logo.png",
+  },
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false },
@@ -121,6 +129,10 @@ const categorySchema = new mongoose.Schema({
 const subCategorySchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, maxlength: 256, required: true },
+  imgUrl: {
+    type: String,
+    default: "/logo.png",
+  },
   category: [{ type: Schema.Types.ObjectId, ref: "Category", required: true }],
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now },
@@ -387,6 +399,12 @@ app.post("/user/blogs", async (req, res) => {
             $options: "i",
           },
         },
+        {
+          thumbnailDetail: {
+            $regex: ".*" + req.body.title.toString() + ".*",
+            $options: "i",
+          },
+        }
       ];
     filters.isDeleted = false;
     const blogs = await Blog.find(filters).sort({ _id: -1 });

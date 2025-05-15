@@ -100,7 +100,9 @@ export class ProductsComponent {
     );
     this.meta.updateTag({
       name: 'description',
-      content: `Discover, Find & Shop ${this.searchTerm || ''} At The Great Products, Latest Products, Best Products, Quality Items, Buy Online.`,
+      content: `Discover, Find & Shop ${
+        this.searchTerm || ''
+      } At The Great Products, Latest Products, Best Products, Quality Items, Buy Online.`,
     });
     this.meta.updateTag({
       name: 'keywords',
@@ -112,12 +114,14 @@ export class ProductsComponent {
     this.meta.updateTag({
       property: 'og:title',
       content: `${this._utilService.toTitleCase(this.searchTerm) || ''} ${
-        (this.searchTerm || '') ? ' - ' : 'Products - '
+        this.searchTerm || '' ? ' - ' : 'Products - '
       } The Great Products`,
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Discover, Find & Shop The Best ${this.searchTerm || ''} At The Great Products, Trending, Viral, Latest, Best, Products, Quality, Items, Buy Online.`,
+      content: `Discover, Find & Shop The Best ${
+        this.searchTerm || ''
+      } At The Great Products, Trending, Viral, Latest, Best, Products, Quality, Items, Buy Online.`,
     });
     this.meta.updateTag({
       property: 'og:image',
@@ -195,8 +199,12 @@ export class ProductsComponent {
                 name: product?.name || '',
                 image: product.imgUrl || environment?.baseUrl + '/logo.png',
                 brand: product.brand?.name || '',
+                brandLogo:
+                  product.brand?.logoUrl || environment?.baseUrl + '/logo.png',
                 category: product?.category?.name || '',
+                categoryImage: product?.category?.imgUrl || environment?.baseUrl + '/logo.png',
                 subCategory: product?.subCategory?.name || '',
+                subCategoryImage: product?.subCategory?.imgUrl || environment?.baseUrl + '/logo.png',
                 colors: product?.colors || [],
                 sizes: product?.sizes || [],
               })),
