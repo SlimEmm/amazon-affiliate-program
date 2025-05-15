@@ -444,7 +444,7 @@ app.post("/user/blog", async (req, res) => {
 
 app.get("/user/brands", async (req, res) => {
   try {
-    const brands = await Brand.find();
+    const brands = await Brand.find().sort({_id:-1});
     res.status(200).json({
       isSuccess: true,
       data: brands,
@@ -458,7 +458,7 @@ app.get("/user/brands", async (req, res) => {
 
 app.get("/user/categories", async (req, res) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find().sort({_id:-1});;
     res.status(200).json({
       isSuccess: true,
       data: categories,
@@ -471,7 +471,7 @@ app.get("/user/categories", async (req, res) => {
 });
 app.get("/user/subcategories", async (req, res) => {
   try {
-    const subCategories = await SubCategory.find();
+    const subCategories = await SubCategory.find().sort({_id:-1});;
     res.status(200).json({
       isSuccess: true,
       data: subCategories,
