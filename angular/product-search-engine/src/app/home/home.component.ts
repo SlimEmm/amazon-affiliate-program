@@ -62,7 +62,7 @@ export class HomeComponent {
           ...response.data?.map((brand, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            url: environment?.baseUrl + this.url,
+            url: `${environment?.baseUrl}/brands${this.url}`,
             name: brand?.name || '',
             logo: brand.logoUrl || environment?.baseUrl + '/logo.png',
           })),
@@ -87,7 +87,7 @@ export class HomeComponent {
           ...response.data?.map((category, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            url: environment?.baseUrl + this.url,
+            url: `${environment?.baseUrl}/categories${this.url}`,
             name: category?.name || '',
             image: category.imgUrl || environment?.baseUrl + '/logo.png',
           })),
@@ -121,7 +121,7 @@ export class HomeComponent {
             itemListElement: response.data?.map((brand, index) => ({
               '@type': 'ListItem',
               position: index + 1,
-              url: environment?.baseUrl + this.url,
+              url: `${environment?.baseUrl}/subcategories${this.url}`,
               name: brand?.name || '',
               image: brand.imgUrl || environment?.baseUrl + '/logo.png',
             })),
