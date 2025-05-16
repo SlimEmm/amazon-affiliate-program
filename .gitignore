@@ -137,3 +137,4 @@ dist
 angular/product-search-engine/.angular/*
 node/package-lock.json
 angular/product-search-engine/package-lock.json
+node/package-lock.json

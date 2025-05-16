@@ -404,7 +404,7 @@ app.post("/user/blogs", async (req, res) => {
             $regex: ".*" + req.body.title.toString() + ".*",
             $options: "i",
           },
-        }
+        },
       ];
     filters.isDeleted = false;
     const blogs = await Blog.find(filters).sort({ _id: -1 });
@@ -444,7 +444,12 @@ app.post("/user/blog", async (req, res) => {
 
 app.get("/user/brands", async (req, res) => {
   try {
-    const brands = await Brand.find().sort({_id:-1});
+    const brands = await Brand.find({
+      name: {
+        $regex: ".*" + req.body.name.toString() + ".*",
+        $options: "i",
+      },
+    }).sort({ _id: -1 });
     res.status(200).json({
       isSuccess: true,
       data: brands,
@@ -458,7 +463,12 @@ app.get("/user/brands", async (req, res) => {
 
 app.get("/user/categories", async (req, res) => {
   try {
-    const categories = await Category.find().sort({_id:-1});;
+    const categories = await Category.find({
+      name: {
+        $regex: ".*" + req.body.name.toString() + ".*",
+        $options: "i",
+      },
+    }).sort({ _id: -1 });
     res.status(200).json({
       isSuccess: true,
       data: categories,
@@ -471,7 +481,12 @@ app.get("/user/categories", async (req, res) => {
 });
 app.get("/user/subcategories", async (req, res) => {
   try {
-    const subCategories = await SubCategory.find().sort({_id:-1});;
+    const subCategories = await SubCategory.find({
+      name: {
+        $regex: ".*" + req.body.name.toString() + ".*",
+        $options: "i",
+      },
+    }).sort({ _id: -1 });
     res.status(200).json({
       isSuccess: true,
       data: subCategories,
