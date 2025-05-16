@@ -442,7 +442,7 @@ app.post("/user/blog", async (req, res) => {
   }
 });
 
-app.get("/user/brands", async (req, res) => {
+app.post("/user/brands", async (req, res) => {
   try {
     const brands = await Brand.find({
       name: {
@@ -461,7 +461,7 @@ app.get("/user/brands", async (req, res) => {
   }
 });
 
-app.get("/user/categories", async (req, res) => {
+app.post("/user/categories", async (req, res) => {
   try {
     const categories = await Category.find({
       name: {
@@ -479,7 +479,7 @@ app.get("/user/categories", async (req, res) => {
     res.status(500).send(error);
   }
 });
-app.get("/user/subcategories", async (req, res) => {
+app.post("/user/subcategories", async (req, res) => {
   try {
     const subCategories = await SubCategory.find({
       name: {
