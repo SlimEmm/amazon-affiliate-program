@@ -23,8 +23,11 @@
               "src/sitemap.xml",
               "src/sitemap-blog.xml",
               "src/sitemap-blogs.xml",
+              "src/sitemap-brands-main.xml",
               "src/sitemap-brands.xml",
+              "src/sitemap-categories-main.xml",
               "src/sitemap-categories.xml",
+              "src/sitemap-subcategories-main.xml",
               "src/sitemap-subcategories.xml",
               {
                 "glob": "**/*",
