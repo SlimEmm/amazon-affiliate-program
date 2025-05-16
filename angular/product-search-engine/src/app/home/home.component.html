@@ -3,6 +3,27 @@
         <!-- <a [href]="baseUrlEnv + '/'" target="_blank">
                 <img src="logo.png" />
         </a> -->
+        <a target="_blank" href="/subcategories" class="d-flex justify-content-center">
+                <h2 class="w-50 bg-dark py-2 border rounded-3 text-warning text-center">Sub Category</h2>
+        </a>
+        <div class="row d-flex justify-content-center cursor-pointer">
+                <div *ngFor="let subCategory of subcategories; let i= index"
+                        class="col-xl-2 col-lg-3 col-md-5 m-1 d-flex align-items-center justify-content-center border rounded-3 bg-dark p-0"
+                        style="min-height:250px">
+                        <a target="_blank" [href]="'/products/'+subCategory.name">
+                                <!-- style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;" -->
+                                <h4 class="w-100 text-white">
+                                        <img class="logo-img border border-1 rounded-3"
+                                                [src]="sanitizer.bypassSecurityTrustUrl(subCategory.imgUrl)"
+                                                [alt]="subCategory.name" />
+                                        <br />
+                                        <br />
+                                        <span class="text-warning pt-5">{{subCategory.name}}</span>
+                                </h4>
+                        </a>
+                </div>
+        </div>
+        <hr style="border:1px solid black !important; margin-bottom: 50px; margin-top:50px" />
         <a target="_blank" href="/brands" class="d-flex justify-content-center">
                 <h2 class="w-50 bg-dark py-2 border rounded-3 text-warning text-center">
                         Brands</h2>
@@ -37,27 +58,6 @@
                                         <br />
                                         <br />
                                         <span class="text-warning">{{category.name}}</span>
-                                </h4>
-                        </a>
-                </div>
-        </div>
-        <hr style="border:1px solid black !important; margin-bottom: 50px; margin-top:50px" />
-        <a target="_blank" href="/subcategories" class="d-flex justify-content-center">
-                <h2 class="w-50 bg-dark py-2 border rounded-3 text-warning text-center">Sub Category</h2>
-        </a>
-        <div class="row d-flex justify-content-center cursor-pointer">
-                <div *ngFor="let subCategory of subcategories; let i= index"
-                        class="col-xl-2 col-lg-3 col-md-5 m-1 d-flex align-items-center justify-content-center border rounded-3 bg-dark p-0"
-                        style="min-height:250px">
-                        <a target="_blank" [href]="'/products/'+subCategory.name">
-                                <!-- style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;" -->
-                                <h4 class="w-100 text-white">
-                                        <img class="logo-img border border-1 rounded-3"
-                                                [src]="sanitizer.bypassSecurityTrustUrl(subCategory.imgUrl)"
-                                                [alt]="subCategory.name" />
-                                        <br />
-                                        <br />
-                                        <span class="text-warning pt-5">{{subCategory.name}}</span>
                                 </h4>
                         </a>
                 </div>

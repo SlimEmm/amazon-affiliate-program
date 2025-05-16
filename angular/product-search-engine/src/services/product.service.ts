@@ -19,23 +19,29 @@ export class ProductService {
   }
 
   getBrands(
+    name:string
   ): Observable<Response<Brand[]>> {
-    return this.apiService.get(
-      `user/brands`
+    return this.apiService.post(
+      `user/brands`,
+      {name}
     );
   }
 
   getCategories(
+    name:string
   ): Observable<Response<Category[]>> {
-    return this.apiService.get(
-      `user/categories`
+    return this.apiService.post(
+      `user/categories`,
+      {name}
     );
   }
 
   getSubCategories(
+    name:string
   ): Observable<Response<SubCategory[]>> {
-    return this.apiService.get(
-      `user/subcategories`
+    return this.apiService.post(
+      `user/subcategories`,
+      {name}
     );
   }
 }

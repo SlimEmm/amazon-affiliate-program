@@ -147,7 +147,7 @@ export class ProductsComponent {
   }
 
   getBrands() {
-    this._productService.getBrands().subscribe((response) => {
+    this._productService.getBrands('').subscribe((response) => {
       if (response.isSuccess) {
         this.brands = response.data;
       }
@@ -155,7 +155,7 @@ export class ProductsComponent {
   }
 
   getCategories() {
-    this._productService.getCategories().subscribe((response) => {
+    this._productService.getCategories('').subscribe((response) => {
       if (response.isSuccess) {
         this.categories = response.data;
       }
@@ -163,7 +163,7 @@ export class ProductsComponent {
   }
 
   getSubCategories() {
-    this._productService.getSubCategories().subscribe((response) => {
+    this._productService.getSubCategories('').subscribe((response) => {
       if (response.isSuccess) {
         this.subcategories = response.data;
       }
@@ -195,7 +195,7 @@ export class ProductsComponent {
               itemListElement: this.products?.map((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
-                url: environment?.baseUrl + '/' + this.url,
+                url: environment?.baseUrl + this.url,
                 name: product?.name || '',
                 image: product.imgUrl || environment?.baseUrl + '/logo.png',
                 brand: product.brand?.name || '',

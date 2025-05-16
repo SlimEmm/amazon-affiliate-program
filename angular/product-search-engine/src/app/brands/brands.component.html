@@ -1,16 +1,25 @@
 <div class="container-fluid text-center my-3" style="min-height: 640px">
-        <h1>Welcome to The Great Products! Thank You! Visit Again!</h1>
+        <h1>Welcome to The Great Brands! Thank You! Visit Again!</h1>
         <!-- <a [href]="baseUrlEnv + '/'" target="_blank">
                 <img src="logo.png" />
         </a> -->
+        <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
+                <div class="row m-0 p-0">
+                        <mat-form-field class="bg-white w-100">
+                                <input placeholder="Search Brands ..." formControlName="name" id="name" name="name"
+                                        matInput (keyup)="searching($event)">
+                        </mat-form-field>
+                </div>
+        </form>
         <ng-container *ngFor="let brand of brands; let i= index">
                 <a [href]="'/products/'+brand.name" target="_blank">
-                <div class="d-flex justify-content-center">
-                        <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
-                                <img class="logo-img border border-1 rounded-3"
-                                        [src]="sanitizer.bypassSecurityTrustUrl(brand.logoUrl)" [alt]="brand.name" />
-                        </h4>
-                </div>
+                        <div class="d-flex justify-content-center">
+                                <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
+                                        <img class="logo-img border border-1 rounded-3"
+                                                [src]="sanitizer.bypassSecurityTrustUrl(brand.logoUrl)"
+                                                [alt]="brand.name" />
+                                </h4>
+                        </div>
                 </a>
                 <div class="row mx-0 mb-5 justify-content-center">
                         <ng-container *ngIf="getIsLoading(brand._id)">
@@ -105,7 +114,7 @@
                                 </div>
                         </ng-container>
                 </div>
-                <hr style="border:1px solid black !important; margin-bottom: 50px;"/>
+                <hr style="border:1px solid black !important; margin-bottom: 50px;" />
         </ng-container>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">

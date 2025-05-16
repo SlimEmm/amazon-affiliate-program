@@ -122,7 +122,7 @@ export class BlogComponent {
               itemListElement: this.products?.map((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
-                url: environment?.baseUrl + '/' + this.url,
+                url: environment?.baseUrl + this.url,
                 name: product?.name || '',
                 image: product.imgUrl || environment?.baseUrl + '/logo.png',
                 brand: product.brand?.name || '',

@@ -1,7 +1,16 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { DomSanitizer, Meta, SafeHtml, Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@environment';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { Brand } from '../../models';
@@ -10,7 +19,15 @@ import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-brands',
-  imports: [CommonModule, NgbTooltipModule],
+  imports: [
+    CommonModule,
+    NgbTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+  ],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css',
 })
@@ -24,6 +41,10 @@ export class BrandsComponent {
   subscribedList: any[] = [];
   structuredDataSet: boolean = false; // Add this property
   structuredData: SafeHtml | undefined;
+  searchForm: FormGroup;
+  debounceTimer: any;
+  oldSearchValue: string = '';
+  searchTerm: string = '';
 
   constructor(
     private meta: Meta,
@@ -32,20 +53,39 @@ export class BrandsComponent {
     private _productService: ProductService,
     public sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: Object,
-    public _utilService: UtilService
+    public _utilService: UtilService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.baseUrlEnv = environment.baseUrl || '';
     this.isBrowser = isPlatformBrowser(this.platformId);
-
+    this.searchForm = this.fb.group({
+      name: [''],
+      brands: [[]],
+      categories: [[]],
+      subCategories: [[]],
+    });
     if (this.isBrowser && window) {
       // Safe to use window here
       this.screenWidth = window.innerWidth || 0;
     }
-    this.getBrands();
+    //this.getBrands();
   }
 
-  getBrands() {
-    this._productService.getBrands().subscribe((response) => {
+  searching(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value || '';
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      if (this.oldSearchValue != value) {
+        this.getBrands(value);
+        this.oldSearchValue = value;
+      }
+    }, 500);
+  }
+
+  getBrands(value: string = '') {
+    this._productService.getBrands(value).subscribe((response) => {
       if (response.isSuccess) {
         this.brands = response.data;
         this.isLoadingList = this.brands.map((x) => {
@@ -71,7 +111,7 @@ export class BrandsComponent {
                     itemListElement: response.data?.map((product, index) => ({
                       '@type': 'ListItem',
                       position: index + 1,
-                      url: environment?.baseUrl + '/' + this.url,
+                      url: environment?.baseUrl + this.url,
                       name: product?.name || '',
                       image:
                         product.imgUrl || environment?.baseUrl + '/logo.png',
@@ -132,20 +172,30 @@ export class BrandsComponent {
   }
 
   ngOnInit() {
+    this.searchTerm = this.route.snapshot?.params?.['id'] || '';
+    this.searchForm.get('name')?.setValue(this.searchTerm);
     this.url = this.router.url;
-    this.title.setTitle(`Brands - The Great Products`);
+    this.title.setTitle(
+      `${
+        this._utilService.toTitleCase(this.searchTerm) || ''
+      } Brands - The Great Products`
+    );
     this.meta.updateTag({
       name: 'description',
       content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy, Online, Electronics`,
+      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy, Online, Electronics, ${
+        this._utilService.toTitleCase(this.searchTerm) || ''
+      }`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
       property: 'og:title',
-      content: `The Great Products`,
+      content: `${
+        this._utilService.toTitleCase(this.searchTerm) || ''
+      } Brands - The Great Products`,
     });
     this.meta.updateTag({
       property: 'og:description',
@@ -159,6 +209,7 @@ export class BrandsComponent {
       property: 'og:url',
       content: environment.baseUrl + this.url,
     });
+    this.getBrands(this.searchTerm);
   }
 
   ngOnDestroy() {

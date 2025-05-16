@@ -1,8 +1,16 @@
 <div class="container-fluid text-center my-3" style="min-height: 640px">
-        <h1>Welcome to The Great Products! Thank You! Visit Again!</h1>
+        <h1>Welcome to The Great Categories! Thank You! Visit Again!</h1>
         <!-- <a [href]="baseUrlEnv + '/'" target="_blank">
                 <img src="logo.png" />
         </a> -->
+        <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
+                <div class="row m-0 p-0">
+                        <mat-form-field class="bg-white w-100">
+                                <input placeholder="Search Categories ..." formControlName="name" id="name" name="name"
+                                        matInput (keyup)="searching($event)">
+                        </mat-form-field>
+                </div>
+        </form>
         <ng-container *ngFor="let category of categories; let i= index">
                 <a [href]="'/products/'+category.name" target="_blank">
                         <div class="d-flex justify-content-center">
@@ -107,7 +115,7 @@
                                 </div>
                         </ng-container>
                 </div>
-                <hr style="border:1px solid black !important; margin-bottom: 50px;"/>
+                <hr style="border:1px solid black !important; margin-bottom: 50px;" />
         </ng-container>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">
