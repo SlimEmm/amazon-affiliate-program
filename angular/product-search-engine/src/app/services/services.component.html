@@ -12,8 +12,8 @@
                 </div>
         </form>
         <ng-container *ngFor="let banner of affiliateBanners; let i= index">
-                <h2 class="my-5 text-danger">{{banner.name}}</h2>
                 <a [href]="banner.affiliateLink" target="_blank">
+                        <h2 class="py-5 text-danger">{{banner.name}}</h2>
                         <div class="d-flex justify-content-center">
                                 <img class="border border-1 rounded-3 w-100"
                                         [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)" [alt]="banner.name" />

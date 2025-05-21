@@ -1,5 +1,10 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -55,7 +60,8 @@ export class ServicesComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     public _utilService: UtilService,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {
     this.baseUrlEnv = environment.baseUrl || '';
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -85,6 +91,7 @@ export class ServicesComponent {
     this._productService.getAffiliateBanners(value).subscribe((response) => {
       if (response.isSuccess) {
         this.affiliateBanners = response.data;
+        this.cdr.detectChanges();
         if (!this.structuredDataSet && response.data?.length > 0) {
           const structuredDataJSON = {
             '@context': 'https://schema.org/',

@@ -156,6 +156,7 @@ export class BrandsComponent {
             });
           this.subscribedList.push(subscribed);
         });
+        this.getBanners();
       }
     });
   }
