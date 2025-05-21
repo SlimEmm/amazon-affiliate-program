@@ -52,11 +52,6 @@ export const routes: Routes = [
       import('./blogs/blogs.component').then((d) => d.BlogsComponent),
   },
   {
-    path: 'products/:id',
-    loadComponent: () =>
-      import('./products/products.component').then((d) => d.ProductsComponent),
-  },
-  {
     path: 'brands',
     pathMatch: 'full',
     loadComponent: () =>
@@ -72,25 +67,49 @@ export const routes: Routes = [
     path: 'categories',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./categories/categories.component').then((d) => d.CategoriesComponent),
+      import('./categories/categories.component').then(
+        (d) => d.CategoriesComponent
+      ),
   },
   {
     path: 'categories/:id',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./categories/categories.component').then((d) => d.CategoriesComponent),
+      import('./categories/categories.component').then(
+        (d) => d.CategoriesComponent
+      ),
   },
   {
     path: 'subcategories',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./subcategories/subcategories.component').then((d) => d.SubCategoriesComponent),
+      import('./subcategories/subcategories.component').then(
+        (d) => d.SubCategoriesComponent
+      ),
   },
   {
     path: 'subcategories/:id',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./subcategories/subcategories.component').then((d) => d.SubCategoriesComponent),
+      import('./subcategories/subcategories.component').then(
+        (d) => d.SubCategoriesComponent
+      ),
+  },
+  {
+    path: 'services/:id',
+    loadComponent: () =>
+      import('./services/services.component').then((d) => d.ServicesComponent),
+  },
+  {
+    path: 'services',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./services/services.component').then((d) => d.ServicesComponent),
+  },
+  {
+    path: 'products/:id',
+    loadComponent: () =>
+      import('./products/products.component').then((d) => d.ProductsComponent),
   },
   {
     path: 'products',

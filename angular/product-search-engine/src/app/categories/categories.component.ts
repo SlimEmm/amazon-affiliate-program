@@ -185,11 +185,11 @@ export class CategoriesComponent {
     );
     this.meta.updateTag({
       name: 'description',
-      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
+      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Digital Services, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy, Online, Electronics, ${
+      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Digital, Services, Buy, Online, Electronics, ${
         this._utilService.toTitleCase(this.searchTerm) || ''
       }`,
     });
@@ -202,7 +202,7 @@ export class CategoriesComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
+      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Digital Services, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       property: 'og:image',

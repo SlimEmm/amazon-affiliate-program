@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@environment';
 import { Observable } from 'rxjs';
-import { Brand, Category, Product, ProductsRequestCommand, Response, SubCategory } from '../models';
+import {
+  Brand,
+  Category,
+  Product,
+  ProductsRequestCommand,
+  Response,
+  Service,
+  SubCategory,
+} from '../models';
 import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root',
@@ -12,36 +19,22 @@ export class ProductService {
   getProducts(
     productsRequestCommand: ProductsRequestCommand
   ): Observable<Response<Product[]>> {
-    return this.apiService.post(
-      `user/products`,
-      productsRequestCommand
-    );
+    return this.apiService.post(`user/products`, productsRequestCommand);
   }
 
-  getBrands(
-    name:string
-  ): Observable<Response<Brand[]>> {
-    return this.apiService.post(
-      `user/brands`,
-      {name}
-    );
+  getAffiliateBanners(name: string): Observable<Response<Service[]>> {
+    return this.apiService.post(`user/affiliate-banners`, { name });
   }
 
-  getCategories(
-    name:string
-  ): Observable<Response<Category[]>> {
-    return this.apiService.post(
-      `user/categories`,
-      {name}
-    );
+  getBrands(name: string): Observable<Response<Brand[]>> {
+    return this.apiService.post(`user/brands`, { name });
   }
 
-  getSubCategories(
-    name:string
-  ): Observable<Response<SubCategory[]>> {
-    return this.apiService.post(
-      `user/subcategories`,
-      {name}
-    );
+  getCategories(name: string): Observable<Response<Category[]>> {
+    return this.apiService.post(`user/categories`, { name });
+  }
+
+  getSubCategories(name: string): Observable<Response<SubCategory[]>> {
+    return this.apiService.post(`user/subcategories`, { name });
   }
 }

@@ -6,6 +6,13 @@ export class Response<Type> {
   data: Type;
 }
 
+export class Service {
+  _id: string = '';
+  name: string = '';
+  imgUrl: string = environment.baseUrl + '/logo.png';
+  affiliateLink: string = '';
+}
+
 export class Brand {
   _id: string = '';
   name: string = '';

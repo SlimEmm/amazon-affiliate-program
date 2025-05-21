@@ -13,7 +13,7 @@ import { DomSanitizer, Meta, SafeHtml, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@environment';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { Brand } from '../../models';
+import { Brand, Service } from '../../models';
 import { ProductService } from '../../services/product.service';
 import { UtilService } from '../../services/util.service';
 
@@ -45,6 +45,8 @@ export class BrandsComponent {
   debounceTimer: any;
   oldSearchValue: string = '';
   searchTerm: string = '';
+  affiliateBanners: Service[] = [];
+  structuredDataJSON: any;
 
   constructor(
     private meta: Meta,
@@ -94,6 +96,7 @@ export class BrandsComponent {
             value: true,
           };
         });
+        this.getBanners();
         this.brands.forEach((x) => {
           let subscribed = this._productService
             .getProducts({
@@ -105,7 +108,7 @@ export class BrandsComponent {
             .subscribe((response) => {
               if (response.isSuccess) {
                 if (!this.structuredDataSet && response.data?.length > 0) {
-                  const structuredDataJSON = {
+                  this.structuredDataJSON = {
                     '@context': 'https://schema.org/',
                     '@type': 'ItemList',
                     itemListElement: response.data?.map((product, index) => ({
@@ -131,15 +134,6 @@ export class BrandsComponent {
                       sizes: product?.sizes || [],
                     })),
                   };
-                  if (this.isBrowser) {
-                    this.structuredData =
-                      this.sanitizer?.bypassSecurityTrustHtml(
-                        `<script type="application/ld+json">${JSON.stringify(
-                          structuredDataJSON
-                        )}</script>`
-                      );
-                    this.structuredDataSet = true;
-                  }
                 }
                 let brandId = response.data?.[0]?.brand?._id?.toString();
                 if (
@@ -182,11 +176,11 @@ export class BrandsComponent {
     );
     this.meta.updateTag({
       name: 'description',
-      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
+      content: `Discover, Find & Shop, Trending, Viral, Latest, Today, Products, Best Products, Quality Items, Digital Services, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       name: 'keywords',
-      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Buy, Online, Electronics, ${
+      content: `Discover, Find, Shop, Great, Trending, Viral, Latest, Today, Products, Best, Quality, Items, Digital, Services, Buy, Online, Electronics, ${
         this._utilService.toTitleCase(this.searchTerm) || ''
       }`,
     });
@@ -199,7 +193,7 @@ export class BrandsComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Buy Online Electronics At The Great Products.`,
+      content: `Discover, Find & Shop, The Latest Products, Best Products, Quality Items, Digital Services, Buy Online Electronics At The Great Products.`,
     });
     this.meta.updateTag({
       property: 'og:image',
@@ -210,6 +204,34 @@ export class BrandsComponent {
       content: environment.baseUrl + this.url,
     });
     this.getBrands(this.searchTerm);
+  }
+
+  getBanners(value: string = '') {
+    this._productService.getAffiliateBanners(value).subscribe((response) => {
+      if (response.isSuccess) {
+        this.affiliateBanners = response.data;
+        let amazonBrand = this.structuredDataJSON.itemListElement.find(
+          (x: any) => x.name === 'Amazon'
+        );
+        amazonBrand.services = response.data.map((service, index) => {
+          return {
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${environment?.baseUrl}/services${this.url}`,
+            name: service?.name || '',
+            image: service.imgUrl || environment?.baseUrl + '/logo.png',
+          };
+        });
+        if (this.isBrowser) {
+          this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
+            `<script type="application/ld+json">${JSON.stringify(
+              this.structuredDataJSON
+            )}</script>`
+          );
+          this.structuredDataSet = true;
+        }
+      }
+    });
   }
 
   ngOnDestroy() {

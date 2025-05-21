@@ -12,6 +12,20 @@
                 </div>
         </form>
         <ng-container *ngFor="let brand of brands; let i= index">
+                <ng-container *ngIf="brand.name === 'Amazon'">
+                        <ng-container *ngFor="let banner of affiliateBanners; let i= index">
+                                {{banner.name}}
+                                <a [href]="banner.affiliateLink" target="_blank">
+                                        <div class="d-flex justify-content-center">
+                                                <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
+                                                        <img class="border border-1 rounded-3 w-100"
+                                                                [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)"
+                                                                [alt]="banner.name" />
+                                                </h4>
+                                        </div>
+                                </a>
+                        </ng-container>
+                </ng-container>
                 <a [href]="'/products/'+brand.name" target="_blank">
                         <div class="d-flex justify-content-center">
                                 <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
@@ -36,7 +50,8 @@
                                                 <span class="text-start title"
                                                         [ngbTooltip]="item.category.name && item.category.name.length > ( screenWidth > 1000 ? 10 : 30) ? item.category.name : ''"
                                                         position="top" container="body">
-                                                        {{_utilService.textTruncate(item.category.name,( screenWidth >
+                                                        {{_utilService.textTruncate(item.category.name,(
+                                                        screenWidth >
                                                         1000 ? 10 : 30))}}
                                                 </span>
                                                 <span style="margin-top:2px"
@@ -46,7 +61,8 @@
                                                 <span class="text-start title"
                                                         [ngbTooltip]="item.subCategory.name && item.subCategory.name.length > ( screenWidth > 1000 ? 10 : 30) ? item.subCategory.name : ''"
                                                         position="top" container="body">
-                                                        {{_utilService.textTruncate(item.subCategory.name,( screenWidth
+                                                        {{_utilService.textTruncate(item.subCategory.name,(
+                                                        screenWidth
                                                         > 1000 ? 10 : 30))}} </span>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center my-3"
@@ -110,7 +126,8 @@
                         </ng-container>
                         <ng-container *ngIf="!getIsLoading(brand._id) && brand.products && brand.products.length <= 0">
                                 <div class="col-12 my-5">
-                                        <span class="no-found-text">No Products Found Currenly for your Search!</span>
+                                        <span class="no-found-text">No Products Found Currenly for your
+                                                Search!</span>
                                 </div>
                         </ng-container>
                 </div>

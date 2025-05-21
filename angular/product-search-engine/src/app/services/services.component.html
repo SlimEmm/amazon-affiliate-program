@@ -1,0 +1,29 @@
+<div class="container-fluid text-center my-3" style="min-height: 640px">
+        <h1>Welcome to The Great Services! Thank You! Visit Again!</h1>
+        <!-- <a [href]="baseUrlEnv + '/'" target="_blank">
+                <img src="logo.png" />
+        </a> -->
+        <form [formGroup]="searchForm" novalidate="novalidate" autocomplete="off" class="d-flex justify-content-center">
+                <div class="row m-0 p-0">
+                        <mat-form-field class="bg-white w-100">
+                                <input placeholder="Search Services ..." formControlName="name" id="name" name="name"
+                                        matInput (keyup)="searching($event)">
+                        </mat-form-field>
+                </div>
+        </form>
+        <ng-container *ngFor="let banner of affiliateBanners; let i= index">
+                {{banner.name}}
+                <a [href]="banner.affiliateLink" target="_blank">
+                        <div class="d-flex justify-content-center">
+                                <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
+                                        <img class="border border-1 rounded-3 w-100"
+                                                [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)"
+                                                [alt]="banner.name" />
+                                </h4>
+                        </div>
+                </a>
+        </ng-container>
+</div>
+<ng-container *ngIf="isBrowser && structuredDataSet">
+        <div [innerHTML]="structuredData"></div>
+</ng-container>

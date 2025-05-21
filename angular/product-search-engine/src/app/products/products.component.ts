@@ -102,13 +102,13 @@ export class ProductsComponent {
       name: 'description',
       content: `Discover, Find & Shop ${
         this.searchTerm || ''
-      } At The Great Products, Latest Products, Best Products, Quality Items, Buy Online.`,
+      } At The Great Products, Latest Products, Best Products, Quality Items, Digital Services, Buy Online.`,
     });
     this.meta.updateTag({
       name: 'keywords',
       content: `${this.searchTerm || ''}${
         (this.searchTerm || '') && ', '
-      }Discover, Find, Shop, Great, Viral, Trending Latest, Best, Quality, Products, Items, Buy, Online`,
+      }Discover, Find, Shop, Great, Viral, Trending Latest, Best, Quality, Products, Items, Digital, Services, Buy, Online`,
     });
     // Add Open Graph meta tags for social sharing
     this.meta.updateTag({
@@ -121,7 +121,7 @@ export class ProductsComponent {
       property: 'og:description',
       content: `Discover, Find & Shop The Best ${
         this.searchTerm || ''
-      } At The Great Products, Trending, Viral, Latest, Best, Products, Quality, Items, Buy Online.`,
+      } At The Great Products, Trending, Viral, Latest, Best, Products, Quality, Items, Digital, Services, Buy Online.`,
     });
     this.meta.updateTag({
       property: 'og:image',

@@ -104,6 +104,22 @@ process.on("SIGINT", async () => {
   process.exit(0);
 });
 
+const affiliateBannerSchema = new mongoose.Schema({
+  _id: { type: String, required: true },
+  name: { type: String, maxlength: 256, required: true },
+  imgUrl: {
+    type: String,
+    default: "/logo.png",
+  },
+  affiliateLink: {
+    type: String,
+    required: true,
+  },
+  createdOn: { type: Date, default: Date.now },
+  updatedOn: { type: Date, default: Date.now },
+  isDeleted: { type: Boolean, default: false },
+});
+
 const brandSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, maxlength: 256, required: true },
@@ -189,6 +205,10 @@ const Category = mongoose.model("Category", categorySchema);
 const SubCategory = mongoose.model("SubCategory", subCategorySchema);
 const Product = mongoose.model("Product", productSchema);
 const Blog = mongoose.model("Blog", blogSchema);
+const AffiliateBanner = mongoose.model(
+  "AffiliateBanner",
+  affiliateBannerSchema
+);
 
 app.get("/flush-cache/:id", async (req, res) => {
   try {
@@ -454,6 +474,25 @@ app.post("/user/brands", async (req, res) => {
       isSuccess: true,
       data: brands,
       message: "Brands Fetched Successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+});
+
+app.post("/user/affiliate-banners", async (req, res) => {
+  try {
+    const brands = await AffiliateBanner.find({
+      name: {
+        $regex: ".*" + req.body.name.toString() + ".*",
+        $options: "i",
+      },
+    }).sort({ _id: -1 });
+    res.status(200).json({
+      isSuccess: true,
+      data: brands,
+      message: "Affiliate Banners Fetched Successfully",
     });
   } catch (error) {
     console.error(error);
