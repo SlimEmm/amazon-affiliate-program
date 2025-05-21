@@ -96,7 +96,6 @@ export class BrandsComponent {
             value: true,
           };
         });
-        this.getBanners();
         this.brands.forEach((x) => {
           let subscribed = this._productService
             .getProducts({
@@ -210,18 +209,19 @@ export class BrandsComponent {
     this._productService.getAffiliateBanners(value).subscribe((response) => {
       if (response.isSuccess) {
         this.affiliateBanners = response.data;
-        let amazonBrand = this.structuredDataJSON.itemListElement.find(
-          (x: any) => x.name === 'Amazon'
-        );
-        amazonBrand.services = response.data.map((service, index) => {
-          return {
-            '@type': 'ListItem',
-            position: index + 1,
-            url: `${environment?.baseUrl}/services${this.url}`,
-            name: service?.name || '',
-            image: service.imgUrl || environment?.baseUrl + '/logo.png',
-          };
-        });
+        // if (this.structuredDataJSON) {
+        //   let amazonBrand = this.structuredDataJSON.itemListElement.find(
+        //     (x: any) => x.name === 'Amazon'
+        //   );
+        //   amazonBrand.services = response.data.map((service, index) => {
+        //     return {
+        //       '@type': 'ListItem',
+        //       position: index + 1,
+        //       url: `${environment?.baseUrl}/services${this.url}`,
+        //       name: service?.name || '',
+        //       image: service.imgUrl || environment?.baseUrl + '/logo.png',
+        //     };
+        //   });
         if (this.isBrowser) {
           this.structuredData = this.sanitizer?.bypassSecurityTrustHtml(
             `<script type="application/ld+json">${JSON.stringify(
@@ -230,6 +230,7 @@ export class BrandsComponent {
           );
           this.structuredDataSet = true;
         }
+        // }
       }
     });
   }

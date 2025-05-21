@@ -483,7 +483,7 @@ app.post("/user/brands", async (req, res) => {
 
 app.post("/user/affiliate-banners", async (req, res) => {
   try {
-    const brands = await AffiliateBanner.find({
+    const banners = await AffiliateBanner.find({
       name: {
         $regex: ".*" + req.body.name.toString() + ".*",
         $options: "i",
@@ -491,7 +491,7 @@ app.post("/user/affiliate-banners", async (req, res) => {
     }).sort({ _id: -1 });
     res.status(200).json({
       isSuccess: true,
-      data: brands,
+      data: banners,
       message: "Affiliate Banners Fetched Successfully",
     });
   } catch (error) {

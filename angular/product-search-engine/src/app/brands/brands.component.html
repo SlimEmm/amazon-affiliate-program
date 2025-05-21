@@ -12,20 +12,6 @@
                 </div>
         </form>
         <ng-container *ngFor="let brand of brands; let i= index">
-                <ng-container *ngIf="brand.name === 'Amazon'">
-                        <ng-container *ngFor="let banner of affiliateBanners; let i= index">
-                                {{banner.name}}
-                                <a [href]="banner.affiliateLink" target="_blank">
-                                        <div class="d-flex justify-content-center">
-                                                <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
-                                                        <img class="border border-1 rounded-3 w-100"
-                                                                [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)"
-                                                                [alt]="banner.name" />
-                                                </h4>
-                                        </div>
-                                </a>
-                        </ng-container>
-                </ng-container>
                 <a [href]="'/products/'+brand.name" target="_blank">
                         <div class="d-flex justify-content-center">
                                 <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
@@ -35,6 +21,18 @@
                                 </h4>
                         </div>
                 </a>
+                <ng-container *ngIf="brand.name === 'Amazon'">
+                        <ng-container *ngFor="let banner of affiliateBanners; let i= index">
+                                <h2 class="my-5 text-danger">{{banner.name}}</h2>
+                                <a [href]="banner.affiliateLink" target="_blank">
+                                        <div class="d-flex justify-content-center">
+                                                        <img class="border border-1 rounded-3 w-100"
+                                                                [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)"
+                                                                [alt]="banner.name" />
+                                        </div>
+                                </a>
+                        </ng-container>
+                </ng-container>
                 <div class="row mx-0 mb-5 justify-content-center">
                         <ng-container *ngIf="getIsLoading(brand._id)">
                                 <div class="col-11 my-5">
