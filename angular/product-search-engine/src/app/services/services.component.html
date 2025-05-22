@@ -11,15 +11,24 @@
                         </mat-form-field>
                 </div>
         </form>
-        <ng-container *ngFor="let banner of affiliateBanners; let i= index">
-                <a [href]="banner.affiliateLink" target="_blank">
-                        <h2 class="py-5 text-danger">{{banner.name}}</h2>
-                        <div class="d-flex justify-content-center">
-                                <img class="border border-1 rounded-3 w-100"
-                                        [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)" [alt]="banner.name" />
-                        </div>
-                </a>
-        </ng-container>
+        <div style="background: linear-gradient(1.35turn, #003366, #7dbcde);" class="pb-5">
+                <ng-container *ngFor="let banner of affiliateBanners; let i= index">
+                        <a [href]="banner.affiliateLink" target="_blank">
+                                <div class="d-flex justify-content-center py-3">
+                                        <h2 class="w-50 bg-dark py-2 border rounded-3 text-warning text-center">
+                                                {{banner.name}}</h2>
+                                </div>
+                                <!-- <h2 class="py-5 text-white">{{banner.name}}</h2> -->
+                                <div class="d-flex justify-content-center">
+                                        <img class="border border-1 rounded-3 w-100"
+                                                [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)"
+                                                [alt]="banner.name" />
+                                </div>
+                        </a>
+                        <hr *ngIf="i < affiliateBanners.length - 1"
+                                style="border:5px solid white !important; margin-bottom: 0px; margin-top:20px" />
+                </ng-container>
+        </div>
 </div>
 <ng-container *ngIf="isBrowser && structuredDataSet">
         <div [innerHTML]="structuredData"></div>

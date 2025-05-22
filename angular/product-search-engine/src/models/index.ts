@@ -63,6 +63,7 @@ export class BlogRequestCommand {
 }
 
 export class Blog {
+  _id: string = '';
   title: string = '';
   url: string = '';
   thumbnail : string = '';

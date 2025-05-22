@@ -4,7 +4,7 @@
     style="background: linear-gradient(1.35turn, #003366, #7dbcde)">
     <div>
       <div>
-        <img [src]="blog.thumbnail || '#'" [alt]="blog.thumbnailDetail || ''" style="width:125px; height: 110px;" />
+        <img [src]="blog.thumbnail || '#'" [alt]="blog.thumbnailDetail || ''" style="width:150px; height: 120px;" />
       </div>
     </div>
     <div>
@@ -18,9 +18,8 @@
     <div class="row mx-0 mb-5 justify-content-center">
       <ng-container *ngFor="let item of products">
         <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
-          class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5" 
-          style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;"
-          >
+          class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
+          style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
           <!-- style="background: #000" -->
           <div
             class="d-flex align-items-center justify-content-center gap-xl-3 gap-md-2 gap-sm-2 gap-1 category-text fw-bold border border-1 py-2 px-5 rounded text-white"
@@ -85,13 +84,17 @@
     <div class="container py-3 text-start">
       <p [innerHtml]="blog.content || ''"></p>
     </div>
+    <div class="d-flex justify-content-center py-3">
+      <h2 class="w-50 bg-dark py-2 border rounded-3 text-warning text-center">
+        Suggested Blogs</h2>
+    </div>
     <ng-container *ngFor="let item of blogs">
-      <div class="px-5 py-5 border-bottom" style="background: #000;">
+      <div class="px-5 py-5 border border-5 border-white" style="background: #000;">
         <a [href]="baseUrlEnv+'/blog/'+item.url" class="col-12 py-3 text-decoration-none text-white " target="_blank">
           <div class="d-flex gap-3 align-items-center">
             <div>
               <div>
-                <img [src]="item.thumbnail" [alt]="item.thumbnailDetail" style="width:100px; height: 100px;" />
+                <img [src]="item.thumbnail" [alt]="item.thumbnailDetail" style="width:150px; height: 120px;" />
               </div>
               <span style="font-size:10px">
                 {{item.thumbnailDetail}}

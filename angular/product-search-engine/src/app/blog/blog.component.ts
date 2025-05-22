@@ -152,6 +152,7 @@ export class BlogComponent {
   getBlogs(value: string, structuredDataJSON: any) {
     this.isLoadingBlogs = true;
     let filters = {
+      _idne: this.blog._id.toString(),
       title: value,
     };
     this._blogService

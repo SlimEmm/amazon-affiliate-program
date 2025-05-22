@@ -15,13 +15,13 @@
         <ng-container *ngIf="!isLoading">
             <ng-container *ngFor="let item of blogs">
                 <a [href]="baseUrlEnv+'/blog/'+item.url" target="_blank"
-                    class="col-12 py-3 border border-2 text-decoration-none text-white"
+                    class="col-12 py-3 border border-5 text-decoration-none text-white border-white"
                     style="background: linear-gradient(1.35turn, #003366, #7dbcde)">
                     <div class="d-flex gap-3 align-items-center">
                         <div>
                             <div class="mx-2 my-0">
                                 <img [src]="item.thumbnail" [alt]="item.thumbnailDetail"
-                                    style="width:125px; height: 110px;" />
+                                    style="width:150px; height: 120px;" />
                             </div>
                             <span style="font-size:10px">
                                 {{item.thumbnailDetail}}
