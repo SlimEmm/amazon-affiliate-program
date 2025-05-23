@@ -427,9 +427,9 @@ app.post("/user/blogs", async (req, res) => {
         },
       ];
     filters.isDeleted = false;
-    // if(req.body._idne) {
-    //   filters._id = { $ne: ObjectId(req.body._idne) }
-    // }
+    if (req.body._idne) {
+      filters._id = { $ne: new ObjectId(req.body._idne.toString()) };
+    }
     const blogs = await Blog.find(filters).sort({ _id: -1 });
     res.status(200).json({
       isSuccess: true,
