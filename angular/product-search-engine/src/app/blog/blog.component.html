@@ -16,69 +16,89 @@
       <h5>{{blog.title || ''}}</h5>
     </div>
     <div class="row mx-0 mb-5 justify-content-center">
-      <ng-container *ngFor="let item of products">
-        <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
-          class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
-          style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
-          <!-- style="background: #000" -->
-          <div
-            class="d-flex align-items-center justify-content-center gap-xl-3 gap-md-2 gap-sm-2 gap-1 category-text fw-bold border border-1 py-2 px-5 rounded text-white"
-            style="min-height:50px">
-            <span class="text-start title"
-              [ngbTooltip]="item.category.name && item.category.name.length > ( screenWidth > 1000 ? 10 : 30) ? item.category.name : ''"
-              position="top" container="body">
-              {{_utilService.textTruncate(item.category.name,( screenWidth > 1000 ? 10 : 30))}}
-            </span>
-            <span style="margin-top:2px" *ngIf="item.category.name || item.subCategory.name">
-              &gt;
-            </span>
-            <span class="text-start title"
-              [ngbTooltip]="item.subCategory.name && item.subCategory.name.length > ( screenWidth > 1000 ? 10 : 30) ? item.subCategory.name : ''"
-              position="top" container="body">
-              {{_utilService.textTruncate(item.subCategory.name,( screenWidth > 1000 ? 10 : 30))}} </span>
-          </div>
-          <div class="d-flex align-items-center justify-content-center my-3" style="min-height:200px">
-            <img class="card-img border border-1 rounded-3" [src]="sanitizer.bypassSecurityTrustUrl(item.imgUrl)"
-              [alt]="item.name" />
-          </div>
-          <div class="mx-2 d-flex flex-column">
-            <span class="text-start fw-bolder brand fs-6 text-white"
-              [ngbTooltip]="item.brand.name && item.brand.name.length > 20 ? item.brand.name : ''" position="top"
-              container="body">{{_utilService.textTruncate(item.brand.name,20)}}</span>
-            <span class="text-start product-title fw-bolder text-white" style="min-height:75px"
-              [ngbTooltip]="item.name && item.name.length > 125 ? item.name : ''" position="top"
-              container="body">{{_utilService.textTruncate(item.name,125)}}</span>
-            <ng-container *ngIf="item.colors && item.colors?.length">
-              <div class="d-flex mt-1">
-                <ng-container *ngFor="let color of item.colors; let i = index;">
-                  <ng-container *ngIf="i < 5">
-                    <span [ngbTooltip]="color" class="border rounded-3 me-1 bg-white" position="top" container="body">
-                      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
-                      </svg>
-                    </span>
+      <ng-container *ngIf="blog.url && blog.url !== 'how-services-provider-digital-services'">
+        <ng-container *ngFor="let item of products">
+          <a [href]="sanitizer.bypassSecurityTrustUrl(item.affiliateLink || '#')" target="_blank"
+            class="px-3 py-3 m-2 border rounded text-decoration-none col-xl-2 col-lg-3 col-md-5"
+            style="background-image: url('background-img.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+            <!-- style="background: #000" -->
+            <div
+              class="d-flex align-items-center justify-content-center gap-xl-3 gap-md-2 gap-sm-2 gap-1 category-text fw-bold border border-1 py-2 px-5 rounded text-white"
+              style="min-height:50px">
+              <span class="text-start title"
+                [ngbTooltip]="item.category.name && item.category.name.length > ( screenWidth > 1000 ? 10 : 30) ? item.category.name : ''"
+                position="top" container="body">
+                {{_utilService.textTruncate(item.category.name,( screenWidth > 1000 ? 10 : 30))}}
+              </span>
+              <span style="margin-top:2px" *ngIf="item.category.name || item.subCategory.name">
+                &gt;
+              </span>
+              <span class="text-start title"
+                [ngbTooltip]="item.subCategory.name && item.subCategory.name.length > ( screenWidth > 1000 ? 10 : 30) ? item.subCategory.name : ''"
+                position="top" container="body">
+                {{_utilService.textTruncate(item.subCategory.name,( screenWidth > 1000 ? 10 : 30))}} </span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center my-3" style="min-height:200px">
+              <img class="card-img border border-1 rounded-3" [src]="sanitizer.bypassSecurityTrustUrl(item.imgUrl)"
+                [alt]="item.name" />
+            </div>
+            <div class="mx-2 d-flex flex-column">
+              <span class="text-start fw-bolder brand fs-6 text-white"
+                [ngbTooltip]="item.brand.name && item.brand.name.length > 20 ? item.brand.name : ''" position="top"
+                container="body">{{_utilService.textTruncate(item.brand.name,20)}}</span>
+              <span class="text-start product-title fw-bolder text-white" style="min-height:75px"
+                [ngbTooltip]="item.name && item.name.length > 125 ? item.name : ''" position="top"
+                container="body">{{_utilService.textTruncate(item.name,125)}}</span>
+              <ng-container *ngIf="item.colors && item.colors?.length">
+                <div class="d-flex mt-1">
+                  <ng-container *ngFor="let color of item.colors; let i = index;">
+                    <ng-container *ngIf="i < 5">
+                      <span [ngbTooltip]="color" class="border rounded-3 me-1 bg-white" position="top" container="body">
+                        <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="15" height="15" x="7.5" y="7.5" rx="15" ry="15" [attr.fill]="color" />
+                        </svg>
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="i === 5">
+                      <span class="fw-bolder fs-5 text-white">...</span>
+                    </ng-container>
                   </ng-container>
-                  <ng-container *ngIf="i === 5">
-                    <span class="fw-bolder fs-5 text-white">...</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="item.sizes && item.sizes.length > 0">
+                <div class="d-flex gap-1 align-items-center">
+                  <ng-container *ngFor="let size of item.sizes; let i = index;">
+                    <ng-container *ngIf="i < 4">
+                      <span
+                        class="border rounded px-1 py-1 mb-2 mt-1 fs-5 fw-bolder text-white border-1 size-label">{{size}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="i === 4">
+                      <span class="fw-bolder fs-5 text-white">...</span>
+                    </ng-container>
                   </ng-container>
+                </div>
+              </ng-container>
+            </div>
+          </a>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="blog.url === 'how-services-provider-digital-services'">
+        <ng-container *ngFor="let banner of affiliateBanners; let i= index">
+                        <a [href]="banner.affiliateLink" target="_blank">
+                                <div class="d-flex justify-content-center py-3">
+                                        <h2 class="w-50 bg-dark py-2 border rounded-3 text-warning text-center">
+                                                {{banner.name}}</h2>
+                                </div>
+                                <!-- <h2 class="py-5 text-white">{{banner.name}}</h2> -->
+                                <div class="d-flex justify-content-center">
+                                        <img class="border border-1 rounded-3 w-100"
+                                                [src]="sanitizer.bypassSecurityTrustUrl(banner.imgUrl)"
+                                                [alt]="banner.name" />
+                                </div>
+                        </a>
+                        <hr *ngIf="i < affiliateBanners.length - 1"
+                                style="border:5px solid white !important; margin-bottom: 0px; margin-top:20px" />
                 </ng-container>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="item.sizes && item.sizes.length > 0">
-              <div class="d-flex gap-1 align-items-center">
-                <ng-container *ngFor="let size of item.sizes; let i = index;">
-                  <ng-container *ngIf="i < 4">
-                    <span
-                      class="border rounded px-1 py-1 mb-2 mt-1 fs-5 fw-bolder text-white border-1 size-label">{{size}}</span>
-                  </ng-container>
-                  <ng-container *ngIf="i === 4">
-                    <span class="fw-bolder fs-5 text-white">...</span>
-                  </ng-container>
-                </ng-container>
-              </div>
-            </ng-container>
-          </div>
-        </a>
       </ng-container>
     </div>
     <div class="container py-3 text-start">

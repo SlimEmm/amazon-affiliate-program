@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environment';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs';
-import { Blog, Product } from '../../models';
+import { Blog, Product, Service } from '../../models';
 import { BlogService } from '../../services/brand.service';
 import { ProductService } from '../../services/product.service';
 import { UtilService } from '../../services/util.service';
@@ -29,6 +29,7 @@ export class BlogComponent {
   isLoadingProducts: boolean = false;
   isLoadingBlogs: boolean = false;
   baseUrlEnv: string = '';
+  affiliateBanners: Service[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,9 @@ export class BlogComponent {
     public _utilService: UtilService,
     private _productService: ProductService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.getBanners();
+  }
   ngOnInit() {
     this.url = this.route.snapshot?.params?.['id'] || '';
     this.title.setTitle(
@@ -149,10 +152,17 @@ export class BlogComponent {
       });
   }
 
+  getBanners(value: string = '') {
+    this._productService.getAffiliateBanners(value).subscribe((response) => {
+      if (response.isSuccess) {
+        this.affiliateBanners = response.data;
+      }
+    });
+  }
+
   getBlogs(value: string, structuredDataJSON: any) {
     this.isLoadingBlogs = true;
     let filters = {
-      _idne: this.blog._id.toString(),
       title: value,
     };
     this._blogService
@@ -164,7 +174,9 @@ export class BlogComponent {
       )
       .subscribe((response) => {
         if (response.isSuccess) {
-          this.blogs = response.data;
+          this.blogs = response.data?.filter(
+            (x) => x._id?.toString() != this.blog?._id?.toString()
+          );
           if (!this.structuredDataSet) {
             const blogsElement = this.blogs.map((blog, index) => ({
               '@type': 'ListItem',
