@@ -37,9 +37,12 @@ app.use((req, res, next) => {
 app.options("*", cors());
 const ObjectId = require("mongodb").ObjectId;
 // Connect to MongoDB
+// New DB - "mongodb+srv://product:NCUIDxB9oIgdTgea@cluster0.tb8hywm.mongodb.net/products?retryWrites=true&w=majority&appName=Cluster0",
+// Old DB - "mongodb+srv://product:test@cluster0.a5qfn.mongodb.net/productsDB?retryWrites=true&w=majority&appName=Cluster0",
+    
 mongoose
   .connect(
-    "mongodb+srv://product:test@cluster0.a5qfn.mongodb.net/productsDB?retryWrites=true&w=majority&appName=Cluster0",
+    "mongodb+srv://product:NCUIDxB9oIgdTgea@cluster0.tb8hywm.mongodb.net/products?retryWrites=true&w=majority&appName=Cluster0",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -77,7 +80,7 @@ const cacheMiddleware = async (req, res, next) => {
   next();
 };
 
-app.use(cacheMiddleware);
+//app.use(cacheMiddleware);
 
 const redis = require("redis");
 
@@ -114,10 +117,7 @@ const affiliateBannerSchema = new mongoose.Schema({
   affiliateLink: {
     type: String,
     required: true,
-  },
-  createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now },
-  isDeleted: { type: Boolean, default: false },
+  }
 });
 
 const brandSchema = new mongoose.Schema({
@@ -126,21 +126,34 @@ const brandSchema = new mongoose.Schema({
   logoUrl: {
     type: String,
     default: "/logo.png",
-  },
-  createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now },
-  isDeleted: { type: Boolean, default: false },
+  }
 });
+
+const creditCardSchema = new mongoose.Schema({
+  _id: { type: String, required: true },
+  name: { type: String, maxlength: 256, required: true },
+  bank: { type: String, maxlength: 256, required: true },
+  imgUrl: {
+    type: String,
+    default: "/logo.png",
+  },
+  logoUrl: {
+    type: String,
+    default: "/logo.png",
+  },
+  affiliateLink: {
+    type: String,
+    required: true,
+  }
+});
+
 const categorySchema = new mongoose.Schema({
   _id: { type: String, required: true },
   name: { type: String, maxlength: 256, required: true },
   imgUrl: {
     type: String,
     default: "/logo.png",
-  },
-  createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now },
-  isDeleted: { type: Boolean, default: false },
+  }
 });
 const subCategorySchema = new mongoose.Schema({
   _id: { type: String, required: true },
@@ -149,10 +162,7 @@ const subCategorySchema = new mongoose.Schema({
     type: String,
     default: "/logo.png",
   },
-  category: [{ type: Schema.Types.ObjectId, ref: "Category", required: true }],
-  createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now },
-  isDeleted: { type: Boolean, default: false },
+  category: [{ type: Schema.Types.ObjectId, ref: "Category", required: true }]
 });
 const blogSchema = new mongoose.Schema({
   _id: { type: String, required: true },
@@ -170,9 +180,6 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now },
-  isDeleted: { type: Boolean, default: false },
   searchTerm: { type: String, required: true },
   views: { type: Number, default: 0 },
 });
@@ -188,9 +195,6 @@ const productSchema = new mongoose.Schema({
   },
   colors: { type: [String], default: [] },
   sizes: { type: [String], default: [] },
-  createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now },
-  isDeleted: { type: Boolean, default: false },
   imgUrl: {
     type: String,
     default: "/logo.png",
@@ -208,6 +212,10 @@ const Blog = mongoose.model("Blog", blogSchema);
 const AffiliateBanner = mongoose.model(
   "AffiliateBanner",
   affiliateBannerSchema
+);
+const CreditCard = mongoose.model(
+  "CreditCard",
+  creditCardSchema
 );
 
 app.get("/flush-cache/:id", async (req, res) => {
@@ -409,19 +417,19 @@ app.post("/user/blogs", async (req, res) => {
       filters["$or"] = [
         {
           title: {
-            $regex: ".*" + req.body.title.toString() + ".*",
+            $regex: ".*" + req.body.title?.toString() + ".*",
             $options: "i",
           },
         },
         {
           content: {
-            $regex: ".*" + req.body.title.toString() + ".*",
+            $regex: ".*" + req.body.title?.toString() + ".*",
             $options: "i",
           },
         },
         {
           thumbnailDetail: {
-            $regex: ".*" + req.body.title.toString() + ".*",
+            $regex: ".*" + req.body.title?.toString() + ".*",
             $options: "i",
           },
         },
@@ -466,7 +474,7 @@ app.post("/user/brands", async (req, res) => {
   try {
     const brands = await Brand.find({
       name: {
-        $regex: ".*" + req.body.name.toString() + ".*",
+        $regex: ".*" + req.body.name?.toString() + ".*",
         $options: "i",
       },
     }).sort({ _id: -1 });
@@ -485,7 +493,7 @@ app.post("/user/affiliate-banners", async (req, res) => {
   try {
     const banners = await AffiliateBanner.find({
       name: {
-        $regex: ".*" + req.body.name.toString() + ".*",
+        $regex: ".*" + req.body.name?.toString() + ".*",
         $options: "i",
       },
     }).sort({ _id: -1 });
@@ -504,7 +512,7 @@ app.post("/user/categories", async (req, res) => {
   try {
     const categories = await Category.find({
       name: {
-        $regex: ".*" + req.body.name.toString() + ".*",
+        $regex: ".*" + req.body.name?.toString() + ".*",
         $options: "i",
       },
     }).sort({ _id: -1 });
@@ -522,7 +530,7 @@ app.post("/user/subcategories", async (req, res) => {
   try {
     const subCategories = await SubCategory.find({
       name: {
-        $regex: ".*" + req.body.name.toString() + ".*",
+        $regex: ".*" + req.body.name?.toString() + ".*",
         $options: "i",
       },
     }).sort({ _id: -1 });
@@ -530,6 +538,26 @@ app.post("/user/subcategories", async (req, res) => {
       isSuccess: true,
       data: subCategories,
       message: "Subcategories Fetched Successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+});
+app.get("/user/credit-cards/:id", async (req, res) => {
+  try {
+    console.log(req.params.id?.toString());
+    const creditCards = await CreditCard.find({
+      name: {
+        $regex: ".*" + req.params.id?.toString() + ".*",
+        $options: "i",
+      },
+    }).sort({ _id: -1 });
+    console.log(creditCards);
+    res.status(200).json({
+      isSuccess: true,
+      data: creditCards,
+      message: "Credit Cards Fetched Successfully",
     });
   } catch (error) {
     console.error(error);
