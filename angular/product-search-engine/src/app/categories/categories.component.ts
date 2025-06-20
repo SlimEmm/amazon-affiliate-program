@@ -96,6 +96,15 @@ export class CategoriesComponent {
                   const structuredDataJSON = {
                     '@context': 'https://schema.org/',
                     '@type': 'ItemList',
+                    areaServed: {
+                      '@type': 'Country',
+                      name: 'India',
+                    },
+                    provider: {
+                      '@type': 'Organization',
+                      name: 'The Great Products',
+                      url: `${environment?.baseUrl}/categories`,
+                    },
                     itemListElement: response.data?.map((product, index) => ({
                       '@type': 'ListItem',
                       position: index + 1,

@@ -64,14 +64,20 @@ export class BlogsComponent {
 
   ngOnInit() {
     this.searchTerm = this.route.snapshot?.params?.['id'] || '';
-    this.searchForm.get('title')?.setValue(this._utilService.toTitleCase(this.searchTerm));
+    this.searchForm
+      .get('title')
+      ?.setValue(this._utilService.toTitleCase(this.searchTerm));
     this.url = this.router.url;
-    this.title.setTitle(`${this._utilService.toTitleCase(this.searchTerm) || ''}${
+    this.title.setTitle(
+      `${this._utilService.toTitleCase(this.searchTerm) || ''}${
         (this.searchTerm || '') && ','
-      } The Great Blogs - Trending, Viral & Latest Blogs`);
+      } The Great Blogs - Trending, Viral & Latest Blogs`
+    );
     this.meta.updateTag({
       name: 'description',
-      content: `Latest Highlight About ${this.searchTerm || ''} Trending, Viral, Latest, Today, News, Blogs, Articles.`,
+      content: `Latest Highlight About ${
+        this.searchTerm || ''
+      } Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     this.meta.updateTag({
       name: 'keywords',
@@ -88,7 +94,9 @@ export class BlogsComponent {
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: `Latest Highlight About ${this.searchTerm || ''} Trending, Viral, Latest, Today, News, Blogs, Articles.`,
+      content: `Latest Highlight About ${
+        this.searchTerm || ''
+      } Trending, Viral, Latest, Today, News, Blogs, Articles.`,
     });
     this.meta.updateTag({
       property: 'og:image',
@@ -132,6 +140,15 @@ export class BlogsComponent {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',
+              areaServed: {
+                '@type': 'Country',
+                name: 'India',
+              },
+              provider: {
+                '@type': 'Organization',
+                name: 'The Great Products',
+                url: `${environment?.baseUrl}/blogs`,
+              },
               itemListElement: this.blogs.map((blog, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
@@ -139,7 +156,7 @@ export class BlogsComponent {
                 title: blog.title,
                 thumbnail: blog.thumbnail || environment.baseUrl + '/logo.png',
                 thumbnailDetail: blog.thumbnailDetail,
-                searchTerm: blog.searchTerm
+                searchTerm: blog.searchTerm,
               })),
             };
             if (this.isBrowser) {

@@ -125,6 +125,15 @@ export class HomeComponent {
               name: brand?.name || '',
               image: brand.imgUrl || environment?.baseUrl + '/logo.png',
             })),
+            areaServed: {
+              '@type': 'Country',
+              name: 'India',
+            },
+            provider: {
+              '@type': 'Organization',
+              name: 'The Great Products',
+              url: `${environment?.baseUrl}`,
+            },
           };
         }
         this.getBrands();

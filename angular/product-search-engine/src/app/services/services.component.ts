@@ -96,6 +96,15 @@ export class ServicesComponent {
           const structuredDataJSON = {
             '@context': 'https://schema.org/',
             '@type': 'ItemList',
+            areaServed: {
+              '@type': 'Country',
+              name: 'India',
+            },
+            provider: {
+              '@type': 'Organization',
+              name: 'The Great Products',
+              url: `${environment?.baseUrl}/services`,
+            },
             itemListElement: response.data?.map((service: any, index: any) => ({
               '@type': 'ListItem',
               position: index + 1,

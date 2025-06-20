@@ -192,6 +192,15 @@ export class ProductsComponent {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',
+              areaServed: {
+                '@type': 'Country',
+                name: 'India',
+              },
+              provider: {
+                '@type': 'Organization',
+                name: 'The Great Products',
+                url: `${environment?.baseUrl}/products`,
+              },
               itemListElement: this.products?.map((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
@@ -202,9 +211,13 @@ export class ProductsComponent {
                 brandLogo:
                   product.brand?.logoUrl || environment?.baseUrl + '/logo.png',
                 category: product?.category?.name || '',
-                categoryImage: product?.category?.imgUrl || environment?.baseUrl + '/logo.png',
+                categoryImage:
+                  product?.category?.imgUrl ||
+                  environment?.baseUrl + '/logo.png',
                 subCategory: product?.subCategory?.name || '',
-                subCategoryImage: product?.subCategory?.imgUrl || environment?.baseUrl + '/logo.png',
+                subCategoryImage:
+                  product?.subCategory?.imgUrl ||
+                  environment?.baseUrl + '/logo.png',
                 colors: product?.colors || [],
                 sizes: product?.sizes || [],
               })),

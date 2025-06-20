@@ -95,6 +95,15 @@ export class SubCategoriesComponent {
                   const structuredDataJSON = {
                     '@context': 'https://schema.org/',
                     '@type': 'ItemList',
+                    areaServed: {
+                      '@type': 'Country',
+                      name: 'India',
+                    },
+                    provider: {
+                      '@type': 'Organization',
+                      name: 'The Great Products',
+                      url: `${environment?.baseUrl}/subcategories`,
+                    },
                     itemListElement: response.data?.map((product, index) => ({
                       '@type': 'ListItem',
                       position: index + 1,

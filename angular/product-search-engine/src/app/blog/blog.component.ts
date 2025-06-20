@@ -122,6 +122,15 @@ export class BlogComponent {
             const structuredDataJSON = {
               '@context': 'https://schema.org/',
               '@type': 'ItemList',
+              areaServed: {
+                '@type': 'Country',
+                name: 'India',
+              },
+              provider: {
+                '@type': 'Organization',
+                name: 'The Great Products',
+                url: `${environment?.baseUrl}`,
+              },
               itemListElement: this.products?.map((product, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
