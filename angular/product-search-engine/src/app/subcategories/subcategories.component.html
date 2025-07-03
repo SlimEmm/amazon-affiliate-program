@@ -16,7 +16,7 @@
                 <ng-container *ngFor="let subCategory of subcategories; let i= index">
                         <a [href]="'/products/'+subCategory.name" target="_blank">
                                 <div class="d-flex justify-content-center">
-                                        <h4 class="w-25 bg-dark py-2 border rounded-4 text-black">
+                                        <h4 class="w-50 bg-dark py-2 border rounded-4 text-black">
                                                 <img class="logo-img border border-1 rounded-3"
                                                         [src]="sanitizer.bypassSecurityTrustUrl(subCategory.imgUrl)"
                                                         [alt]="subCategory.name" />
